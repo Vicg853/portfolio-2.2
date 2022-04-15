@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="https://beta.victorgomez.dev">
+    <img alt="Portfolio logo" src="./public/images/global/Animated.gif" width="60" />
+  </a>
+</p>
 
-## Getting Started
+### **General info**
+Hi 👋! This is my personal portfolio that I usually update every year (thus I'll probably change this repo's name later). 
 
-First, run the development server:
+The website is generated using NextJS (opted for it instead of Gatsby) SSG and some of the pages use ISG/SSR for some content to be displayed. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Hope you like it 😄!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
+### **Technologies**
+Project is created with:
+* Next server side rendering framework: v12.1.5
+* Linaria no runtime css-in-js lib: v2.3.1
+* Preact: still going to be added
+* For other secondary libs/fmwk and Gatsby plugins, give a look into [package.json file](https://github.com/Vicg853/portfolio-2.2/blob/main/package.json)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+---
+### **Setup**
+  > Note: Node version >= 14.x must be installed in your local environment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+  *After downloading/cloning the repository and assuring yourself you are allowed to copy this repo...*
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  * **Before running...**
+    > ... add at least a ``` .env.dev ``` file with the following minimum required variables
+  ```.env
+    SITE_URL='http://localhost:3000'
+  ```
 
-## Learn More
+  * **...Development**
+  ```bash
+   cd ./portfolio-2.2
+   yarn dev 
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+  * **...Production**
+  ```bash
+   cd ./portfolio-2.2
+   yarn prod
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  * Access:
+  **Voila, now, you're ready to access it via [``` localhost:3000 ```](http://localhost:3000)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### **Testing**
+Still not implemented...
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### **Credits**
+Contributors: [@vicg853](https://github.com/Vicg853)
+
+Special thanks to techs/teams: 
+- of NodeJS's for an amazing runtime env
+- at Next for the magic with site generation framework
+- linaria for an amazing css-in-js with such low compromises
+- all the other people that developed the other libs/fmwrks and plugins
