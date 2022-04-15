@@ -201,12 +201,13 @@ function CssTheme<ThemeType extends object>(
       }, [cssTHemeKeyHook().get()])
 
       //* Actually renders the provider component with css vars
+      //TODO Give a look into this hydration isseus caused by html entities
       return (
-         <style>{
+         <style suppressHydrationWarning>{
             Object.entries(themes).map(([key, val]) => {
                const themeVals = makeCssThemeVars(val, true)
                return `.${bodyThemeClassPrefix}-${key} { ${themeVals.join('')} }`
-            }).join('\n')
+            }).join('')
          }</style>
       )
    }

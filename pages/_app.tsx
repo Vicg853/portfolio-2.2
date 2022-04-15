@@ -33,9 +33,9 @@ export {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <div className={GlobalStyles}></div>
-      <GlobalSeo />
       <CssThemeProvider />
+      <div className={GlobalStyles}/>
+      <GlobalSeo />
       <>
          <NavBar />
          <MiniMenu />

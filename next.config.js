@@ -16,9 +16,11 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  //experimental: {
-  //  
-  //},
+  experimental: {
+    images: {
+      layoutRaw: true,
+    },
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

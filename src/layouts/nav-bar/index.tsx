@@ -3,11 +3,10 @@ import type { AnimeParams } from 'animejs'
 import { useEffect, useState } from 'react'
 import anime from 'animejs'
 import Link from 'next/link'
+import Image from 'next/image'
 
 //* Importing resources
 import { useCssThemeKey } from '../../../pages/_app'
-import LogoSVGDarkBg from '@g-images/Principal_darkbg.svg'
-import LogoSVGLightBg from '@g-images/Principal_lightbg.svg'
 
 //* Importing connected components
 import { useMenu } from '../menu/state'
@@ -108,8 +107,10 @@ export const NavBar = () => {
       <Container 
       data-scrolled={(scrolled && !isMenuOpen) ? 'true' : 'false'} >
          <Link href='/' passHref>
-            <a>
-               {themeKey === 'dark' ? <LogoSVGDarkBg className={logoStyle} /> : <LogoSVGLightBg className={logoStyle} />}
+            <a className={logoStyle}>
+               {themeKey === 'dark' ? 
+               <Image src='/images/global/Principal_darkbg.svg'  alt='Logo' layout='fill' /> : 
+               <Image src='/images/global/Principal_lightbg.svg' alt='Logo' layout='fill' />}
             </a>
          </Link>
          <sub>
