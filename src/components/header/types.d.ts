@@ -24,15 +24,15 @@ export type HeaderBackground = ({
 
 //* Header optional button types
 export type HeaderButtonAction = ({
-   type: 'link',
-   href: string,
+   type: 'link'
+   href: string
 } | {
    type: 'function'
    action: () => void
 })
 export interface HeaderButton {
    text: string
-   action: ButtonAction
+   action: HeaderButtonAction
 }
 
 export interface IHeaderProps {
