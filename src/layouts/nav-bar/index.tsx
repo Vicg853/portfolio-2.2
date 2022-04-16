@@ -5,7 +5,6 @@ import anime from 'animejs'
 import Link from 'next/link'
 import Image from 'next/image'
 
-//* Importing resources
 import { useCssThemeKey } from '../../../pages/_app'
 
 //* Importing connected components
@@ -109,8 +108,10 @@ export const NavBar = () => {
          <Link href='/' passHref>
             <a className={logoStyle}>
                {themeKey === 'dark' ? 
-               <Image src='/images/global/Principal_darkbg.svg'  alt='Logo' layout='fill' /> : 
-               <Image src='/images/global/Principal_lightbg.svg' alt='Logo' layout='fill' />}
+               <Image src='/images/global/Principal_darkbg.svg' 
+                  priority alt='Logo' layout='fill' /> :
+               <Image src='/images/global/Principal_lightbg.svg' 
+                  priority alt='Logo' layout='fill' />}
             </a>
          </Link>
          <sub>

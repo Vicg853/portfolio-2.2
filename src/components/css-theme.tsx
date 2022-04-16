@@ -146,7 +146,7 @@ function CssTheme<ThemeType extends object>(
    customPersistentKey?: ThemeProviderProps<ThemeType>['customPersistentKey'], 
    systemSchemePreferenceKey? : ThemeProviderProps<ThemeType>['systemSchemePreferenceKey']
 ): CssThemeExportPromise<ThemeType, keyof typeof themes> {
-   const initialTheme = () => {
+   const initialTheme = (() => {
       if(typeof document !== 'undefined' && isPersistent) {
          const preHydrationVal = document.documentElement.style.getPropertyValue('--initial-theme')
          if(preHydrationVal) return preHydrationVal
@@ -160,13 +160,13 @@ function CssTheme<ThemeType extends object>(
          if(systemColorPreference) return systemSchemePreferenceKey
       }
       return defaultTheme
-   }
+   })()
 
    //* Creating the hookstate global state for current theme key and theme values
    const themeKeyState = createState<keyof typeof themes>(initialTheme).attach(Downgraded)
    const themesValState = createState<{ currentTheme: ThemeType, themes: typeof themes}>({
       themes,
-      currentTheme: themes[initialTheme()]
+      currentTheme: themes[initialTheme]
    }).attach(Downgraded)
 
    //* Creating state hooks for current theme key and theme values
