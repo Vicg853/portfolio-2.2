@@ -19,8 +19,8 @@ const PalleteConstants: PalleteConstantsTyping = {
    info: '#ffc085',
    warn: '#91ceff',
    header: {
-      h1:'#ffcb75',
-      h2: '#f5f5f570'
+      hLine:'#ffcb75',
+      hText: '#f5f5f5'
    }
 }
 
