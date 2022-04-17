@@ -7,7 +7,7 @@ export const Container = styled.header`
    flex-direction: column;
    justify-content: flex-end;
    align-items: flex-start;
-   transition: all 0.3s ease-in-out;
+   transition: border 0.3s ease-in-out;
    overflow: hidden;
    
    z-index: var(--zIndex-header);
