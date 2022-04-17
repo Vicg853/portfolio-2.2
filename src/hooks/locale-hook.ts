@@ -1,9 +1,16 @@
 import { useRouter } from "next/router"
 
-import { i18n } from '../locales'
+import { i18n, defaultLocale } from '../locales'
 
 export const useLocale = () => {
-   const locale = useRouter().locale!
+   const { locale, locales} = useRouter() as {
+      locale: string
+      locales: string[]
+   }
    
-   return i18n.table(locale)!
+   return {
+      ...i18n.table(locale ?? defaultLocale)!,
+      locale,
+      locales
+   }
 }
