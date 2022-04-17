@@ -14,8 +14,9 @@ const Home: NextPage = () => {
           src: '/images/pages/jacky-lo-LjX-m_UXQGM-unsplash.jpg',
         }}
        />
-      <div style={{ height: '100vh' }}>
-        Hello World!
+      <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        Hello World! <br />
+        This website is still under construction 🚧🏗️
       </div>
     </>
   )
