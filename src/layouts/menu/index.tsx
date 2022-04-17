@@ -11,35 +11,44 @@ import {
 
 //* Importing mini-nav state
 import { useMenu } from './state'
+import { useLocale } from '@hooks/locale-hook'
 
 interface LinksInterface {
    name: string
    path: string
+   alt: string
 }
 const windowCheck = typeof window !== 'undefined'
 
 export const MiniMenu = () => {
+   const { menu, locale } = useLocale()
+   
    //TODO Improve and add graphql query to external cms api (apollo probably)
-   const routes = [
+   const routes: LinksInterface[] = [
       {
         path: `/`,
-        name: `Home`,
+        name: menu.homePage.text,
+        alt: menu.homePage.altText
       },
       {
         path: `/projects`,
-        name: `Projects`,
+        name: menu.projectsPage.text,
+        alt: menu.projectsPage.altText
       },
       {
         path: `/resume`,
-        name: `Resume`,
+        name: menu.resumePage.text,
+        alt: menu.resumePage.altText
       },
       {
         path: `/this-site`,
-        name: `This Site`,
+        name: menu.thisSitePage.text,
+        alt: menu.thisSitePage.altText
       },
       {
         path: `/contact`,
-        name: `Contact`,
+        name: menu.contactPage.text,
+        alt: menu.contactPage.altText
       }
     ]
 
@@ -86,9 +95,11 @@ export const MiniMenu = () => {
                {routes.map((link, i) => (
                   <Link 
                   passHref
+                  locale={locale}
                   key={i} href={link.path}>
                      <a className={miniNavItems}
-                     onClick={() => setIsMenuOpen(false)}>
+                     onClick={() => setIsMenuOpen(false)}
+                     aria-label={link.alt} >
                         {link.name}
                      </a>
                   </Link>
