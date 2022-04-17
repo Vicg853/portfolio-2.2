@@ -35,16 +35,16 @@ const footer: FooterLocale = {
    footerMessage: 'Hé! Merci d\'avoir consulté mon portfolio !\n Voici quelques liens utiles + références!\n\n\n Cordialement,\n Signé :\n Victor Rosa Gomez 😄🖥️,\n Codant des dinosaures depuis 2003...',
    footerSocialsTexts: {
       github: {
-         text: 'Github',
-         altText: 'Aller sur mon profil Github.',
+         name: 'Github',
+         alt: 'Aller sur mon profil Github.',
       },
       linkedin: {
-         text: 'LinkedIn',
-         altText: 'Aller sur mon profil LinkedIn.',
+         name: 'LinkedIn',
+         alt: 'Aller sur mon profil LinkedIn.',
       },
       stackOverflow: {
-         text: 'Stack Overflow',
-         altText: 'Aller sur mon profil StackOverflow.',
+         name: 'Stack Overflow',
+         alt: 'Aller sur mon profil StackOverflow.',
       },
    },
    thanksAndReferencesTexts: {

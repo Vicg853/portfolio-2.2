@@ -35,16 +35,16 @@ const footer: FooterLocale = {
    footerMessage: 'Hey! Obrigado por acessar e ler meu site!\n Aqui estão alguns links úteis + referências!\n\n Cordialmente,\n Assinado:\n Victor Rosa Gomez 😄🖥️,\n Desenvolvendo dinossauros desde 2003...',
    footerSocialsTexts: {
       github: {
-         text: 'Github',
-         altText: 'Acessar meu perfil no Github.',
+         name: 'Github',
+         alt: 'Acessar meu perfil no Github.',
       },
       linkedin: {
-         text: 'LinkedIn',
-         altText: 'Acessar meu perfil no LinkedIn.',
+         name: 'LinkedIn',
+         alt: 'Acessar meu perfil no LinkedIn.',
       },
       stackOverflow: {
-         text: 'Stack Overflow',
-         altText: 'Acessar meu perfil no StackOverflow.',
+         name: 'Stack Overflow',
+         alt: 'Acessar meu perfil no StackOverflow.',
       },
    },
    thanksAndReferencesTexts: {
