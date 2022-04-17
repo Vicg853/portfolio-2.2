@@ -10,9 +10,11 @@ const nextConfig = {
   compiler: {
     removeConsole: true,
   },
-  //i18n: {
-//
-  //},
+  i18n: {
+    locales: ['en-US', 'pt-BR', 'fr'],
+    defaultLocale: 'en-US',
+    localeDetection: false,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
   },
