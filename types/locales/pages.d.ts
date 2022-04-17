@@ -1,4 +1,4 @@
-export interface PageLocale<ContentBodyType extends (Object | undefined)> {
+export interface PageLocale {
    seo?: {
       title: string;
       description: string;
@@ -10,7 +10,6 @@ export interface PageLocale<ContentBodyType extends (Object | undefined)> {
       button?: string;
       backgroundAlt?: string;
    }
-   content: ContentBodyType
 }
 
 export interface PageDefaults {

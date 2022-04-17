@@ -1,4 +1,4 @@
-export interface PageLinkProps {
+interface PageLinkProps {
    text: string;
    altText: string;
 }
