@@ -5,6 +5,7 @@ import {
 } from './style'
 
 import { useMenu } from '../menu/state'
+import { useLocale } from '@hooks/locale-hook'
 
 export interface SocialLinksInterface {
    name: string
@@ -24,55 +25,57 @@ export interface SourcesLinksINterface {
 }
 
 export const Footer = () => {
+   const { footer } = useLocale()
+
    //TODO Improve and add graphql query to external cms api (apollo probably)
    const externalSocialLinks: SocialLinksInterface[] = [
       {
-         name: 'Github',
+         name: footer.footerSocialsTexts['github'].name,
          url: 'https://github.com/Vicg853',
          icon: {
             type: 'url',
             src: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
-            alt: 'My Github profile'
+            alt: footer.footerSocialsTexts['github'].alt
          }
       },
       {
-         name: 'LinkedIn',
+         name: footer.footerSocialsTexts['linkedin'].name,
          url: 'https://www.linkedin.com/in/vicg853/?locale=en_US',
          icon: {
             type: 'url',
             src: 'https://static-exp1.licdn.com/sc/h/8s162nmbcnfkg7a0k8nq9wwqo',
-            alt: 'My LinkedIn profile'
+            alt: footer.footerSocialsTexts['linkedin'].alt
          }
       },
       {
-         name: 'StackOverflow',
+         name: footer.footerSocialsTexts['stackOverflow'].name,
          url: 'https://stackoverflow.com/users/11699778/victor-gomez',
          icon: {
             type: 'url',
             src: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196',
-            alt: 'My StackOverflow profile'
+            alt: footer.footerSocialsTexts['stackOverflow'].alt
          }
       }
     ]
 
    const externalSourcesLinks: SourcesLinksINterface[] = [
       {
-         name: 'Icons8',
+         name: footer.thanksAndReferencesTexts['icons8'].name,
          url: 'https://icons8.com',
-         description: 'This webpage uses icons from Icons8.',
-         alt: 'Icons8 link'
+         description: footer.thanksAndReferencesTexts['googleFonts'].description,
+         alt: footer.thanksAndReferencesTexts['icons8'].alt
       },
       {
-         name: 'Google Fonts',
+         name: footer.thanksAndReferencesTexts['googleFonts'].name,
          url: 'https://fonts.google.com',
-         description: 'This webpage uses fonts from Google Fonts.',
-         alt: 'Google Fonts link'
+         description: footer.thanksAndReferencesTexts['googleFonts'].description,
+         alt: footer.thanksAndReferencesTexts['googleFonts'].alt
       },
       {
-         name: 'Unsplash',
+         name: footer.thanksAndReferencesTexts['unsplash'].name,
          url: 'https://unsplash.com',
-         description: 'This webpage uses images from Unsplash.',
-         alt: 'Unsplash link'
+         description: footer.thanksAndReferencesTexts['googleFonts'].description,
+         alt: footer.thanksAndReferencesTexts['googleFonts'].alt
       }
     ]
 
@@ -84,15 +87,7 @@ export const Footer = () => {
          <sub >
             <section>
                <span className='decor-tag'>&lsaquo;footer&rsaquo;</span> 
-               <br />
-               Hey! Thank you for checking out my portfolio!<br />
-               Here are some useful links + references<br />
-               Best regards, <br />
-               <br />
-               Signed: <br />
-               Victor Rosa Gomez 😄🖥️, <br />
-               Coding dinosaurs since 2003... <br />
-               <br />
+               {footer.footerMessage.split('\n').map((line) => <>{line}<br /></>)}
                <span className='decor-tag'>&lsaquo;&frasl;footer&rsaquo;</span>
             </section>
             <section>
@@ -137,7 +132,7 @@ export const Footer = () => {
          <div className='separator' />
          <sub>
             <span className='copyright-notice'>
-               Copyright &copy; 2021-present Victor Rosa Gomez. All rights reserved.
+               {footer.copyrightText}
             </span>
          </sub>
       </Container>
