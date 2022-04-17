@@ -6,7 +6,7 @@ import {
 
 import { useMenu } from '../menu/state'
 
-interface SocialLinksInterface {
+export interface SocialLinksInterface {
    name: string
    url: string
    icon: {
@@ -16,7 +16,7 @@ interface SocialLinksInterface {
    }
 }
 
-interface SourcesLinksINterface {
+export interface SourcesLinksINterface {
    name: string
    url: string
    description?: string
@@ -25,7 +25,7 @@ interface SourcesLinksINterface {
 
 export const Footer = () => {
    //TODO Improve and add graphql query to external cms api (apollo probably)
-   const externalSocialLinks = [
+   const externalSocialLinks: SocialLinksInterface[] = [
       {
          name: 'Github',
          url: 'https://github.com/Vicg853',
@@ -55,7 +55,7 @@ export const Footer = () => {
       }
     ]
 
-   const externalSourcesLinks = [
+   const externalSourcesLinks: SourcesLinksINterface[] = [
       {
          name: 'Icons8',
          url: 'https://icons8.com',

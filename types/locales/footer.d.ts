@@ -1,10 +1,11 @@
+import type { SourcesLinksINterface, SocialLinksInterface } from '@layout/footer'
 export interface FooterLocale {
    footerMessage: string;
    footerSocialsTexts: {
-      [key: string]: string;
+      [key: string]: Pick<SocialLinksInterface, 'text' | 'altText'>
    }
    thanksAndReferencesTexts: {
-      [key: string]: string;
+      [key: string]: Pick<SourcesLinksINterface, 'name' | 'description' | 'alt'>;
    }
    copyrightText: string;
 }
