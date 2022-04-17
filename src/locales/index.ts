@@ -31,8 +31,8 @@ import { enUsLocale } from './en-US'
 import { ptBRLocale } from './pt-BR'
 import { frLocale } from './fr'
 
-export const locale = rosetta<RosettaPerLocaleProps<Pages>>({
-   'en-Us': enUsLocale,
+export const i18n = rosetta<RosettaPerLocaleProps<Pages>>({
+   'en-US': enUsLocale,
    'pt-BR': ptBRLocale,
    'fr': frLocale,
-}).locale('en-Us')
+})
