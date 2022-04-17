@@ -16,8 +16,8 @@ export interface PalleteConstantsTyping {
    info: string,
    warn: string,
    header: {
-      h1: string,
-      h2: string
+      hLine: string,
+      hText: string
    }
 }
 

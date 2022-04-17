@@ -50,6 +50,8 @@ export const Container = styled.nav`
 `
 
 export const logoStyle = css`
+   display: block;
+   position: relative;
    width: 6rem;
    height: 6rem;
 `

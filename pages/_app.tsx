@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import type { ThemeTyping } from '@custom-types/theme'
 
+import Head from 'next/head'
 
 import CssTheme from '@components/css-theme'
 
@@ -18,7 +19,7 @@ import { MiniMenu } from '@layout/menu'
 import { Footer } from '@layout/footer'
 
 const { Provider: CssThemeProvider, useGetCssThemesVal,
-    useCssThemeKey, ThemePreHydration } = CssTheme<ThemeTyping>({ 
+    useCssThemeKey, ThemePreHydration, getThemesStyles } = CssTheme<ThemeTyping>({ 
    dark: DarkTheme,
    light: LightTheme
 }, 'dark', true)
@@ -27,15 +28,21 @@ export {
    useGetCssThemesVal,
    useCssThemeKey,
    CssThemeProvider,
-   ThemePreHydration
+   ThemePreHydration,
+   getThemesStyles
 }
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <div className={GlobalStyles}></div>
-      <GlobalSeo />
+      <Head>
+         <style>
+            {getThemesStyles()}
+         </style>
+      </Head>
       <CssThemeProvider />
+      <div className={GlobalStyles}/>
+      <GlobalSeo />
       <>
          <NavBar />
          <MiniMenu />
