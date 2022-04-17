@@ -9,6 +9,7 @@ import { useCssThemeKey } from '../../../pages/_app'
 
 //* Importing connected components
 import { useMenu } from '../menu/state'
+import { useLocale } from '@hooks/locale-hook'
 
 //* Importing styled components
 import { 
@@ -20,6 +21,8 @@ import {
 const windowCheck = typeof window !== 'undefined'
 
 export const NavBar = () => {
+   const { nav, locale } = useLocale()
+
    //* Mini menu state hook
    const [isMenuOpen, setIsMenuOpen] = useMenu()
    
@@ -64,6 +67,7 @@ export const NavBar = () => {
          easing: 'easeOutCubic'
       }
    ]
+   
    useEffect(() => {
       animationTargets.forEach(target => anime(target))
    }, [themeKey])
@@ -105,13 +109,13 @@ export const NavBar = () => {
    return (
       <Container 
       data-scrolled={(scrolled && !isMenuOpen) ? 'true' : 'false'} >
-         <Link href='/' passHref>
+         <Link href='/' passHref locale={locale}>
             <a className={logoStyle}>
                {themeKey === 'dark' ? 
                <Image src='/images/global/Principal_darkbg.svg' 
-                  priority alt='Logo' layout='fill' /> :
+                  priority alt={nav.logoAlt} layout='fill' /> :
                <Image src='/images/global/Principal_lightbg.svg' 
-                  priority alt='Logo' layout='fill' />}
+                  priority alt={nav.logoAlt} layout='fill' />}
             </a>
          </Link>
          <sub>
@@ -119,7 +123,7 @@ export const NavBar = () => {
                className={`${themeButtonStyle} nav-buttons`}
                role='button'
                onClick={() => setThemeKey(themeKey === 'dark' ? 'light' : 'dark')}
-               aria-label={`Set color theme to ${themeKey === 'dark' ? `dark.` : `light.`}`}>
+               aria-label={nav.themeButton()(themeKey.toString())}>
                <svg className={`${themeButtonStyle}-svg`} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
                   <mask id='moon-mask'>
                      <rect x='0' y='0' width='100%' height='100%' />
@@ -142,7 +146,7 @@ export const NavBar = () => {
                className={`${menuButtonStyle} nav-buttons`}
                role='button'
                onClick={() => setIsMenuOpen(!isMenuOpen)}
-               aria-label={`${isMenuOpen ? 'Close' : 'Open'} mini menu.`}>
+               aria-label={nav.menuButton()(isMenuOpen)}>
                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' className={`${menuButtonStyle}-menu`}>
                   <g>
                      <line className={`${menuButtonStyle}-line1`} x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />

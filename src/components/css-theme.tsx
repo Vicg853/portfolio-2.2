@@ -94,6 +94,16 @@ type CssThemeExportPromise<ThemeType, themeKeysType> = {
     Provider: React.FC
 
     ThemePreHydration: React.FC
+
+   /**
+    * Provides css themes as css variables as a string when called. Can be place anywhere in your app, but it is recommended to be rendered in the <head> tag.
+    * @returns {string} - Returns a string with css variables.
+    * @example
+    *    <style>
+    *       {getCssThemeVars()}
+    *   </style>
+   */
+    getThemesStyles: () => string
 }
 
  /**
@@ -177,6 +187,13 @@ function CssTheme<ThemeType extends object>(
    
    const bodyThemeClassPrefix = `use-theme`
 
+   //* Creating theme css string
+   const cssThemeStyleString = Object.entries(themes).map(([key, val]) => {
+      const themeVals = makeCssThemeVars(val, true)
+      return `.${bodyThemeClassPrefix}-${key} { ${themeVals.join('')} }`
+   }).join('')
+   
+   
    const ProviderComponent: React.FC = () => {
       const setThemeVals = cssThemeValHook().set
       const themePromised = cssThemeValHook().promised
@@ -202,14 +219,7 @@ function CssTheme<ThemeType extends object>(
 
       //* Actually renders the provider component with css vars
       //TODO Give a look into this hydration isseus caused by html entities
-      return (
-         <style suppressHydrationWarning>{
-            Object.entries(themes).map(([key, val]) => {
-               const themeVals = makeCssThemeVars(val, true)
-               return `.${bodyThemeClassPrefix}-${key} { ${themeVals.join('')} }`
-            }).join('')
-         }</style>
-      )
+      return <></>
    }
 
    //* Script that willll be injected before body for pre-hydration execution
@@ -244,6 +254,7 @@ function CssTheme<ThemeType extends object>(
          const { get } = cssThemeValHook()
          return get()
       },
+      getThemesStyles: () => cssThemeStyleString,
       Provider: ProviderComponent,
       ThemePreHydration: ThemePreHydration,
    }
