@@ -1,3 +1,4 @@
+//* Defining needed types and importing needed deps for locales
 import rosetta from 'rosetta'
 
 import type { NavAltsLocale } from '@c-types/locales/nav-bar'
@@ -11,19 +12,27 @@ interface PageFullType<PageContentType> {
    mainProps: PageLocale
    content: PageContentType
 }
-
-
+//TODO Add pages !!! when they are ready
 interface RosettaPerLocaleProps<PagesList> {
    nav: NavAltsLocale
    menu: LinksLocale
-   page: {
-      defaults: PageDefaults
-      pages: {
-         [key in keyof PagesList]: PageFullType<PagesList[key]>
-      }
-   }
+   //page: {
+   //   defaults: PageDefaults
+   //   pages: {
+   //      [key in keyof PagesList]: PageFullType<PagesList[key]>
+   //   }
+   //}
    footer: FooterLocale
 }
 
+//* Importing different locales objects
 
-export const locale = rosetta<RosettaPerLocaleProps<Pages>>()
+import { enUsLocale } from './en-US'
+import { ptBRLocale } from './pt-BR'
+import { frLocale } from './fr'
+
+export const locale = rosetta<RosettaPerLocaleProps<Pages>>({
+   'en-Us': enUsLocale,
+   'pt-BR': ptBRLocale,
+   'fr': frLocale,
+}).locale('en-Us')
