@@ -6,6 +6,10 @@ const nav: NavAltsLocale = {
    logoAlt: 'My logo',
    menuButton: () => (mode) => `${mode ? 'Close' : 'Open'} menu.`,
    themeButton: () => (theme) => `Set theme to ${theme === 'dark' ? 'light' : 'dark'} mode.`,
+   localesMenu: {
+      closeMeMsg: 'Clcik me again to close me.',
+      mainAlt: () => (isActive) => `Press or ${isActive ? 'un-' : ''}hover me to ${isActive ? 'close' : 'open'} the main menu.`,
+   }
 }
 
 const menu: LinksLocale = {
