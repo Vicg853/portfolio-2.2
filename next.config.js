@@ -3,6 +3,13 @@
 
 const withLinaria = require('next-linaria');
 
+const {
+  defaultLocale,
+  localeEnName,
+  localeFrName,
+  localePtBrName
+} = require('./src/locales/configs')
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -11,8 +18,8 @@ const nextConfig = {
     removeConsole: true,
   },
   i18n: {
-    locales: ['en-US', 'pt-BR', 'fr'],
-    defaultLocale: 'en-US',
+    locales: [localeEnName, localeFrName, localePtBrName],
+    defaultLocale: defaultLocale,
     localeDetection: false,
   },
   images: {
