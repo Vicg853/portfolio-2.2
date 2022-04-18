@@ -8,6 +8,12 @@ import type { FooterLocale } from '@c-types/locales/footer'
 
 import type { Pages } from './pages-list'
 
+import {
+   defaultLocale,
+   localeEnName,
+   localePtBrName,
+   localeFrName
+} from './configs'
 interface PageFullType<PageContentType> {
    mainProps: PageLocale
    content: PageContentType
@@ -31,10 +37,12 @@ import { enUsLocale } from './en-US'
 import { ptBRLocale } from './pt-BR'
 import { frLocale } from './fr'
 
-export const defaultLocale = 'en-US'
 
-export const i18n = rosetta<RosettaPerLocaleProps<Pages>>({
-   'en-US': enUsLocale,
-   'pt-BR': ptBRLocale,
-   'fr': frLocale,
-})
+
+const i18n = rosetta<RosettaPerLocaleProps<Pages>>()
+i18n.set(localeEnName, enUsLocale)
+i18n.set(localePtBrName, ptBRLocale)
+i18n.set(localeFrName, frLocale)
+i18n.locale(defaultLocale)
+
+export { i18n }
