@@ -159,7 +159,7 @@ export const NavBar = () => {
                      const localeLabels = getLocaleLabels()
 
                      return (
-                        <Link key={i} passHref href={route} locale={toLocale}>
+                        <Link key={i} passHref href={route} locale={toLocale} scroll={false}>
                            <a onClick={() => setLocalesMenuClicked(false)}
                            aria-label={localeLabels.alt}>{localeLabels.text}</a>
                         </Link>
