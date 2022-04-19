@@ -87,7 +87,7 @@ export const Footer = () => {
          <sub >
             <section>
                <span className='decor-tag'>&lsaquo;footer&rsaquo;</span> 
-               {footer.footerMessage.split('\n').map((line) => <>{line}<br /></>)}
+               {footer.footerMessage.split('\n').map((line, i) => <>{line}<br key={i}/></>)}
                <span className='decor-tag'>&lsaquo;&frasl;footer&rsaquo;</span>
             </section>
             <section>
