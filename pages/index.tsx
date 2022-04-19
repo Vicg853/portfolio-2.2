@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         background={{
           type: 'image',
           srcType: 'local',
-          src: '/images/pages/jacky-lo-LjX-m_UXQGM-unsplash.jpg',
+          src: '/images/pages/index/LRM_20200528_151756 (1).jpg',
         }}
        />
       <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
