@@ -3592,7 +3592,7 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-dom@npm:@preact/compat", "react@npm:@preact/compat":
+"react-dom@npm:@preact/compat@17.0.3", "react@npm:@preact/compat@17.0.3":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@preact/compat/-/compat-17.0.3.tgz#5e41def12b4b6d00d6f86e6b24ef46b029a99626"
   integrity sha512-lzkui97aQ00hxzUwfRfZm7jUXE1bjWyOXiqm8DeWYhkD+G9ZaY1wso/itqyg60wGnP9DRlM4PDn2blIOnh1yeg==
