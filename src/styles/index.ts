@@ -31,6 +31,7 @@ export const terminalContainer  = css`
    align-items: stretch;
 
    #term-bar {
+      max-width: 100%;
       display: inline-flex;
       justify-content: flex-start;
       height: var(--term-bar-height);
@@ -57,10 +58,10 @@ export const terminalContainer  = css`
    }
    #term-content {
       height: calc(100% - var(--term-bar-height));
-      padding: 0.7rem 1rem;
-      overflow-y: scroll;
+      overflow: hidden;
       border-bottom-left-radius: 0.4rem;
       border-bottom-right-radius: 0.4rem;
+      
       border: 1.5px solid var(--pallete-bgContrast);
       border-top: none;
       font-family: var(--fonts-tertiary);
