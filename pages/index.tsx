@@ -1,11 +1,16 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
+import type { PageFullType  } from '../src/locales'
 
 import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
+//* Importing essential components
 import { Header } from '@components/header'
+
+//* Importing api functions
+import { getPageSource } from '@api-utils/locales-sources'
 
 //* Importing style elements
 import {
@@ -32,23 +37,26 @@ const TermuxTerminal = dynamic(() => import('@components/pages/index/xterm'), {
 	ssr: false,
 })
 
-export const getStaticProps: GetStaticProps<{
-	locale: string
-}> = async ({ locale, locales }) => {
-	return {
-		props: {
-			locale: locale ?? locales![0],
-		},
-	}
-}
-
 export interface IndexPageLocaleContent {
 	mainP: string[]
 	imageCaption: string
 	terminal?: any
 }
 
-const Home: NextPage = ({ }) => {
+export const getStaticProps: GetStaticProps<{
+	locale: string
+	pageSource: PageFullType<IndexPageLocaleContent>
+}> = async ({ locale, locales }) => {
+	const pageSource = getPageSource(locale, 'index')
+	return {
+		props: {
+			pageSource,
+			locale: locale ?? locales![0],
+		},
+	}
+}
+
+const Home: NextPage<{pageSource: PageFullType<IndexPageLocaleContent>}> = ({ pageSource  }) => {
   	return (
   	  	<>
   	  		<Header title='Hi! I code dinosaurs 🦖'
