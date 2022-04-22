@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import type { GetStaticProps } from 'next'
+
 import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
@@ -12,19 +14,30 @@ import {
 } from '@p-styles/index'
 
 const LoadingTermComponent = () => (
-	<span id='loading-term' style={{height: '200vh', display: 'block'}}>
-		{"❯"} shell <br/>
-		starting terminal and loading dinosaurs 🦖<br/>
-	</span>
+	<sub id='term-content' style={{width: '100%', position: 'relative', padding: '0rem 0.7rem'}}>
+		<span id='loading-term' style={{height: '368px', display: 'block'}}>
+			{"❯"} shell <br/>
+			starting terminal and loading dinosaurs 🦖<br/>
+		</span>
+	</sub>
 )
 
-const TermuxTerminal = dynamic(() => import('@components/pages/index/termux'), {
+const TermuxTerminal = dynamic(() => import('@components/pages/index/xterm'), {
 	ssr: false,
-	suspense: true,
-	loading: LoadingTermComponent
 })
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps<{
+	locale: string
+}> = async ({ locale, locales }) => {
+	return {
+		props: {
+			locale: locale ?? locales![0],
+		},
+	}
+}
+
+
+const Home: NextPage = ({ }) => {
   	return (
   	  	<>
   	  		<Header title='Hi! I code dinosaurs 🦖'
@@ -42,11 +55,9 @@ const Home: NextPage = () => {
 						<span className='grey-button' />
 						<span className='green-button' />
 					</sub>
-					<sub id='term-content'>
-						<Suspense fallback={<LoadingTermComponent/>}>
-							<TermuxTerminal />
-						</Suspense>
-					</sub>
+					<Suspense fallback={<LoadingTermComponent/>}>
+						<TermuxTerminal />
+					</Suspense>
   	  			</Section>
   	  		 </Container>
   	  	</>
