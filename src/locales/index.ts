@@ -14,7 +14,7 @@ import {
    localePtBrName,
    localeFrName
 } from './configs'
-interface PageFullType<PageContentType> {
+export interface PageFullType<PageContentType> {
    mainProps: PageLocale
    content: PageContentType
 }
