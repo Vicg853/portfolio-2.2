@@ -42,6 +42,11 @@ export const getStaticProps: GetStaticProps<{
 	}
 }
 
+export interface IndexPageLocaleContent {
+	mainP: string[]
+	imageCaption: string
+	terminal?: any
+}
 
 const Home: NextPage = ({ }) => {
   	return (
@@ -60,8 +65,8 @@ const Home: NextPage = ({ }) => {
 						<SecTitle>{"<"}Intro{"/>"}</SecTitle>
 						<Paragraph>
 							Olá! Tudo bem?<br/><br/> 
-							Sou apaixonado por ciencia da computação, mesmo (não é frase de efeito): amo aprender qualquer coisa da aréa, desde o mais pratico ao teorico mais pesado, ou do hardware/binario a programação de high-level. <br/><br/>
-							Entrei nesse mundo aos 12 anos e desde então aprendi diversas coisas sobre esse assunto e sei que ainda existe uma longaaa jornada para conseguir saber de tudo (algo que naverdade nunca vou alcançar, de tanto que essa aréa muda, acho isso incrível !!!).
+							Sou apaixonado por ciencia da computação, mesmo (não é frase de efeito): amo aprender qualquer coisa da area, desde o mais pratico ao teórico mais pesado, ou do hardware/binario a programação de high-level. <br/><br/>
+							Entrei nesse mundo aos 12 anos e desde então aprendi diversas coisas sobre esse assunto e sei que ainda existe uma longaaa jornada para conseguir saber de tudo (algo que na verdade nunca vou alcançar, de tanto que essa area muda, acho isso incrível !!!).
 						</Paragraph>
 					</SectionVertical>
 					<CaptionedImage data-topCaption>
