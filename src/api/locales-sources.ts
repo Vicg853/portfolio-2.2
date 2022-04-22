@@ -3,7 +3,7 @@ import { i18n } from '../locales'
 
 import { defaultLocale } from '../locales/configs'
 
-export const getPageSource = (locale: string, page: keyof Pages) => {
+export const getPageSource = (locale: string | undefined, page: keyof Pages) => {
    const defaultLocaleSource =  i18n.table(defaultLocale)
    const pageSource = locale ? 
       (i18n.table(locale) ?? defaultLocaleSource) 
