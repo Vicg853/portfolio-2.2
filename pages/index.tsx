@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
 
-import React, { Suspense } from 'react'
+import React, { Suspense, Fragment } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
@@ -59,8 +59,8 @@ export const getStaticProps: GetStaticProps<{
 const Home: NextPage<{pageSource: PageFullType<IndexPageLocaleContent>}> = ({ pageSource  }) => {
   	return (
   	  	<>
-  	  		<Header title='Hi! I code dinosaurs 🦖'
-  	  		  	description='I&apos;m Victor: a computer science and whole-stack lover, &#10; but full-stack focused for the moment.'
+  	  		<Header title={pageSource.mainProps.header!.title}
+  	  		  	description={pageSource.mainProps.header!.description}
   	  		  	background={{
   	  		  	  type: 'image',
   	  		  	  srcType: 'local',
@@ -72,19 +72,17 @@ const Home: NextPage<{pageSource: PageFullType<IndexPageLocaleContent>}> = ({ pa
 					<SectionVertical>
 						<SecTitle>{"<"}Intro{"/>"}</SecTitle>
 						<Paragraph>
-							Olá! Tudo bem?<br/><br/> 
-							Sou apaixonado por ciencia da computação, mesmo (não é frase de efeito): amo aprender qualquer coisa da area, desde o mais pratico ao teórico mais pesado, ou do hardware/binario a programação de high-level. <br/><br/>
-							Entrei nesse mundo aos 12 anos e desde então aprendi diversas coisas sobre esse assunto e sei que ainda existe uma longaaa jornada para conseguir saber de tudo (algo que na verdade nunca vou alcançar, de tanto que essa area muda, acho isso incrível !!!).
+							{pageSource.content.mainP.map((p, i) => <Fragment key={i}>{p}<br/><br/></Fragment>)}
 						</Paragraph>
 					</SectionVertical>
 					<CaptionedImage data-topCaption>
 						<Image src='/images/pages/index/IMG-20200226-WA0034.jpg'
 							className={meImageStyle}
-							alt='Olá, sou Victor: Programando dinossauros 🦖 desde 2003'
+							alt={pageSource.content.imageCaption}
 							width={268}
 							height={308}
 						 />
-						<span>Olá, sou Victor: Programando dinossauros 🦖 desde 2003</span>
+						<span>{pageSource.content.imageCaption}</span>
 					</CaptionedImage>
 				</Section>
   	  			<Section className={terminalContainer}>
