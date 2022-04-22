@@ -3,14 +3,20 @@ import type { GetStaticProps } from 'next'
 
 import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 import { Header } from '@components/header'
 
 //* Importing style elements
 import {
   Container,
+  SecTitle,
   Section,
-  terminalContainer
+  SectionVertical,
+  CaptionedImage,
+  Paragraph,
+  terminalContainer,
+  meImageStyle
 } from '@p-styles/index'
 
 const LoadingTermComponent = () => (
@@ -49,6 +55,25 @@ const Home: NextPage = ({ }) => {
   	  		  	}}
   	  		 />
   	  		 <Container>
+				<Section data-wrapRev data-gap>
+					<SectionVertical>
+						<SecTitle>{"<"}Intro{"/>"}</SecTitle>
+						<Paragraph>
+							Olá! Tudo bem?<br/><br/> 
+							Sou apaixonado por ciencia da computação, mesmo (não é frase de efeito): amo aprender qualquer coisa da aréa, desde o mais pratico ao teorico mais pesado, ou do hardware/binario a programação de high-level. <br/><br/>
+							Entrei nesse mundo aos 12 anos e desde então aprendi diversas coisas sobre esse assunto e sei que ainda existe uma longaaa jornada para conseguir saber de tudo (algo que naverdade nunca vou alcançar, de tanto que essa aréa muda, acho isso incrível !!!).
+						</Paragraph>
+					</SectionVertical>
+					<CaptionedImage data-topCaption>
+						<Image src='/images/pages/index/IMG-20200226-WA0034.jpg'
+							className={meImageStyle}
+							alt='Olá, sou Victor: Programando dinossauros 🦖 desde 2003'
+							width={268}
+							height={308}
+						 />
+						<span>Olá, sou Victor: Programando dinossauros 🦖 desde 2003</span>
+					</CaptionedImage>
+				</Section>
   	  			<Section className={terminalContainer}>
 					<sub id='term-bar'>
 						<span className='red-button' />

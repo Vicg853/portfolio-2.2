@@ -5,17 +5,102 @@ export const Container = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
-   align-items: stretch;
+   align-items: center;
    width: 100vw;
    padding: 3rem 5vw;
    height: auto;
+   gap: 4rem;
+
+   @media (max-width: 650px) {
+      padding: 3rem 2vw;
+   }
+`
+
+export const SecTitle = styled.h3`
+   font-size: 1.2rem;
+   font-weight: 500;
+   color: var(--pallete-text);
+   font-family: var(--fonts-secondary);
+   font-style: italic;
+   width: 100%;
+   text-align: start;
+   margin: 1.5rem 0rem;
 `
 
 export const Section = styled.section`
    display: inline-flex;
-   justify-content: space-around;
+   justify-content: center;
    align-items: center;
    flex-wrap: wrap;
+   &&[data-wrapRev] {
+      flex-wrap: wrap-reverse;
+   }
+
+   padding: 1rem;
+   border-radius: 0.5rem;
+   &&[data-border] {
+      border: 0.1px solid var(--pallete-opaque-bgAlt);
+   }
+   &&[data-gap] {
+      gap: 4rem;
+   }
+`
+
+export const SectionVertical = styled.section`
+   display: flex;
+   flex-direction: column;
+   justify-content: stretch;
+   align-items: center;
+
+   &&[data-limitWidth] {
+      max-width: calc(50% - 1rem);
+   }
+`
+
+export const Paragraph = styled.p`
+   max-width: 400px;
+   color: var(--pallete-text);
+   font-size: 0.8rem;
+   font-family: var(--fonts-primary);
+`
+
+export const meImageStyle = css`
+   position: relative;
+   width: auto;
+   height: auto;
+   max-width: 268px;
+   max-height: 308px;
+   border-radius: 0.5rem;
+   overflow: hidden;
+`
+
+export const CaptionedImage = styled.div`
+   position: relative;
+   width: auto;
+   height: auto;
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-start;
+   flex-direction: column;
+   && > span {
+      width: 80%;
+      margin-left: 0.4rem;
+      margin-bottom: 0.3rem;
+      position: absolute;
+      font-family: var(--fonts-primary);
+      font-size: 0.7rem;
+      color: var(--pallete-textAlt);
+      background-color: var(--pallete-bgAlt);
+      border-radius: 0.6rem;
+      padding: 0.5rem 0.7rem;
+   }
+   &&[data-topCaption] {
+      && > span {
+         margin-bottom: 0px;
+         margin-top: 0.3rem;
+      }
+      justify-content: flex-start;
+   }
 `
 
 export const terminalContainer  = css`
