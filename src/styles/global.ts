@@ -1,5 +1,19 @@
 import { styled } from 'linaria/react'
 
+//* Global container
+export const Container = styled.div`
+   max-width: 85%;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+   width: auto;
+   
+   height: auto;
+   gap: 4rem;
+   padding: 3rem 0rem;
+`
+
 //* Horizontal section component
 export const SectionHor = styled.section`
    display: inline-flex;
@@ -42,7 +56,7 @@ export const SectionVert = styled.section`
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
+   align-items: stretch;
    max-width: 100%;
 
    &&:not([data-limitWidth]) {
@@ -66,7 +80,7 @@ export const SectionVert = styled.section`
    }
 `   
 
-//* Section's title component
+//* Section's title and description component
 export const SecTitle = styled.h3`
    display: inline-flex;
    font-size: 1.2rem;
@@ -76,7 +90,6 @@ export const SecTitle = styled.h3`
    font-style: italic;
    width: 100%;
    text-align: start;
-   margin: 1.5rem 0rem;
 
    ::before, ::after {
       display: block;
@@ -92,6 +105,15 @@ export const SecTitle = styled.h3`
    ::after {
       content: '/>';
    }
+`
+export const SectionDesc = styled.p`
+   display: inline-flex;
+   font-size: 0.8rem;
+   font-weight: 300;
+   color: var(--pallete-text);
+   font-family: var(--fonts-secondary);
+   width: 100%;
+   text-align: start;
 `
 
 //* Image with small <span> caption 
