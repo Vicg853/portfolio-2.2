@@ -1,5 +1,5 @@
-import type { IProps } from '@pages/index'
+import type { IndexPageLocaleContent } from '@pages/index'
 
 export interface Pages {
-   index: IProps
+   index: IndexPageLocaleContent
 }

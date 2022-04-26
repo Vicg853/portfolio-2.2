@@ -3,7 +3,6 @@
 const withPlugins = require('next-compose-plugins');
 const path = require('path');
 
-var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -35,7 +34,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {
-    //optimizeCss: true, //TODO needs third party dep it seems
+    //optimizeCss: true, //TODO seems to rquire third party deps
     images: {
       layoutRaw: true,
     },

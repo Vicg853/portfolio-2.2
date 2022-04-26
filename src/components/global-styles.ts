@@ -94,20 +94,21 @@ export const GlobalStyles = css`
       @media (prefers-reduced-motion: reduce) {
          transition: all none;
       }
-      ::-webkit-scrollbar{
-         width: 0.4rem;
-         position: fixed;
+      ::-webkit-scrollbar {
+         width: 1rem;
       }
-      ::-webkit-scrollbar-thumb{
-         background: var(--pallete-bgContrast);  
-         border: 1.7px solid #0000;
+      ::-webkit-scrollbar-thumb {
+         background: var(--pallete-bgContrast);
+         background-clip: padding-box;
+         border: 0.43rem solid transparent;
          border-radius: 1rem;
+         :hover {
+            background: var(--pallete-opaque-accent);
+            background-clip: padding-box;
+         }
       }
-      ::-webkit-scrollbar-thumb:hover{
-         background: var(--pallete-accent);
-      }
-      ::-webkit-scrollbar-track{
-         background: var(--pallete-bg);
+      ::-webkit-scrollbar-track {
+         background: transparent;
       }
       @media (prefers-reduced-motion: reduce) {
          * {

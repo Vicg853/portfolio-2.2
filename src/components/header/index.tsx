@@ -75,6 +75,7 @@ export const Header: React.FC<IHeaderProps> = ({
             )}
          </sub>
          
+         {/*TODO - Make these elements be dynamically imported to prevent unused components to be imported on the main/per-page bundles */}
          
          {(background.type === 'color' || background.type === 'transparent') && (
             <div id='header-background'

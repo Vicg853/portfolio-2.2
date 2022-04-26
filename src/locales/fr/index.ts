@@ -2,6 +2,8 @@ import { FooterLocale } from '@custom-types/locales/footer'
 import type { LinksLocale } from '@custom-types/locales/menu'
 import type { NavAltsLocale } from '@custom-types/locales/nav-bar'
 
+import { pages } from './pages'
+
 const nav: NavAltsLocale = {
    logoAlt: 'Mon logo',
    menuButton: () => (mode) => `${mode ? 'Fermer' : 'Ouvrir'} le menu de navigation.`,
@@ -75,6 +77,8 @@ const footer: FooterLocale = {
 export const frLocale = {
    nav,
    menu,
-
+   page: {
+      pages,
+   },
    footer,
 }
