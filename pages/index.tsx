@@ -2,9 +2,11 @@ import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
 
-import React, { Suspense, Fragment } from 'react'
+import { Suspense, Fragment } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { defaultLocale } from 'src/locales/configs'
+import { cx } from 'linaria'
 
 //* Importing essential components
 import { Header } from '@components/header'
@@ -14,19 +16,26 @@ import { getPageSource } from '@api-utils/locales-sources'
 
 //* Importing style elements
 import {
-  Container,
-  SecTitle,
-  Section,
-  SectionVertical,
-  CaptionedImage,
   Paragraph,
   terminalContainer,
-  meImageStyle
+  meImageStyle,
+  mediaLimitWidth,
+  objectivesGridStyle,
+  ObjectiveCard,
+  addGap
 } from '@p-styles/index'
+import {
+	Container,
+	SectionHor,
+	SectionVert,
+	SecTitle,
+	CaptionedImage,
+	SectionDesc
+} from '@p-styles/global'
 
 const LoadingTermComponent = () => (
-	<sub id='term-content' style={{width: '100%', position: 'relative', padding: '0rem 0.7rem'}}>
-		<span id='loading-term' style={{height: '368px', display: 'block'}}>
+	<sub id='term-content'>
+		<span id='loading-term'>
 			{"❯"} shell <br/>
 			starting terminal and loading dinosaurs 🦖<br/>
 		</span>
@@ -137,13 +146,13 @@ const Home: NextPage<{pageSource: PageProps}> = ({ pageSource  }) => {
   	  		  	}}
   	  		 />
   	  		 <Container>
-				<Section data-wrapRev data-gap>
-					<SectionVertical>
-						<SecTitle>{"<"}Intro{"/>"}</SecTitle>
+				<SectionHor data-wrapRev data-gap>
+					<SectionVert className={addGap}>
+						<SecTitle>Intro</SecTitle>
 						<Paragraph>
 							{pageSource.content.mainP.map((p, i) => <Fragment key={i}>{p}<br/><br/></Fragment>)}
 						</Paragraph>
-					</SectionVertical>
+					</SectionVert>
 					<CaptionedImage data-topCaption>
 						<Image src='/images/pages/index/IMG-20200226-WA0034.jpg'
 							className={meImageStyle}
@@ -153,8 +162,36 @@ const Home: NextPage<{pageSource: PageProps}> = ({ pageSource  }) => {
 						 />
 						<span>{pageSource.content.imageCaption}</span>
 					</CaptionedImage>
-				</Section>
-  	  			<Section className={terminalContainer}>
+				</SectionHor>
+				<SectionVert className={cx(mediaLimitWidth, addGap)} data-medMinWidth>
+					<SecTitle>Objectives</SecTitle>
+					<SectionDesc>
+						✅: Completed{" | "}
+						✍️: In progress{" | "}
+						❌: To do
+					</SectionDesc>
+					<SectionHor data-justStart data-wrapRev
+					className={objectivesGridStyle} >
+						{pageSource.objectives.map(objective => (
+							<ObjectiveCard key={objective.objectiveId}>
+								<sub>
+									<h4>
+										{objective.objectiveName}
+									</h4>
+									<span className='status-icon'>
+										{objective.objectiveProgress === 'done' && (<>✅</>)}
+										{objective.objectiveProgress === 'in-progress' && (<>✍️</>)}
+										{objective.objectiveProgress === 'to-do' && (<>❌</>)}
+									</span>
+								</sub>
+								<p>
+									{objective.objectiveDescription}
+								</p>
+							</ObjectiveCard>
+						))}
+					</SectionHor>
+				</SectionVert>
+  	  			<SectionVert className={terminalContainer}>
 					<sub id='term-bar'>
 						<span className='red-button' />
 						<span className='grey-button' />
@@ -163,7 +200,7 @@ const Home: NextPage<{pageSource: PageProps}> = ({ pageSource  }) => {
 					<Suspense fallback={<LoadingTermComponent/>}>
 						<TermuxTerminal />
 					</Suspense>
-  	  			</Section>
+  	  			</SectionVert>
   	  		 </Container>
   	  	</>
   	)
