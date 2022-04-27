@@ -14,7 +14,7 @@ import {
    localePtBrName,
    localeFrName
 } from './configs'
-interface PageFullType<PageContentType> {
+export interface PageFullType<PageContentType> {
    mainProps: PageLocale
    content: PageContentType
 }
@@ -22,12 +22,12 @@ interface PageFullType<PageContentType> {
 interface RosettaPerLocaleProps<PagesList> {
    nav: NavAltsLocale
    menu: LinksLocale
-   //page: {
-   //   defaults: PageDefaults
-   //   pages: {
-   //      [key in keyof PagesList]: PageFullType<PagesList[key]>
-   //   }
-   //}
+   page: {
+      //defaults: PageDefaults
+      pages: {
+         [key in keyof PagesList]: PageFullType<PagesList[key]>
+      }
+   }
    footer: FooterLocale
 }
 

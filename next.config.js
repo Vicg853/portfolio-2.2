@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
-//const withPlugins = require('next-compose-plugins');
+
+const withPlugins = require('next-compose-plugins');
+const path = require('path');
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const withLinaria = require('next-linaria');
+const withPreact = require('next-plugin-preact');
+
 
 const {
   defaultLocale,
@@ -26,11 +34,15 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {
+    //optimizeCss: true, //TODO seems to rquire third party deps
     images: {
       layoutRaw: true,
     },
   },
-  webpack(config) {
+  webpack(config, { dev }) {
+    //* Making webpack use minified version of animejs
+    if(!dev) config.resolve.alias['animejs'] = path.join(__dirname, 'node_modules/animejs/lib/anime.min.js');
+
     config.module.rules.push({
       test: /\.svg$/,
       loader: '@svgr/webpack',
@@ -46,4 +58,8 @@ const nextConfig = {
   },
 }
 
-module.exports = withLinaria(nextConfig)
+module.exports = withPlugins([
+  [withBundleAnalyzer],
+  [withPreact],
+  [withLinaria],
+], nextConfig)

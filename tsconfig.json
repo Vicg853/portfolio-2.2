@@ -18,7 +18,7 @@
      "paths": {
        "@components/*": ["./src/components/*"],
        "@layout/*": ["./src/layouts/*"],
-       "@p-styles/*": ["./src/p-style/*"],
+       "@p-styles/*": ["./src/styles/*"],
        "@p-images/*": ["./public/images/pages/*"],
        "@images/*": ["./public/images/*"],
        "@custom-types/*": ["./types/*"],
@@ -27,6 +27,7 @@
        "@c-types/*": ["./types/*"],
        "@g-images/*": ["./public/images/global/*"],
        "@pages/*": ["./pages/*"],
+       "@api-utils/*": ["./src/api/*"],
      },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/*.d.ts"],
