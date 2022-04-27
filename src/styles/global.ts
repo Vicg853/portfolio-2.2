@@ -8,6 +8,7 @@ export const Container = styled.div`
    justify-content: flex-start;
    align-items: stretch;
    width: auto;
+   overflow: visible;
    
    height: auto;
    gap: 4rem;
@@ -143,5 +144,18 @@ export const CaptionedImage = styled.div`
          margin-top: 0.3rem;
       }
       justify-content: flex-start;
+   }
+`
+
+//* Simple paragraph component
+export const Paragraph = styled.p`
+   color: var(--pallete-text);
+   font-size: 0.95rem;
+   font-family: var(--fonts-primary);
+
+   ul {
+      display: block;
+      margin: 0.6rem 1.7rem;
+
    }
 `
