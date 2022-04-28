@@ -76,39 +76,6 @@ export const NavBar = () => {
       animationTargets.forEach(target => anime(target))
    }, [themeKey])
 
-   //* Menu button animations
-   const menuButtonClass = `.${menuButtonStyle}`
-   const menuButtonAnimationTargets: AnimeParams[] = [
-      {
-         targets: `${menuButtonClass}-line1`,
-         translateY: isMenuOpen ? '13' : '0',
-         opacity: isMenuOpen ? 0 : 1,
-      },
-      {
-         targets: `${menuButtonClass}-line3`,
-         translateY: isMenuOpen ? '-13' : '0',
-         opacity: isMenuOpen ? 0 : 1,
-      },
-      {
-         targets: `${menuButtonClass}-line2`,
-         translateX: isMenuOpen ? '15' : '0',
-      },
-      {
-         targets: `${menuButtonClass}-arrow1`,
-         rotate: isMenuOpen ? '0deg' : '52.5deg',
-         opacity: isMenuOpen ? 1 : 0,
-      },
-      {
-         targets: `${menuButtonClass}-arrow2`,
-         rotate: isMenuOpen ? '0deg' : '-52.5deg',
-         opacity: isMenuOpen ? 1 : 0,
-      }
-   ]
-
-   useEffect(() => {
-      menuButtonAnimationTargets.forEach(target => anime(target))
-   }, [isMenuOpen])
-
       
    //* Locales menu state
    const [localesMenuOpen, setLocalesMenuOpen] = useState(false)
@@ -196,17 +163,18 @@ export const NavBar = () => {
             <button  
                className={menuButtonStyle}
                role='button'
+               data-active={isMenuOpen ? 'true' : 'false'}
                onClick={() => setIsMenuOpen(!isMenuOpen)}
                aria-label={navTranslations.menuButton()(isMenuOpen)}>
-               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' className={`${menuButtonStyle}-menu`}>
+               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
                   <g>
-                     <line className={`${menuButtonStyle}-line1`} x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`${menuButtonStyle}-line2`} x1='5' y1='24' x2='43' y2='24' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`${menuButtonStyle}-line3`} x1='5' y1='37' x2='43' y2='37' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className={`menu-btn-line1 menu-btn-elements`} x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className={`menu-btn-line2 menu-btn-elements`} x1='5' y1='24' x2='43' y2='24' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className={`menu-btn-line3 menu-btn-elements`} x1='5' y1='37' x2='43' y2='37' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
                   </g>
                   <g>
-                     <line className={`${menuButtonStyle}-arrow1`} x1='5' y1='24' x2='15' y2='11' style={{transform: 'rotate(0deg)',transformOrigin: '5px center'}} strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`${menuButtonStyle}-arrow2`} x1='5' y1='24' x2='15' y2='37' style={{transformOrigin: '5px center'}} strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className={`menu-btn-arrow1 menu-btn-elements`} x1='5' y1='24' x2='15' y2='11'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className={`menu-btn-arrow2 menu-btn-elements`} x1='5' y1='24' x2='15' y2='37'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
                   </g>
                </svg>
             </button>

@@ -74,6 +74,55 @@ export const menuButtonStyle = css`
       stroke: var(--pallete-bgAlt);
       transition: stroke 0.3s;
    }
+   .menu-btn-elements {
+      transition: all 0.3s;
+   }
+   .menu-btn-arrow1 {
+      transform: rotate(0deg);
+   }
+   .menu-btn-arrow1, .menu-btn-arrow2 {
+      transform-origin: 5px center;
+   }
+
+   &&[data-active='true'] {
+      .menu-btn-line1 {
+         transform: translateY(13px);
+         opacity: 0;
+      }
+      .menu-btn-line3 {
+         transform: translateY(-13px);
+         opacity: 0;
+      }
+      .menu-btn-line2 { transform: translateX(15px); }
+      .menu-btn-arrow1 {
+         transform: rotate(0deg);
+         opacity: 1;
+      }
+      .menu-btn-arrow2 {
+         transform: rotate(0deg);
+         opacity: 1;
+      }
+   }
+
+   &&[data-active='false'] {
+      .menu-btn-line1 {
+         transform: translateY(0px);
+         opacity: 1;
+      }
+      .menu-btn-line3 {
+         transform: translateY(0px);
+         opacity: 1;
+      }
+      .menu-btn-line2 { transform: translateX(0px); }
+      .menu-btn-arrow1 {
+         transform: rotate(52.5deg);
+         opacity: 0;
+      }
+      .menu-btn-arrow2 {
+         transform: rotate(-52.5deg);
+         opacity: 0;
+      }
+   }
    
    :hover svg > g {
       stroke: var(--pallete-accent);
