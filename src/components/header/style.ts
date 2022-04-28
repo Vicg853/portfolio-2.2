@@ -49,6 +49,53 @@ export const Container = styled.header`
          margin-bottom: 10vh;
       }
    }
+
+   //* Init animations
+
+   animation-name: HeaderIntro;
+   animation-duration: 0.8s;
+   animation-timing-function: cubic-bezier(0.57, -0.02, 0.04, 1.23);
+   animation-iteration-count: 1;
+   animation-delay: 0.1s;
+   @keyframes HeaderIntro {
+      0% {
+         opacity: 0.6;
+         transform: scale(1.3);
+      }
+      100% {
+         opacity: 1;
+         transform: scale(1);
+      }
+   }
+
+   #textContent > * {
+      animation-name: TitleIntro;
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.57, -0.02, 0.04, 1.23);
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      opacity: 0;
+      transform: translateY(40px);
+      @keyframes TitleIntro {
+         0% {
+            opacity: 0;
+            transform: translateY(40px);
+         }
+         100% {
+            opacity: 1;
+            transform: translateY(0px);
+         }
+      }
+   }
+   #textContent > *:nth-child(1) {
+      animation-delay: 0.49s;
+   }
+   #textContent > *:nth-child(2) {
+      animation-delay: 0.58s;
+   }
+   #textContent > *:nth-child(3) {
+      animation-delay: 0.63s;
+   }
 `
 
 export const TitleComp = styled.h1`
