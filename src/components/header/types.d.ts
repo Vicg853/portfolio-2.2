@@ -45,5 +45,6 @@ export interface IHeaderProps {
       alt?: string
       parallaxNo?: true
    }
+   noBorderRadius?: boolean
    button?: HeaderButton
 }

@@ -32,7 +32,8 @@ export const Header: React.FC<IHeaderProps> = ({
    title,
    description,
    background,
-   button
+   button,
+   noBorderRadius
 }) => {
    const [menu] = useMenu()
 
@@ -52,7 +53,8 @@ export const Header: React.FC<IHeaderProps> = ({
    return (
       <Container 
       data-menu={menu ? 'open' : 'closed'}
-      style={{ height: dimensions?.height ?? '100vh' }}>
+      data-border-radius={noBorderRadius ? 'false' : 'true'}
+      style={{ height: dimensions?.height ?? '94.5vh' }}>
          <sub id='textContent'>
             <TitleComp >{title}</TitleComp>
             <DescriptionComp >{description}</DescriptionComp>

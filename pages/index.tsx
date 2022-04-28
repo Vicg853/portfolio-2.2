@@ -86,25 +86,22 @@ export const getStaticProps: GetStaticProps<{
 	//TODO Add real graphql source when apollo is ready
 	const objectivesSource: ObjectivesSourceQueryType[] = [
 		{
-			objectiveId: 'objective-learn-rust-lang',
+			objectiveId: 'finish-this-webpage',
 			objectiveProgress: 'in-progress',
 			sourceI18nIterations: {
 				'en': {
-					objectiveName: 'Learn Rust',
-					objectiveDescription: 'Learn the Rust programming language.'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finish this website!'
 				},
 				'pt': {
-					objectiveName: 'Aprender Rust',
-					objectiveDescription: 'Aprender a linguagem de programação Rust .'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finalizar esse site!'
 				},
 				'fr': {
-					objectiveName: 'Apprendre Rust',
-					objectiveDescription: 'Apprendre le langage de programmation Rust.'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finir ce site!'
 				}
 			},
-			objectiveSources: [
-				'https://rust-lang.org'
-			]
 		}
 	]
 	
