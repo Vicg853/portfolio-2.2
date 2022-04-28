@@ -1,8 +1,5 @@
-import type { AnimeParams } from 'animejs'
-
 import { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
-import anime from 'animejs'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -44,38 +41,6 @@ export const NavBar = () => {
          else setScrolled(false)
       })
    })
-
-
-   //* Theme toggle button animations 
-   const mainTargetClass = `.${themeButtonStyle}`
-   const animationTargets: AnimeParams[] = [
-      {
-         targets: `${mainTargetClass}-svg`,
-         rotate: themeKey === 'dark' ? '90deg' : '40deg',
-         easing: 'spring(2, 60, 10, 10)'
-      },
-      {
-         targets:  `${mainTargetClass}-moon-mask`,
-         cx:  themeKey === 'dark' ? 30 : 12,
-         cy:  themeKey === 'dark' ? 0 : 4,
-         easing: 'easeOutCubic'
-      },
-      {
-         targets: `${mainTargetClass}-moon-circle`,
-         r:  themeKey === 'dark' ? 5 : 9,
-         easing: 'easeOutCubic'
-      },
-      {
-         targets:  `${mainTargetClass}-moon-lines`,
-         opacity:  themeKey === 'dark' ? 1 : 0,
-         easing: 'easeOutCubic'
-      }
-   ]
-   
-   useEffect(() => {
-      animationTargets.forEach(target => anime(target))
-   }, [themeKey])
-
       
    //* Locales menu state
    const [localesMenuOpen, setLocalesMenuOpen] = useState(false)
@@ -140,15 +105,16 @@ export const NavBar = () => {
             <button
                className={themeButtonStyle}
                role='button'
+               data-isDark={themeKey === 'dark' ? 'true' : 'false'}
                onClick={() => setThemeKey(themeKey === 'dark' ? 'light' : 'dark')}
                aria-label={navTranslations.themeButton()(themeKey.toString())}>
-               <svg className={`${themeButtonStyle}-svg`} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+               <svg className='theme-button-svg theme-btn-elements' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
                   <mask id='moon-mask'>
                      <rect x='0' y='0' width='100%' height='100%' />
-                     <circle className={`${themeButtonStyle}-moon-mask`} r='6.5' />
+                     <circle className='theme-button-moon-mask theme-btn-elements' r='6.5' />
                   </mask>
-                  <circle cx="12" cy="12" className={`${themeButtonStyle}-moon-circle`} mask='url(#moon-mask)' />
-                  <g className={`${themeButtonStyle}-moon-lines`}>
+                  <circle cx="12" cy="12" r='5' className='theme-button-moon-circle theme-btn-elements' mask='url(#moon-mask)' />
+                  <g className='theme-button-moon-lines theme-btn-elements'>
                      <line strokeLinecap='round' strokeLinejoin='round' x1='12' y1='1' x2='12' y2='3' />
                      <line strokeLinecap='round' strokeLinejoin='round' x1='12' y1='21' x2='12' y2='23' />
                      <line strokeLinecap='round' strokeLinejoin='round' x1='4.22' y1='4.22' x2='5.64' y2='5.64' />
@@ -168,13 +134,13 @@ export const NavBar = () => {
                aria-label={navTranslations.menuButton()(isMenuOpen)}>
                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
                   <g>
-                     <line className={`menu-btn-line1 menu-btn-elements`} x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`menu-btn-line2 menu-btn-elements`} x1='5' y1='24' x2='43' y2='24' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`menu-btn-line3 menu-btn-elements`} x1='5' y1='37' x2='43' y2='37' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className='menu-btn-line1 menu-btn-elements' x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className='menu-btn-line2 menu-btn-elements' x1='5' y1='24' x2='43' y2='24' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className='menu-btn-line3 menu-btn-elements' x1='5' y1='37' x2='43' y2='37' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
                   </g>
                   <g>
-                     <line className={`menu-btn-arrow1 menu-btn-elements`} x1='5' y1='24' x2='15' y2='11'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
-                     <line className={`menu-btn-arrow2 menu-btn-elements`} x1='5' y1='24' x2='15' y2='37'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className='menu-btn-arrow1 menu-btn-elements' x1='5' y1='24' x2='15' y2='11'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
+                     <line className='menu-btn-arrow2 menu-btn-elements' x1='5' y1='24' x2='15' y2='37'  strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />
                   </g>
                </svg>
             </button>

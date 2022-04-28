@@ -152,6 +152,41 @@ export const themeButtonStyle = css`
       transition-property: fill, stroke !important;
       transition-duration: 0.3s !important;
    }
+
+   --animation-timing-fnc: cubic-bezier(0.61,-0.6, 0.39, 1.72);
+   .theme-btn-elements {
+      transition: all 0.8s;
+      transition-timing-function: var(--animation-timing-fnc);
+   }
+
+   &&[data-isDark='true'] {
+      .theme-button-svg { transform: rotate(90deg); }
+      .theme-button-moon-mask {
+         cx: 30;
+         cy: 0;
+      }
+      .theme-button-moon-circle { 
+         animation: theme-button-moon-circle-small
+         0.8s forwards;   
+         animation-timing-function: var(--animation-timing-fnc);
+      }
+      .theme-button-moon-lines { opacity: 1; }
+   }
+   &&[data-isDark='false'] {
+      .theme-button-svg { transform: rotate(40deg); }
+      .theme-button-moon-mask {
+         cx: 12;
+         cy: 4;
+      }
+      .theme-button-moon-circle { 
+         animation: theme-button-moon-circle-big 
+            0.8s forwards;   
+         animation-timing-function: var(--animation-timing-fnc);
+      }
+      .theme-button-moon-lines { opacity: 0; }
+   }
+   @keyframes theme-button-moon-circle-small { from { r: 9; } to { r: 5; } }
+   @keyframes theme-button-moon-circle-big { from { r: 5; } to { r: 9; } }
    
    :hover svg > circle, :hover svg > g {
       fill: var(--pallete-accent);
