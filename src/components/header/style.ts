@@ -12,7 +12,11 @@ export const Container = styled.header`
    
    z-index: var(--zIndex-header);
 
-   width: 100vw;
+   width: 98vw;
+
+   &&[data-border-radius] {
+      border-radius: 0.9rem;
+   }
 
    && > * {
       z-index: calc(var(--zIndex-header) + 1);
