@@ -40,13 +40,11 @@ export const Container = styled.nav`
       margin-bottom: 0%;
       transition: all 0.5s;
       border-radius: 0.8rem;
-      transform: scale(0.9);
       opacity: 0;
       transition-property: opacity, transform;
       transition-duration: 0.5s;
    }
    &&[data-scrolled='true'] #background {
-      transform: scale(1);
       opacity: 1;
    }
 `
@@ -130,6 +128,14 @@ export const LocalesButtonsContainer = styled.div`
       overflow-y: visible;
    }
    
+   #content-container {
+      position: absolute;
+      top: 100%;
+      width: auto;
+      height: auto;
+      padding-top: 0.7rem;
+   }
+
    svg {
       display: block;
       width: 26px !important;
@@ -148,8 +154,6 @@ export const LocalesButtonsContainer = styled.div`
 `
 
 export const LocalesLinksSub = styled.div`
-   position: absolute;
-   top: 100%;
    box-sizing: border-box;
    display: flex;
    width: max-content;
