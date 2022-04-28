@@ -13,6 +13,7 @@ export const Container = styled.header`
    z-index: var(--zIndex-header);
 
    width: 98vw;
+   margin-top: 2.75vh;
 
    &&[data-border-radius] {
       border-radius: 0.9rem;
@@ -34,7 +35,7 @@ export const Container = styled.header`
       flex-direction: column;
       align-items: flex-start;
 
-      margin-left: 5vw;
+      margin-left: 3.9vw;
       margin-bottom: 16vh;
       max-width: 90vw;
    }
