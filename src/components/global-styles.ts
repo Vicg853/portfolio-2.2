@@ -16,8 +16,8 @@ const fonts: Fonts = {
 const PalleteConstants: PalleteConstantsTyping = {
    err: '#ff6b6b',
    success: '#8efa75',
-   info: '#ffc085',
-   warn: '#91ceff',
+   info: '#91ceff',
+   warn: '#ffc085',
    header: {
       hLine:'#ffcb75',
       hText: '#f5f5f5'

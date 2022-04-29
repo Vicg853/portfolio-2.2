@@ -10,6 +10,8 @@ import { cx } from 'linaria'
 
 //* Importing essential components
 import { Header } from '@components/header'
+import { InTextLink } from '@components/mini-components/InTextLink'
+import { Callout } from '@components/mini-components/Callout'
 
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
@@ -86,25 +88,22 @@ export const getStaticProps: GetStaticProps<{
 	//TODO Add real graphql source when apollo is ready
 	const objectivesSource: ObjectivesSourceQueryType[] = [
 		{
-			objectiveId: 'objective-learn-rust-lang',
+			objectiveId: 'finish-this-webpage',
 			objectiveProgress: 'in-progress',
 			sourceI18nIterations: {
 				'en': {
-					objectiveName: 'Learn Rust',
-					objectiveDescription: 'Learn the Rust programming language.'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finish this website!'
 				},
 				'pt': {
-					objectiveName: 'Aprender Rust',
-					objectiveDescription: 'Aprender a linguagem de programação Rust .'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finalizar esse site!'
 				},
 				'fr': {
-					objectiveName: 'Apprendre Rust',
-					objectiveDescription: 'Apprendre le langage de programmation Rust.'
+					objectiveName: 'Portfolio v2',
+					objectiveDescription: 'Finir ce site!'
 				}
 			},
-			objectiveSources: [
-				'https://rust-lang.org'
-			]
 		}
 	]
 	
@@ -134,7 +133,7 @@ export const getStaticProps: GetStaticProps<{
 	}
 }
 
-const Home: NextPage<{pageSource: PageProps}> = ({ pageSource  }) => {
+const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, locale }) => {
   	return (
   	  	<>
   	  		<Header title={pageSource.mainProps.header!.title}
@@ -146,6 +145,44 @@ const Home: NextPage<{pageSource: PageProps}> = ({ pageSource  }) => {
   	  		  	}}
   	  		 />
   	  		 <Container>
+				<SectionHor>
+					<SectionVert className={addGap}>
+						<Callout icon={{
+							type: 'emoji',
+							source: '⚠️🚧'
+						}}>
+							<>
+								{locale === 'en' && (
+									<>
+										This webpage is still under development, so many of its features and pages<br/>
+										are still missing. Also many design and breaking changes will still occur.<br/>
+										<br/>
+										You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>old version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
+										Or you can follow this page progress...<br/>
+									</>
+								)}
+								{locale === 'pt' && (
+									<>
+										Este site ainda está em desenvolvimento, então muitas peças e paginas<br/> 
+										ainda estão faltando. Ainda ocorreram várias mudanças no design.<br/>
+										<br/>
+										Caso deseje, pode ver a <InTextLink href='https://old.victorgomez.dev'>versão antiga</InTextLink>.<br/>
+										Ou seguir o progresso desta site aqui...<br/>
+									</>
+								)}
+								{locale === 'fr' && (
+									<>
+										Ce site est encore en cours de développement, donc quelques de ses elements et pages<br/>
+										sont encore manquants. Encore des modifications sur le design et fonctionnalités seront fréquentes.<br/>
+										<br/>
+										Si vous le souhaitez, vous pouvez acceder la <InTextLink href='https://old.victorgomez.dev'>version antérieure</InTextLink> {"("}seulement disponible en portugais :{"( )"}.<br/>
+										Ou vous pouvez suivre le progrès de ce site ici...<br/>
+									</>
+								)}
+							</>
+						</Callout>
+					</SectionVert>
+				</SectionHor>
 				<SectionHor data-wrapRev data-gap>
 					<SectionVert className={addGap}>
 						<SecTitle>Intro</SecTitle>
