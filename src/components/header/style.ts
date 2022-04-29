@@ -52,19 +52,21 @@ export const Container = styled.header`
 
    //* Init animations
 
-   animation-name: HeaderIntro;
-   animation-duration: 0.8s;
-   animation-timing-function: cubic-bezier(0.57, -0.02, 0.04, 1.23);
-   animation-iteration-count: 1;
-   animation-delay: 0.1s;
-   @keyframes HeaderIntro {
-      0% {
-         opacity: 0.6;
-         transform: scale(1.3);
-      }
-      100% {
-         opacity: 1;
-         transform: scale(1);
+   #header-background {
+      animation-name: HeaderIntro;
+      animation-duration: 0.8s;
+      animation-timing-function: cubic-bezier(0.57, -0.02, 0.04, 1.23);
+      animation-iteration-count: 1;
+      animation-delay: 0.1s;
+      @keyframes HeaderIntro {
+         0% {
+            opacity: 0.6;
+            transform: scale(1.3);
+         }
+         100% {
+            opacity: 1;
+            transform: scale(1);
+         }
       }
    }
 
@@ -88,13 +90,13 @@ export const Container = styled.header`
       }
    }
    #textContent > *:nth-child(1) {
-      animation-delay: 0.49s;
+      animation-delay: 0.3s;
    }
    #textContent > *:nth-child(2) {
-      animation-delay: 0.58s;
+      animation-delay: 0.48s;
    }
    #textContent > *:nth-child(3) {
-      animation-delay: 0.63s;
+      animation-delay: 0.51s;
    }
 `
 
