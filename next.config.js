@@ -34,7 +34,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {
-    //optimizeCss: true, //TODO seems to rquire third party deps
+    optimizeCss: true,
     images: {
       layoutRaw: true,
     },
