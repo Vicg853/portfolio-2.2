@@ -3,7 +3,7 @@ import type { IndexPageLocaleContent } from '@pages/index'
 
 export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    content: {
-      mainP: 'Computer science and the whole-stack are my biggest passions: I love learning anything about the subject, from a more technical point of view to the heavier theories, from hardware to software... \n I was 12 when I started exploring this universe and since then I have discovered many things. It was not long before I noticed that this subject always evolves and that the acquired knowledge is infinite, which excites me, like, a loottt: constant evolution === infinite possibilities.\n So in this website you will find some of the things that I have/am/will learn and find a variety of projects: open-source, IoT, Hardware, Websites, Apps, NGOs related projects, ...',
+      mainP: 'Computer science and the whole-stack are my biggest passions: I love learning anything about the subject, from a more technical point of view to the heavier theories, from hardware to software... \n\n I was 12 when I started exploring this universe and since then I have discovered many things. It was not long before I noticed that this subject always evolves and that the acquired knowledge is infinite, which excites me, like, a loottt: constant evolution === infinite possibilities.\n\n So in this website you will find some of the things that I have/am/will learn and find a variety of projects: open-source, IoT, Hardware, Websites, Apps, NGOs related projects, ...',
       imageCaption: 'Aqui estou!',
       objectivesText: {
          title: 'Keeping myself\n up-to-date &\n running',
