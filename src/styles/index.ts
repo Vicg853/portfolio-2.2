@@ -22,6 +22,7 @@ export const objectivesSectionStyle = css`
    padding: 1.5rem;
    margin-top: 10rem;
    margin-bottom: 5rem;
+   border: 1px solid var(--pallete-opaque-bgAlt);
 `
 
 export const mainPMediaQueryStyle = css`
