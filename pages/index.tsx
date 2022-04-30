@@ -14,6 +14,7 @@ import { Callout } from '@components/mini-components/Callout'
 
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
+import { getObjectivesList } from '@api-utils/content-retrivers/objectives'
 
 //* Importing style elements
 import {
@@ -72,42 +73,8 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ locale, locales }) => {
 	const pageSource = getPageSource(locale, 'index')
 
-	//TODO Add real graphql source when apollo is ready
-	const objectivesSource: ObjectivesSourceQueryType[] = [
-		{
-			objectiveId: 'finish-this-webpage',
-			objectiveProgress: 'in-progress',
-			sourceI18nIterations: {
-				'en': {
-					objectiveName: 'Portfolio v2',
-					objectiveDescription: 'Finish this website!'
-				},
-				'pt': {
-					objectiveName: 'Portfolio v2',
-					objectiveDescription: 'Finalizar esse site!'
-				},
-				'fr': {
-					objectiveName: 'Portfolio v2',
-					objectiveDescription: 'Finir ce site!'
-				}
-			},
-		}
-	]
-	
-	//filter out only the current locale name and descriptions
-	const objectivesFetch: ObjectivesSourcePageProps[] = objectivesSource.map(objective => {
-		const objectiveLocale = objective.sourceI18nIterations[(locale ?? defaultLocale) as 'en' | 'pt' | 'fr'] ??
-			objective.sourceI18nIterations[defaultLocale]
-
-		return {
-			...objective,
-			sourceI18nIterations: null,
-			objectiveName: objectiveLocale.objectiveName,
-			objectiveDescription: objectiveLocale.objectiveDescription,
-		}
-	})
-
-	
+	//* Retrieving objectives list
+	const objectivesFetch = getObjectivesList(locale as any, 'en')
 
 	return {
 		props: {
@@ -208,7 +175,9 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					padding: 1.5rem;
 					margin-top: 10rem;
 				`}>
-					<Section>
+					<Section data-wrap className={css`
+						gap: 0.5rem;
+					`}>
 						<Section data-vert>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
 							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
