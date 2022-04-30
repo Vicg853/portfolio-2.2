@@ -55,13 +55,13 @@ const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource, locale: strin
    return (
       <>
          <Header 
-            title={pageSource.mainProps.header!.title}
-            description={pageSource.mainProps.header!.description}
+            title={pageSource.mainProps!.header!.title}
+            description={pageSource.mainProps!.header!.description}
             background={{
                type: 'image',
                srcType: 'local',
                src: '/images/pages/projects/background.jpg',
-               alt: pageSource.mainProps.header!.backgroundAlt,
+               alt: pageSource.mainProps!.header!.backgroundAlt,
             }}
          />
          <Container>
