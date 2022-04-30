@@ -10,7 +10,7 @@ import { getPageSource } from '@api-utils/locales-sources'
 //* Importing global and specific styled components
 import { 
    Container,
-   SectionHor,
+   Section,
    Paragraph
 } from '@p-styles/global'
 import {
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<{
 	}
 }
 
-const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource}> = ({ pageSource }) => {
+const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource, locale: string}> = ({ pageSource, locale }) => {
 
    return (
       <>
@@ -65,28 +65,42 @@ const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource}> = ({ pageSou
             }}
          />
          <Container>
-            <SectionHor>
-               <Paragraph className={introductionSizing}>
-                  {pageSource.content.mainParagraph['1']}
-                  <br/>
-                  {pageSource.content.mainParagraph['2']}
-                  <InTextLink href='/resume' locale={'en'}>
-                     {pageSource.content.mainParagraph['3']}
-                  </InTextLink>{')'}.
-                  <br/><br/>
-                  {pageSource.content.mainParagraph['4']}
-               </Paragraph>
-            </SectionHor>
-            <Callout className={calloutAlignment} 
-            special='info'
-            icon={{ type: 'emoji', source: 'ℹ' }}>
-               <>
-                  You can also check out this webpage{"'"}s info at its dedicated
-                  <InTextLink href='/this-site' locale={'en'}>
-                     page!
-                  </InTextLink>
-               </>
-            </Callout>
+				<Section>
+					<Callout icon={{
+						type: 'emoji',
+						source: '⚠️🚧'
+					}}>
+						<>
+							{locale === 'en' && (
+								<>
+									This webpage is still under development, so many of its features and pages<br/>
+									are still missing. Also many design and breaking changes will still occur.<br/>
+									<br/>
+									You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>old version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
+									Or you can follow this page progress...<br/>
+								</>
+							)}
+							{locale === 'pt' && (
+								<>
+									Este site ainda está em desenvolvimento, então muitas peças e paginas<br/> 
+									ainda estão faltando. Ainda ocorreram várias mudanças no design.<br/>
+									<br/>
+									Caso deseje, pode ver a <InTextLink href='https://old.victorgomez.dev'>versão antiga</InTextLink>.<br/>
+									Ou seguir o progresso desta site aqui...<br/>
+								</>
+							)}
+							{locale === 'fr' && (
+								<>
+									Ce site est encore en cours de développement, donc quelques de ses elements et pages<br/>
+									sont encore manquants. Encore des modifications sur le design et fonctionnalités seront fréquentes.<br/>
+									<br/>
+									Si vous le souhaitez, vous pouvez acceder la <InTextLink href='https://old.victorgomez.dev'>version antérieure</InTextLink> {"("}seulement disponible en portugais :{"( )"}.<br/>
+									Ou vous pouvez suivre le progrès de ce site ici...<br/>
+								</>
+							)}
+						</>
+					</Callout>
+				</Section>
          </Container>
       </>
    )

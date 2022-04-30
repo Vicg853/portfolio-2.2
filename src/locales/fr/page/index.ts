@@ -3,14 +3,17 @@ import type { IndexPageLocaleContent } from '@pages/index'
 
 export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    content: {
-      mainP: [
-         'Salut! Ça va?',
-         'Je suis passionné par l\'informatique et le whole-stack (vraiment, cela ne s\'agit pas d\'une hyperbole/métaphore... ): je veux tout savoir dessus, du plus pratique au théorique le plus avancé, du hardware au software...',
-         'Dès l\'age de 12 ans j\'explore ce sujet. J\'ai donc beaucoup appris sur ce monde et j\'ai réalise que en effet il y en manque encore une long chemin pour tout y savoir (en effet, que cela é impossible, car il y a toujours des nouvelles et cella me fait aimer encore plus tout cela).',
-         'Ici vou pourrez trouver ce que j\'ai/je suis entrain/je veut encore appr(is|endre) et encore une variété de projets de différentes portées: open-source, IoT, Hardware, Sites Web, Applica., projets de technologie au sein d\'NGOs, ...',
-         'J\'espère que vous pouvez y apprécier 😄!'
-      ],
-      imageCaption: 'Salut! Je suis Victor: développant des dinosaures 🦖 depuis 2003!',
+      mainP: 'Je suis passionné par l\'informatique et le whole-stack  et cela ne s\'agit pas d\’une métaphore! Cela me mène à en apprendre toujours plus sur le sujet, du plus théorique aux plus pratique. \n\nDès l\'âge de 12 ans j\'explore ce sujet. J\'ai donc beaucoup appris sur ce monde et dès cette introduction j\’ai pu apprendre que ce monde est en constante évolution,  une des raisons qui justifient ma passion: évolution constante === infinité possibilités.\n\nSur ce site web vous pourrez découvrir ce que j\'apprends et vais encore apprendre, accompagné d\’une variété de projets de différentes portées: open-source, IoT, Hardware, Sites Web, Application, projets de technologie au sein de NGOs, ...',
+      imageCaption: 'Moi!',
+      objectivesText: {
+         title: 'Paramètres\n toujours en jour &\n en route',
+         description: 'a.k.a.: mes objectifs pour cette année',
+         objectivesLegend: {
+            done: 'Conclu 🎉',
+            inProgress: 'En progrès...',
+            todo: 'En pause / non commencé',
+         }
+      }
    },
    mainProps: {
       header: {
