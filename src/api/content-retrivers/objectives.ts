@@ -14,7 +14,7 @@ interface ObjectiveLocalesSource {
    objectiveDescription: string
 }
 
-type ObjectivesSourceReturn = GlobalObjectivesSourceType & ObjectiveLocalesSource
+export type ObjectivesSourceReturn = GlobalObjectivesSourceType & ObjectiveLocalesSource
 
 interface ObjectivesSourceQueryType extends GlobalObjectivesSourceType {
 	sourceI18nIterations: Record<LocalesType, ObjectiveLocalesSource>

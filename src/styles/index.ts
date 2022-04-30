@@ -1,11 +1,41 @@
 import { styled } from 'linaria/react'
 import { css } from 'linaria'
 
-export const objectivesGridStyle = css`
+export const ObjectivesGridS = styled.div`
 	display: grid;
-   gap: 1.5rem;
-	grid-template-columns: repeat(auto-fill, 330px);
-	justify-content: center;
+   grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+   align-items: stretch;
+   gap: 1rem;
+   
+   a {
+      cursor: pointer;
+   }
+
+   @media (max-width: 862px) {
+      justify-content: center;
+   }
+`
+
+export const objectivesSectionStyle = css`
+   background: var(--pallete-opaque-bgContrast);
+   border-radius: 0.7rem;
+   padding: 1.5rem;
+   margin-top: 10rem;
+   margin-bottom: 5rem;
+`
+
+export const mainPMediaQueryStyle = css`
+   @media (max-width: 745px) {
+      justify-content: center;
+   }
+`
+
+export const objectivesSectionTitleStyle = css`
+   gap: 0.5rem;
+`
+
+export const objectivesDescriptionStyle = css`
+   margin-top: 0.7rem !important;
 `
 
 export const addGap = css`
@@ -35,7 +65,7 @@ export const ObjectiveCard = styled.div`
    border: 1px solid var(--pallete-opaque-bgAlt);
    padding: 1rem;
    gap: 0.8rem;
-   min-width: 300px;
+   height: 100%;
 
    sub {
       display: inline-flex;

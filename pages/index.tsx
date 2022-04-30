@@ -1,11 +1,10 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
+import type { ObjectivesSourceReturn } from '@api-utils/content-retrivers/objectives'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { defaultLocale } from 'src/locales/configs'
-import { css } from 'linaria'
 
 //* Importing essential components
 import { Header } from '@components/header'
@@ -21,8 +20,12 @@ import {
   Paragraph,
   meImageStyle,
   addGap,
-  objectivesGridStyle,
-  ObjectiveCard
+  ObjectivesGridS,
+  ObjectiveCard,
+  objectivesSectionStyle,
+  mainPMediaQueryStyle,
+  objectivesSectionTitleStyle,
+  objectivesDescriptionStyle
 } from '@p-styles/index'
 import {
 	Container,
@@ -31,23 +34,7 @@ import {
 	CaptionedImage,
 	SectionDesc
 } from '@p-styles/global'
-interface GlobalObjectivesSourceType {
-	objectiveProgress: 'to-do' | 'in-progress' | 'done'
-	objectiveId: string
-	objectiveSource?: string
-}
 
-interface ObjectivesSourcePageProps extends GlobalObjectivesSourceType {
-	objectiveName: string,
-	objectiveDescription: string,
-}
-
-interface ObjectivesSourceQueryType extends GlobalObjectivesSourceType {
-	sourceI18nIterations: Record<'en' | 'pt' | 'fr', {
-		objectiveName: string
-		objectiveDescription: string
-	}>
-}
 
 export interface IndexPageLocaleContent {
 	mainP: string
@@ -64,7 +51,7 @@ export interface IndexPageLocaleContent {
 }
 
 type PageProps =  PageFullType<IndexPageLocaleContent> & {
-	objectivesFetch: ObjectivesSourcePageProps[]
+	objectivesFetch: ObjectivesSourceReturn[]
 }
 
 export const getStaticProps: GetStaticProps<{
@@ -149,11 +136,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 				</Section>
 				<Section  data-wrapRev 
 				data-widthMax data-gap
-				className={css`
-					@media (max-width: 745px) {
-						justify-content: center;
-   				}
-				`}>
+				className={mainPMediaQueryStyle}>
 					<Section className={addGap} data-vert>
 						<SecTitle>Hello<br/> World</SecTitle>
 						<Paragraph>{mainP.split(/\n/).map(val => <>{val}<br key={val}/></>)}</Paragraph>
@@ -169,19 +152,12 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					</CaptionedImage>
 				</Section>
 				<Section data-vert data-gap
-				className={css`
-					background: var(--pallete-opaque-bgContrast);
-					border-radius: 0.7rem;
-					padding: 1.5rem;
-					margin-top: 10rem;
-				`}>
-					<Section data-wrap className={css`
-						gap: 0.5rem;
-					`}>
+				className={objectivesSectionStyle}>
+					<Section data-wrap className={objectivesSectionTitleStyle}>
 						<Section data-vert>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
 							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
-							className={css`margin-top: 0.7rem !important;`}/>
+							className={objectivesDescriptionStyle}/>
 						</Section>
 						<Section data-vert>
 							<SectionDesc dangerouslySetInnerHTML={{ __html: `✅ ${objectivesText.objectivesLegend.done}`}} />
@@ -189,7 +165,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 							<SectionDesc dangerouslySetInnerHTML={{ __html: `⌛ ${objectivesText.objectivesLegend.todo}`}} />
 						</Section>
 					</Section>
-					<Section data-wrap data-widthHundred className={objectivesGridStyle}>
+					<ObjectivesGridS>
 						{objectivesFetch.map(objective => {
 							const comp = (
 								<ObjectiveCard key={objective.objectiveId}>
@@ -208,14 +184,14 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 							)
 
 							if(objective.objectiveSource) return (
-								<Link href={objective.objectiveSource}>
-									{comp}
+								<Link href={objective.objectiveSource} passHref>
+									<a>{comp}</a>
 								</Link>
 							)
 							
 							return comp
 						})}
-					</Section>
+					</ObjectivesGridS>
 				</Section>
   	  		 </Container>
   	  	</>
