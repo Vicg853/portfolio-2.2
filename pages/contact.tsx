@@ -35,6 +35,12 @@ export interface ContactPageLocaleContent {
    otherContactCard: {
       emailTitle: string
    }
+   statusMessageCard: {
+      success: string
+      serverError: string
+      inputError: string
+      toMany: string
+   }
 }
 
 type ContactPageProps = {

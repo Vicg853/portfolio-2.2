@@ -13,6 +13,12 @@ export const ContactPage: PageFullType<ContactPageLocaleContent> = {
       },
       otherContactCard: {
          emailTitle: 'Par mail'
+      },
+      statusMessageCard: {
+         inputError: 'Veuillez remplir tous les champs!',
+         success: 'Votre message a été envoyé avec succès!',
+         serverError: 'Une erreur s\'est produite:',
+         toMany: 'Calmez-vous!!! Vous envoyez trop de messages! 😖😲',
       }
    },
 }
