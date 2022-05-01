@@ -177,9 +177,10 @@ export const Input = styled.input`
    }
 
    &&[data-err] {
-      border-color: var(--pallete-constants-warn);
+      border-color: var(--pallete-constants-err);
    }
 `
+
 export const TextArea = styled.textarea`
    max-width: 350px;
    min-width: 350px;
@@ -206,9 +207,10 @@ export const TextArea = styled.textarea`
    }
 
    &&[data-err] {
-      border-color: var(--pallete-constants-warn);
+      border-color: var(--pallete-constants-err);
    }
 `
+
 export const InputLabel = styled.label`
    display: block;
    content: attr(data-label);
@@ -218,6 +220,7 @@ export const InputLabel = styled.label`
    font-weight: 600;
    color: var(--pallete-text);
 `
+
 export const SendButton = styled.button`
    width: 350px;
    height: 44px;
@@ -236,12 +239,23 @@ export const SendButton = styled.button`
 
    cursor: pointer;
 
-   :hover {
+   &&[data-status='err'] {
+      background: var(--pallete-constants-err);
+   }
+   &&[data-status='success'] {
+      background: var(--pallete-constants-success);
+   }
+   &&[data-status='loading'] {
+      cursor: not-allowed;
+      opacity: 0.7;
+   }
+
+   :hover:not([data-status='success'], [data-status='err'], [data-status='loading']) {
       border: 1px solid var(--pallete-accent);
       background: var(--pallete-bg);
       color: var(--pallete-accent);
    }
-   :active  {
+   :active:not([data-status='success'], [data-status='err'], [data-status='loading'])  {
       background: var(--pallete-bgAlt);
    }
 `
