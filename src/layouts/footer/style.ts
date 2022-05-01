@@ -14,9 +14,9 @@ export const Container = styled.footer`
    padding: var(--top-bot-spacing) var(--sides-spacing);
    background: var(--pallete-bgContrast);
 
-   transition-property: border-radius, background-color;
+   transition-property: border-radius, background-color, transform;
    transition-duration: 0.5s;
-   transition-timing-function: ease-in-out;
+   transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
    && > sub {
       width: 100%;
@@ -71,6 +71,7 @@ export const Container = styled.footer`
 
    &&[data-menu-open='true'] {
       border-radius: 1.5rem;
+      transform: scale(0.8);
    }
 
    @media (max-width: 620px) {

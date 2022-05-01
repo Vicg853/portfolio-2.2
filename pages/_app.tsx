@@ -33,6 +33,7 @@ export {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+
   return (
     <>
       <Head>
@@ -49,8 +50,8 @@ export default function App({ Component, pageProps }: AppProps) {
          {/* @ts-ignore */}
          <ContentContainer>
             <Component {...pageProps} />
-            <Footer />
          </ContentContainer>
+         <Footer />
       </>
     </>
   )
