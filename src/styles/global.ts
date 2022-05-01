@@ -15,13 +15,18 @@ export const Container = styled.div`
    padding: 3rem 0rem;
 `
 
-//* Horizontal section component
-export const SectionHor = styled.section`
+export const Section = styled.section`
    display: inline-flex;
-   justify-content: center;
+   justify-content: space-between;
    align-items: center;
    flex-wrap: nowrap;
    max-width: 100%;
+
+   &&[data-vert] {
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+   }
 
    &&[data-bigMinWidth] {
       width: 1200px;
@@ -31,6 +36,13 @@ export const SectionHor = styled.section`
    }
    &&[data-smallMinWidth] {
       width: 600px;
+   }
+   &&[data-widthMax] {
+      width: 85vw;
+      max-width: 1700px;
+   }
+   &&[data-widthHundred] {
+      width: 100%;
    }
 
    &&[data-wrap] {
@@ -49,62 +61,42 @@ export const SectionHor = styled.section`
    &&[data-justEnd] {
       justify-content: flex-end;
    }
-
+   &&[data-jusCent] {
+      justify-content: center;
+   }
+   &&[data-jusSpArr] {
+      justify-content: space-around;
+   }
+   &&[data-jusSpBet] {
+      justify-content: space-between;
+   }
+   &&[data-justSpEven] {
+      justify-content: space-evenly;
+   }
 `
-
-//* Vertical section component
-export const SectionVert = styled.section`
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: stretch;
-   max-width: 100%;
-
-   &&:not([data-limitWidth]) {
-      &&[data-bigMinWidth] {
-         width: 1200px;
-      }
-      &&[data-medMinWidth] {
-         width: 700px;
-      }
-      &&[data-smallMinWidth] {
-         width: 600px;
-      }
-   }
-
-   &&[data-limitWidth] {
-      max-width: calc(50% - 1rem);
-   }
-
-   &&[data-gap] {
-      gap: 4rem;
-   }
-`   
 
 //* Section's title and description component
 export const SecTitle = styled.h3`
-   display: inline-flex;
-   font-size: 1.2rem;
-   font-weight: 500;
+   --font-size: 1.3rem;
+   --font-weight: 600;
+   width: auto;
+   font-size: var(--font-size);
+   font-weight: var(--font-weight);
    color: var(--pallete-text);
    font-family: var(--fonts-secondary);
-   font-style: italic;
-   width: 100%;
    text-align: start;
+   align-self: flex-start;
 
-   ::before, ::after {
-      display: block;
-      font-family: var(--fonts-tertiary);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--pallete-text);
-      font-style: normal;
-   }
-   ::before {
-      content: '<';
-   }
    ::after {
-      content: '/>';
+      display: block;
+      content: '';
+      width: 98%;
+      height: 1px;
+      background-color: var(--pallete-accent);
+      opacity: 0.5;
+      font-style: normal;
+      margin-top: 0.8rem;
+      border-radius: 0.5rem;
    }
 `
 export const SectionDesc = styled.p`
@@ -157,5 +149,113 @@ export const Paragraph = styled.p`
       display: block;
       margin: 0.6rem 1.7rem;
 
+   }
+`
+
+//* Form components
+export const Input = styled.input`
+   width: 350px;
+   height: 44px;
+   background: transparent;
+   color: var(--pallete-text);
+   font-size: 0.9rem;
+   border: 2px solid var(--pallete-opaque-bgAlt);
+   border-radius: 0.5rem;
+   font-family: var(--fonts-primary);
+   padding: 0.2rem 0.7rem;
+
+   transition: all 0.3s ease-in-out;
+
+   ::placeholder {
+      color: var(--pallete-opaque-text);
+   }
+   :focus {
+      border: 2px solid var(--pallete-accent);
+   }
+   :hover:not(:focus) {
+      border: 2px solid var(--pallete-bgAlt);
+   }
+
+   &&[data-err] {
+      border-color: var(--pallete-constants-err);
+   }
+`
+
+export const TextArea = styled.textarea`
+   max-width: 350px;
+   min-width: 350px;
+   max-height: 200px;
+   min-height: 200px;
+   background: transparent;
+   color: var(--pallete-text);
+   font-size: 0.9rem;
+   border: 2px solid var(--pallete-opaque-bgAlt);
+   border-radius: 0.5rem;
+   font-family: var(--fonts-primary);
+   padding: 0.2rem 0.7rem;
+
+   transition: all 0.3s ease-in-out;
+
+   ::placeholder {
+      color: var(--pallete-opaque-text);
+   }
+   :focus {
+      border: 2px solid var(--pallete-accent);
+   }
+   :hover:not(:focus) {
+      border: 2px solid var(--pallete-bgAlt);
+   }
+
+   &&[data-err] {
+      border-color: var(--pallete-constants-err);
+   }
+`
+
+export const InputLabel = styled.label`
+   display: block;
+   content: attr(data-label);
+   margin-bottom: 0.5rem;
+   font-family: var(--fonts-secondary);
+   font-size: 0.95rem;
+   font-weight: 600;
+   color: var(--pallete-text);
+`
+
+export const SendButton = styled.button`
+   width: 350px;
+   height: 44px;
+   justify-content: center;
+   align-items: center;
+   
+   background: var(--pallete-accent);
+   color: var(--pallete-bg);
+   border: 1px solid transparent;
+   border-radius: 0.5rem;
+   transition: all 0.3s ease-in-out;
+   
+   font-size: 0.9rem;
+   font-weight: 600;
+   font-family: var(--fonts-secondary);
+
+   cursor: pointer;
+
+   &&[data-status='err'] {
+      background: var(--pallete-constants-err);
+   }
+   &&[data-status='success'] {
+      background: var(--pallete-constants-success);
+   }
+   &&[data-status='loading'] {
+      cursor: not-allowed;
+      opacity: 0.7;
+   }
+
+   :hover:not([data-status='success'], [data-status='err'], [data-status='loading']) {
+      border: 1px solid var(--pallete-accent);
+      background: var(--pallete-bg);
+      color: var(--pallete-accent);
+   }
+   :active:not([data-status='success'], [data-status='err'], [data-status='loading'])  {
+      background: var(--pallete-bgAlt);
    }
 `
