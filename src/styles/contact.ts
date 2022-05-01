@@ -124,3 +124,47 @@ export const gmtOffsetStyle = css`
       justify-self: center;
    }
 `
+
+export const ReqResultMessageCard = styled.div`
+   position: fixed;
+   top: 10vh;
+   transition: none;
+   width: 0px;
+   height: 0px;
+
+   sub {
+      display: block;
+      padding: 1rem 1.4rem;
+      border-radius: 0.5rem;
+      color: var(--pallete-bg);
+      font-weight: 600;
+      font-size: 0.9rem;
+      z-index: var(--zIndex-messagePopUp);
+      transform: scale(1.4);
+      opacity: 0.5;
+      transition: all 0.3s ease-in-out;
+
+
+   }
+
+   &&[data-status="err"], &&[data-status="success"] {
+      width: auto;
+      height: auto;
+      sub {
+         transform: scale(1);
+         opacity: 1;
+      }
+   }
+
+   &&[data-status='err'] {
+      sub {
+         background: var(--pallete-constants-err);
+      }
+   }
+   &&[data-status='success'] {
+      sub {
+         background: var(--pallete-constants-success);
+      }
+   }
+
+`
