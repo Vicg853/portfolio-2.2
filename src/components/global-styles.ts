@@ -5,6 +5,7 @@ const zIndex: zIndexesTypes = {
    nav: 50,
    menu: 40,
    header: 25,
+   messagePopUp: 90,
 }
 
 const fonts: Fonts = {

@@ -15,7 +15,7 @@ import {
    localeFrName
 } from './configs'
 export interface PageFullType<PageContentType> {
-   mainProps: PageLocale
+   mainProps?: PageLocale
    content: PageContentType
 }
 //TODO Add pages !!! when they are ready

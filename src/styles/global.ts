@@ -151,3 +151,111 @@ export const Paragraph = styled.p`
 
    }
 `
+
+//* Form components
+export const Input = styled.input`
+   width: 350px;
+   height: 44px;
+   background: transparent;
+   color: var(--pallete-text);
+   font-size: 0.9rem;
+   border: 2px solid var(--pallete-opaque-bgAlt);
+   border-radius: 0.5rem;
+   font-family: var(--fonts-primary);
+   padding: 0.2rem 0.7rem;
+
+   transition: all 0.3s ease-in-out;
+
+   ::placeholder {
+      color: var(--pallete-opaque-text);
+   }
+   :focus {
+      border: 2px solid var(--pallete-accent);
+   }
+   :hover:not(:focus) {
+      border: 2px solid var(--pallete-bgAlt);
+   }
+
+   &&[data-err] {
+      border-color: var(--pallete-constants-err);
+   }
+`
+
+export const TextArea = styled.textarea`
+   max-width: 350px;
+   min-width: 350px;
+   max-height: 200px;
+   min-height: 200px;
+   background: transparent;
+   color: var(--pallete-text);
+   font-size: 0.9rem;
+   border: 2px solid var(--pallete-opaque-bgAlt);
+   border-radius: 0.5rem;
+   font-family: var(--fonts-primary);
+   padding: 0.2rem 0.7rem;
+
+   transition: all 0.3s ease-in-out;
+
+   ::placeholder {
+      color: var(--pallete-opaque-text);
+   }
+   :focus {
+      border: 2px solid var(--pallete-accent);
+   }
+   :hover:not(:focus) {
+      border: 2px solid var(--pallete-bgAlt);
+   }
+
+   &&[data-err] {
+      border-color: var(--pallete-constants-err);
+   }
+`
+
+export const InputLabel = styled.label`
+   display: block;
+   content: attr(data-label);
+   margin-bottom: 0.5rem;
+   font-family: var(--fonts-secondary);
+   font-size: 0.95rem;
+   font-weight: 600;
+   color: var(--pallete-text);
+`
+
+export const SendButton = styled.button`
+   width: 350px;
+   height: 44px;
+   justify-content: center;
+   align-items: center;
+   
+   background: var(--pallete-accent);
+   color: var(--pallete-bg);
+   border: 1px solid transparent;
+   border-radius: 0.5rem;
+   transition: all 0.3s ease-in-out;
+   
+   font-size: 0.9rem;
+   font-weight: 600;
+   font-family: var(--fonts-secondary);
+
+   cursor: pointer;
+
+   &&[data-status='err'] {
+      background: var(--pallete-constants-err);
+   }
+   &&[data-status='success'] {
+      background: var(--pallete-constants-success);
+   }
+   &&[data-status='loading'] {
+      cursor: not-allowed;
+      opacity: 0.7;
+   }
+
+   :hover:not([data-status='success'], [data-status='err'], [data-status='loading']) {
+      border: 1px solid var(--pallete-accent);
+      background: var(--pallete-bg);
+      color: var(--pallete-accent);
+   }
+   :active:not([data-status='success'], [data-status='err'], [data-status='loading'])  {
+      background: var(--pallete-bgAlt);
+   }
+`

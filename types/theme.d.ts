@@ -2,6 +2,7 @@ export interface zIndexesTypes {
    nav: number
    menu: number
    header: number
+   messagePopUp: number
 }
 
 export interface Fonts {

@@ -83,7 +83,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 
 	const {
 		header
-	} = pageSource.mainProps
+	} = pageSource.mainProps!
 
 	const objectivesFetch = pageSource.objectivesFetch
 
