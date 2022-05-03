@@ -4,6 +4,8 @@ import { css } from 'linaria'
 export const Container = styled.footer`
    --top-bot-spacing: 3rem;
    --sides-spacing: 4.7vw;
+   --sub-max-width: 1700px;
+   --sub-width: 85vw;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -19,8 +21,8 @@ export const Container = styled.footer`
    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
    && > sub {
-      width: 100%;
-      max-width: 1400px;
+      width: var(--sub-width);
+      max-width: var(--sub-max-width);
       display: inline-flex;
       align-items: stretch;
       justify-content: space-between;
@@ -44,8 +46,8 @@ export const Container = styled.footer`
    }
 
    .separator {
-      width: 100%;
-      max-width: 1400px;
+      width: var(--sub-width);
+      max-width: var(--sub-max-width);
       height: 1px;
       background: var(--pallete-bgAlt);
       border-radius: 0.5rem;
