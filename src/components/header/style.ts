@@ -37,7 +37,11 @@ export const Container = styled.header`
 
       margin-left: 3.9vw;
       margin-bottom: 16vh;
-      max-width: 90vw;
+      width: 90vw;
+      max-width: 1900px;
+
+      @media (min-width: 2000px) {
+         margin-left: calc((100vw - 1900px) / 2);
    }
 
    &&[data-menu='open'] {

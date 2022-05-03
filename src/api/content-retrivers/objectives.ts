@@ -130,7 +130,7 @@ export const getObjectivesList = (locale: LocalesType | undefined, defaultLocale
 			objectiveName: objectiveLocale.objectiveName,
 			objectiveDescription: objectiveLocale.objectiveDescription,
 		}
-	})
+	}).sort((a, b) => a.objectiveProgress === b.objectiveProgress ? 0 : a.objectiveProgress === 'to-do' ? 1 : -1)
 
    return objectivesFetch
 }

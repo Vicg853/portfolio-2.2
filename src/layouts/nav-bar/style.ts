@@ -3,50 +3,61 @@ import { styled } from 'linaria/react'
 
 export const Container = styled.nav`
    --padding-top-bot: 2.7rem;
+   --max-width: 1900px;
    --padding-sides: 4.3vw;
    position: fixed;
-   display: inline-flex;
    width: 100vw;
-   height: min-content;
-   padding: var(--padding-top-bot) var(--padding-sides);
-   justify-content: space-between;
+   display: flex;
+   justify-content: center;
    align-items: center;
-   flex-wrap: nowrap;
    z-index: var(--zIndex-nav);
-   
-   &&[data-scrolled='true'] {
-      background-color: var(--pallete-opaque-accent2);
-   }
+   padding: var(--padding-top-bot) var(--padding-sides);
 
-   svg, sub, a {
-      z-index: calc(var(--zIndex-nav) + 1);
-   }
-   sub {
+   #subcontainer {
+      width: 100%;
+      max-width: var(--max-width);
+      position: relative;
       display: inline-flex;
-      justify-content: center;
-      gap: 1rem;
-      padding-right: 0.8rem;
-   }
-
-   #background {
-      --margin-tolerance: 1rem;
-      position: absolute;
+      height: min-content;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
       z-index: var(--zIndex-nav);
-      backdrop-filter: blur(10px);
-      width: calc(100% - var(--padding-sides) * 2 + var(--margin-tolerance) * 2);
-      height: calc(100% - var(--padding-top-bot) * 2 + var(--margin-tolerance) * 2);
-      left: calc(var(--padding-sides) - var(--margin-tolerance));
-      top: calc(var(--padding-top-bot) - var(--margin-tolerance));
-      margin-bottom: 0%;
-      transition: all 0.5s;
-      border-radius: 0.8rem;
-      opacity: 0;
-      transition-property: opacity, transform;
-      transition-duration: 0.5s;
+      
+      &&[data-scrolled='true'] {
+         background-color: var(--pallete-opaque-accent2);
+      }
+
+      svg, sub, a {
+         z-index: calc(var(--zIndex-nav) + 1);
+      }
+      sub {
+         display: inline-flex;
+         justify-content: center;
+         gap: 1rem;
+         padding-right: 0.8rem;
+      }
+
+      #background {
+         --margin-tolerance: 1rem;
+         position: absolute;
+         z-index: var(--zIndex-nav);
+         backdrop-filter: blur(10px);
+         width: calc(100% - var(--padding-sides) * 2 + var(--margin-tolerance) * 2);
+         height: calc(100% - var(--padding-top-bot) * 2 + var(--margin-tolerance) * 2);
+         left: calc(var(--padding-sides) - var(--margin-tolerance));
+         top: calc(var(--padding-top-bot) - var(--margin-tolerance));
+         margin-bottom: 0%;
+         transition: all 0.5s;
+         border-radius: 0.8rem;
+         opacity: 0;
+         transition-property: opacity, transform;
+         transition-duration: 0.5s;
+      }
    }
-   &&[data-scrolled='true'] #background {
+   &&[data-scrolled='true'] > #subcontainer >  #background {
       opacity: 1;
-   }
+   }   
 `
 
 export const logoStyle = css`

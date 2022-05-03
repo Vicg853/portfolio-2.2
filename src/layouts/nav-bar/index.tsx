@@ -51,6 +51,8 @@ export const NavBar = () => {
    return (
       <Container 
       data-scrolled={(scrolled && !isMenuOpen) ? 'true' : 'false'} >
+         <div id="subcontainer">
+
          <Link href='/' passHref locale={locale}>
             <a className={logoStyle}>
                {themeKey === 'dark' ? 
@@ -146,6 +148,7 @@ export const NavBar = () => {
             </button>
          </sub>
          <div id='background' />
+         </div>
       </Container>
    )
 }
