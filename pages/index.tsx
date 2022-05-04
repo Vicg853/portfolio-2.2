@@ -42,7 +42,8 @@ export interface IndexPageLocaleContent {
 	objectivesText: {
 		title: string
 		description: string
-		objectivesLegend: {
+		objectivesCaption: {
+			title: string
 			done: string
 			inProgress: string
 			todo: string
@@ -159,10 +160,11 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
 							className={objectivesDescriptionStyle}/>
 						</Section>
-						<Section data-vert>
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `✅ ${objectivesText.objectivesLegend.done}`}} />
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `✍️ ${objectivesText.objectivesLegend.inProgress}`}} />
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `⌛ ${objectivesText.objectivesLegend.todo}`}} />
+						<Section data-vert id='captions'>
+							<span id='title'>{objectivesText.objectivesCaption.title}</span>
+							<SectionDesc dangerouslySetInnerHTML={{ __html: `✅ ${objectivesText.objectivesCaption.done}`}} />
+							<SectionDesc dangerouslySetInnerHTML={{ __html: `✍️ ${objectivesText.objectivesCaption.inProgress}`}} />
+							<SectionDesc dangerouslySetInnerHTML={{ __html: `⌛ ${objectivesText.objectivesCaption.todo}`}} />
 						</Section>
 					</Section>
 					<ObjectivesGridS>

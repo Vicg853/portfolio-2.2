@@ -3,22 +3,23 @@ import type { IndexPageLocaleContent } from '@pages/index'
 
 export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    content: {
-      mainP: 'Sou profundamente apaixonado por ciência da computação e a chamada "whole-stack", isso me leva então procurar saber cada vez mais sobre o assunto, desde o teórico mais pesado ao prático, ou do hardware ao software como dito. \n\nEntrei nesse universo aos 12 anos. Desde então descobri inúmeras coisas sobre o assunto. E não demorou muito para eu perceber que a área está em constante evolução, algo que acho incrível: evolução constante === infinitas possibilidades.\n\nNesse site você poderá descobrir o que eu sei, aprendo e irei aprender, junto com uma variedade de projetos, de vários escopos: open-source, IoT, hardware, sites, apps, relacionados a ONG, ...',
-      imageCaption: 'Aqui estou!',
+      mainP: 'Sou apaixonado por ciência da computação e pela "whole-stack", um pesquisador entusiasta sobre o tema, desde a área de hardware a área de software. \n\nImerso neste universo aos desde 12 anos, não demorou muito para eu perceber que a área está em constante evolução, algo que acho incrível e por isso estou em constante aprendizado.\n\nNeste site é possível explorar o que já domino, minhas curiosidades e projetos (tanto em andamento, quanto para o futuro) de escopos open-source, IoT, hardware, sites, apps, relacionados a ONG, etc',
+      imageCaption: 'Olá!',
       objectivesText: {
-         title: 'Me mantendo sempre\natualizado &\n ativo',
-         description: 'a.k.a.: meus objetivos para este ano',
-         objectivesLegend: {
-            done: 'Concluido 🎉',
-            inProgress: 'Em curso...',
-            todo: 'Em standby / não iniciado ainda',
+         title: 'Sempre\nna ativa &\natualizado',
+         description: 'a.k.a. projetos a curto prazo (vulgo 2022)',
+         objectivesCaption: {
+            title: 'Legenda',
+            done: 'Projetos concluidos 🎉',
+            inProgress: 'Projetos em andamento',
+            todo: 'Projetos para o futuro',
          }
       }
    },
    mainProps: {
       header: {
-         title: 'Hi! I code dinosaurs 🦖',
-         description: 'Sou Victor: um apaixonado por ciencia da computação e a whole-stack, mas focado em full-stack para o momento.',
+         title: 'Olá! Eu desenvolvo dinossauros 🦖',
+         description: 'Sou Victor, desenvolvedor full-stack, apaixonado por ciencia da computação e a "whole-stack".',
          backgroundAlt: 'Ilustração da pagina.'
       },
    }

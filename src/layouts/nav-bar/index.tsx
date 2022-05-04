@@ -84,8 +84,6 @@ export const NavBar = () => {
                                  return { text: 'English 🇺🇸', alt: 'Switch language to english!' }
                               case 'pt':
                                  return { text: 'Português 🇧🇷', alt: 'Mudar idioma para português!' }
-                              case 'fr':
-                                 return { text: 'Français 🇫🇷', alt: 'Changer de langue en français!' }
                               default:
                                  return { text: 'English 🇺🇸', alt: 'Switch language to english!' }
                            }

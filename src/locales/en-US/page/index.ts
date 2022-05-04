@@ -8,7 +8,8 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
       objectivesText: {
          title: 'Keeping myself\n up-to-date &\n running',
          description: 'a.k.a.: my objectives for this year',
-         objectivesLegend: {
+         objectivesCaption: {
+            title: 'Captions',
             done: 'Done 🎉',
             inProgress: 'On-going...',
             todo: 'On standby / not started yet',

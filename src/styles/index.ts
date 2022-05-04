@@ -33,6 +33,16 @@ export const mainPMediaQueryStyle = css`
 
 export const objectivesSectionTitleStyle = css`
    gap: 0.5rem;
+   #captions > #title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--pallete-text);
+   }
+   #captions {
+      height: 100%;
+      align-self: stretch;
+   }
 `
 
 export const objectivesDescriptionStyle = css`

@@ -42,6 +42,7 @@ export const Container = styled.header`
 
       @media (min-width: 2000px) {
          margin-left: calc((100vw - 1900px) / 2);
+      }
    }
 
    &&[data-menu='open'] {

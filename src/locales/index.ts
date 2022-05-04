@@ -35,14 +35,14 @@ interface RosettaPerLocaleProps<PagesList> {
 
 import { enUsLocale } from './en-US'
 import { ptBRLocale } from './pt-BR'
-import { frLocale } from './fr'
+//import { frLocale } from './fr'
 
 
 
 const i18n = rosetta<RosettaPerLocaleProps<Pages>>()
 i18n.set(localeEnName, enUsLocale)
 i18n.set(localePtBrName, ptBRLocale)
-i18n.set(localeFrName, frLocale)
+//i18n.set(localeFrName, frLocale)
 i18n.locale(defaultLocale)
 
 export { i18n }
