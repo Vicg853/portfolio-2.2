@@ -13,9 +13,7 @@ const withPreact = require('next-plugin-preact');
 
 const {
   defaultLocale,
-  localeEnName,
-  localeFrName,
-  localePtBrName
+  localesArray
 } = require('./src/locales/configs')
 
 const nextConfig = {
@@ -26,7 +24,7 @@ const nextConfig = {
     removeConsole: true,
   },
   i18n: {
-    locales: [localeEnName, localeFrName, localePtBrName],
+    locales: localesArray,
     defaultLocale: defaultLocale,
     localeDetection: false,
   },
