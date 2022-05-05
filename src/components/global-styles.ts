@@ -22,6 +22,9 @@ const PalleteConstants: PalleteConstantsTyping = {
    header: {
       hLine:'#ffcb75',
       hText: '#f5f5f5'
+   },
+   nav: {
+      onHeaderColor: '#f5f5f5',
    }
 }
 
