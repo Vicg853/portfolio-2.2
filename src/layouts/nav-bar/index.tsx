@@ -20,6 +20,10 @@ import {
 } from './style'
 const windowCheck = typeof window !== 'undefined'
 
+//* This is a temporary solution
+//TODO - Find a better way to handle this
+const noHeaderPages: string[] = ['/contact']
+
 export const NavBar = () => {
    const { route } = useRouter()
    const { nav: navTranslations, locale, locales } = useLocale()
@@ -31,17 +35,23 @@ export const NavBar = () => {
    const [themeKey, setThemeKey] = useCssThemeKey()
 
    //* Setting deps to make nav's background change after scrolling through a target
-   const [scrolled, setScrolled] = useState(false)
+   function windowsScrollCheck() {
+      const scrolledThroughLimit = window.scrollY > (window.innerHeight/2)
+      if(scrolledThroughLimit) return true
+      else return false
+   }
+
+   const [scrolled, setScrolled] = useState(() => {
+      if(!windowCheck) return false
+      return windowsScrollCheck()
+   })
    useEffect(() => {
       if(!windowCheck) return
-
       window.addEventListener('scroll', () => {
-         const scrolledThoughLimit = window.scrollY > (window.innerHeight/2)
-         if(scrolledThoughLimit) setScrolled(true)
-         else setScrolled(false)
+         setScrolled(windowsScrollCheck())
       })
    })
-      
+   
    //* Locales menu state
    const [localesMenuOpen, setLocalesMenuOpen] = useState(false)
    const [localesMenuClicked, setLocalesMenuClicked] = useState(false)
@@ -51,11 +61,10 @@ export const NavBar = () => {
    return (
       <Container 
       data-showBg={(scrolled && !isMenuOpen) ? 'true' : 'false'}
-      data-scrolled={scrolled ? 'true' : 'false'}
+      data-scrolled={(scrolled || noHeaderPages.includes(route)) ? 'true' : 'false'}
       data-theme={themeKey}
       data-menuOpen={isMenuOpen ? 'true' : 'false'} >
          <div id="subcontainer">
-
          <Link href='/' passHref locale={locale}>
             <a className={logoStyle}>
                {(themeKey === 'dark' || (!scrolled && !isMenuOpen)) ? 
@@ -70,7 +79,7 @@ export const NavBar = () => {
             data-active={(localesMenuOpen || localesMenuClicked) ? 'true' : 'false'}
             onMouseOver={() => setLocalesMenuOpen(true)}
             onMouseLeave={() => setLocalesMenuOpen(false)}
-            data-scrolled={scrolled ? 'true' : 'false'}
+            data-scrolled={(scrolled || noHeaderPages.includes(route)) ? 'true' : 'false'}
             data-theme={themeKey}
             data-menuOpen={isMenuOpen ? 'true' : 'false'}
             aria-label={navTranslations.localesMenu.mainAlt()((localesMenuOpen || localesMenuClicked))}>
