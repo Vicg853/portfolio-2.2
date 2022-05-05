@@ -20,6 +20,9 @@ export interface PalleteConstantsTyping {
       hLine: string,
       hText: string
    }
+   nav: {
+      onHeaderColor: string
+   }
 }
 
 export interface PalleteTyping {

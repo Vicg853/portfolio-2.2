@@ -103,6 +103,13 @@ export const Container = styled.header`
    #textContent > *:nth-child(3) {
       animation-delay: 0.51s;
    }
+
+   @media (max-width: 700px) {
+      width: 100vw;
+      height: 100vh !important;
+      margin-top: 0;
+      border-radius: 0 !important;
+   }
 `
 
 export const TitleComp = styled.h1`

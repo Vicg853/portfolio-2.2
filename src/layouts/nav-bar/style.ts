@@ -39,14 +39,14 @@ export const Container = styled.nav`
       }
 
       #background {
-         --margin-tolerance: 1rem;
+         --margin-tolerance-topbot: 1.4rem;
+         --margin-tolerance-sides: 2.5rem;
          position: absolute;
          z-index: var(--zIndex-nav);
          backdrop-filter: blur(10px);
-         width: calc(100% - var(--padding-sides) * 2 + var(--margin-tolerance) * 2);
-         height: calc(100% - var(--padding-top-bot) * 2 + var(--margin-tolerance) * 2);
-         left: calc(var(--padding-sides) - var(--margin-tolerance));
-         top: calc(var(--padding-top-bot) - var(--margin-tolerance));
+         width: calc(100% + var(--margin-tolerance-sides) * 2);
+         height: calc(100% + var(--margin-tolerance-topbot) * 2);
+         left: calc(-1 * var(--margin-tolerance-sides));
          margin-bottom: 0%;
          transition: all 0.5s;
          border-radius: 0.8rem;
@@ -57,7 +57,11 @@ export const Container = styled.nav`
    }
    &&[data-scrolled='true'] > #subcontainer >  #background {
       opacity: 1;
-   }   
+   } 
+   &&[data-scrolled='false']:not([data-menuOpen='true']):not([data-theme='dark']) svg > :is(.menu-btn-groups, .theme-btn-elements) {  
+      stroke: var(--pallete-constants-nav-onHeaderColor);
+      fill: var(--pallete-constants-nav-onHeaderColor);
+   }
 `
 
 export const logoStyle = css`
@@ -136,7 +140,7 @@ export const menuButtonStyle = css`
    }
    
    :hover svg > g {
-      stroke: var(--pallete-accent);
+      stroke: var(--pallete-accent) !important;
    }
 `
 
@@ -200,8 +204,8 @@ export const themeButtonStyle = css`
    @keyframes theme-button-moon-circle-big { from { r: 5; } to { r: 9; } }
    
    :hover svg > circle, :hover svg > g {
-      fill: var(--pallete-accent);
-      stroke: var(--pallete-accent);
+      fill: var(--pallete-accent) !important;
+      stroke: var(--pallete-accent) !important;
    }
 `
 
@@ -223,6 +227,13 @@ export const LocalesButtonsContainer = styled.div`
       overflow-y: visible;
    }
    
+   .coloredLocaleButtonElem {
+      fill: var(--pallete-bgAlt);
+   }
+   &&[data-scrolled='false']:not([data-menuOpen='true']):not([data-theme='dark']) .coloredLocaleButtonElem {
+      fill: var(--pallete-constants-nav-onHeaderColor);   
+   }
+
    #content-container {
       position: absolute;
       top: 100%;
@@ -240,7 +251,8 @@ export const LocalesButtonsContainer = styled.div`
    svg > g > g {
       transition: fill 0.3s;
    }
-   :hover svg > g > g {
+   :hover .coloredLocaleBut {
+      cursor: pointer;
       fill: var(--pallete-accent) !important;
    }
    :hover {
