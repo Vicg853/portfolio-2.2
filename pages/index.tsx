@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
-import type { Objectives } from '@api-utils/content-retrivers/objectives'
+import type { ObjectivesType } from '@api-utils/content-retrivers/objectives'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -52,7 +52,7 @@ export interface IndexPageLocaleContent {
 }
 
 type PageProps =  PageFullType<IndexPageLocaleContent> & {
-	objectivesFetch: Objectives[]
+	objectivesFetch: ObjectivesType[]
 }
 
 export const getStaticProps: GetStaticProps<{
