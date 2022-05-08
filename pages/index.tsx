@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
-import type { ObjectivesSourceReturn } from '@api-utils/content-retrivers/objectives'
+import type { Objectives } from '@api-utils/content-retrivers/objectives'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -52,7 +52,7 @@ export interface IndexPageLocaleContent {
 }
 
 type PageProps =  PageFullType<IndexPageLocaleContent> & {
-	objectivesFetch: ObjectivesSourceReturn[]
+	objectivesFetch: Objectives[]
 }
 
 export const getStaticProps: GetStaticProps<{
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps<{
 	const pageSource = getPageSource(locale, 'index')
 
 	//* Retrieving objectives list
-	const objectivesFetch = getObjectivesList(locale as any, 'en')
+	const objectivesFetch = await getObjectivesList(locale as any, 'en')
 
 	return {
 		props: {
@@ -170,13 +170,13 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					<ObjectivesGridS>
 						{objectivesFetch.map(objective => {
 							const comp = (
-								<ObjectiveCard key={objective.objectiveId}>
+								<ObjectiveCard key={objective.id}>
 									<sub>
 										<h4>{objective.objectiveName}</h4>
 										<span>
-											{objective.objectiveProgress === 'done' && <>✅</> }
-											{objective.objectiveProgress === 'in-progress' && <>✍️</>}
-											{objective.objectiveProgress === 'to-do' && <>⌛</>}
+											{objective.objectiveProgress === 'DONE' && <>✅</> }
+											{objective.objectiveProgress === 'INPROGRESS' && <>✍️</>}
+											{objective.objectiveProgress === 'TODO' && <>⌛</>}
 										</span>
 									</sub>
 									<p>
