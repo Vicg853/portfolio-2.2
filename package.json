@@ -13,8 +13,6 @@
     "build:full": "yarn gql:gen && yarn build"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "^2.6.2",
-    "@graphql-codegen/typescript-graphql-request": "^4.4.7",
     "@hookstate/core": "^3.0.13",
     "animejs": "^3.2.1",
     "graphql": "^16.4.0",
@@ -38,6 +36,7 @@
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/typescript": "^2.4.10",
     "@graphql-codegen/typescript-graphql-files-modules": "2.1.1",
+    "@graphql-codegen/typescript-graphql-request": "^4.4.7",
     "@graphql-codegen/typescript-operations": "2.3.7",
     "@linaria/shaker": "^3.0.0-beta.15",
     "@linaria/webpack-loader": "^3.0.0-beta.16",
