@@ -1,39 +1,11 @@
 import { localeEnName, localeFrName, localePtBrName } from '../../locales/configs'
-import { request, gql } from 'graphql-request'
-
-if(!process.env.MAIN_CMS_GQL_URL) throw new Error('MAIN_CMS_GQL_URL env var not found')
-const cmsGqlUrl = process.env.MAIN_CMS_GQL_URL 
+import { graphQlClient } from '@lib/graphql-client'
+import { getSdk, Objectives } from '@gql-gen/graphql'
 
 type LocalesType = typeof localeEnName | typeof localeFrName | typeof localePtBrName
-type TodosTypesEnum = 'TODO' | 'INPROGRESS' | 'DONE'
-
-interface GlobalObjectivesSourceType {
-   id: string
-	objectiveProgress: TodosTypesEnum
-	objectiveSource?: string
-}
-interface ObjectiveLocalesSource {
+export interface ObjectivesType extends Pick<Objectives, 'id' | 'objectiveProgress' | 'objectiveSource'>{
    objectiveName: string
    objectiveDescription: string
-}
-
-export type Objectives = GlobalObjectivesSourceType & ObjectiveLocalesSource
-
-const objectivesGql = gql`
-query {
-   getAllObjectives {
-         id
-         objectiveProgress
-         objectiveSource
-         objectiveName
-         objectiveDescription
-      }
-   }
-`
-
-interface ObjectivesSourceQueryType extends GlobalObjectivesSourceType {
-   objectiveName: Record<LocalesType, string>
-   objectiveDescription: Record<LocalesType, string>
 }
 
 function notFoundObjName(locale: LocalesType): string {
@@ -56,20 +28,24 @@ function notFoundObjDesc(locale: LocalesType): string {
    return 'Description not found'   
 }
 
-export const getObjectivesList = async (locale: LocalesType | undefined, defaultLocale: LocalesType): Promise<Objectives[]> => {
-   const { getAllObjectives: objectivesSource } = await request<{
-      getAllObjectives: ObjectivesSourceQueryType[]
-   }>(cmsGqlUrl, objectivesGql)
+export const getObjectivesList = async (
+   locale: LocalesType | undefined, 
+   defaultLocale: LocalesType): Promise<ObjectivesType[]> => {
+   const {
+      getAllObjectives: objectivesSource
+   } = await getSdk(graphQlClient).objectives()
 
    //* Filter out only the current locale name and descriptions
-	const objectivesFetch: Objectives[] = objectivesSource.map(objective => {
-		const objectiveNameLocaleSource = objective.objectiveName[locale ?? defaultLocale] ?? 
-         notFoundObjName(locale ?? defaultLocale)
-		const objectiveDescLocaleSource = objective.objectiveDescription[locale ?? defaultLocale] ??
-         notFoundObjDesc(locale ?? defaultLocale)
+	const objectivesFetch: ObjectivesType[] = objectivesSource!.map(objective => {
+		const objectiveNameLocaleSource = (objective.objectiveName[locale ?? defaultLocale] ?? 
+         notFoundObjName(locale ?? defaultLocale)) as string
+		const objectiveDescLocaleSource = (objective.objectiveDescription[locale ?? defaultLocale] ??
+         notFoundObjDesc(locale ?? defaultLocale)) as string
 
       return {
-         ...objective,
+         id: objective.id,
+         objectiveProgress: objective.objectiveProgress,
+         objectiveSource: objective.objectiveSource,
          objectiveName: objectiveNameLocaleSource,
          objectiveDescription: objectiveDescLocaleSource,
       }
