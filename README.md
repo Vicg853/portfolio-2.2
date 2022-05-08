@@ -16,6 +16,8 @@ Hope you like it 😄!
 Project is created with:
 * Next server side rendering framework: v12.1.5
 * Linaria no runtime css-in-js lib: v2.3.1
+* GraphQl query language: v16.4.0
+* GraphQl code generation (grpahql-codegen): v2.6.2
 * Preact: still going to be added
 * For other secondary libs/fmwk and Gatsby plugins, give a look into [package.json file](https://github.com/Vicg853/portfolio-2.2/blob/main/package.json)
 
@@ -60,4 +62,5 @@ Special thanks to techs/teams:
 - of NodeJS's for an amazing runtime env
 - at Next for the magic with site generation framework
 - linaria for an amazing css-in-js with such low compromises
+- facebook for such an easy tool to create scalable API (graphql)
 - all the other people that developed the other libs/fmwrks and plugins

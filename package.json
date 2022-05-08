@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:analyze": "ANALYZE=true yarn build"
+    "build:analyze": "ANALYZE=true yarn build",
+    "gql:gen": "graphql-codegen --config codegen.yml",
+    "dev:full": "yarn dev && yarn build:analyze",
+    "build:full": "yarn gql:gen && yarn build"
   },
   "dependencies": {
     "@hookstate/core": "^3.0.13",
@@ -29,6 +32,12 @@
   "sideEffects": false,
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "^2.4.10",
+    "@graphql-codegen/typescript-graphql-files-modules": "2.1.1",
+    "@graphql-codegen/typescript-graphql-request": "^4.4.7",
+    "@graphql-codegen/typescript-operations": "2.3.7",
     "@linaria/shaker": "^3.0.0-beta.15",
     "@linaria/webpack-loader": "^3.0.0-beta.16",
     "@next/bundle-analyzer": "^12.1.5",
