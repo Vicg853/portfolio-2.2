@@ -12,3 +12,8 @@ export const calloutAlignment = css`
 export const introductionSizing = css`
    width: 600px;
 `
+
+export const containerMargins = css`
+   margin-top: 4rem;
+   margin-bottom: 4rem;
+`

@@ -10,25 +10,22 @@ import { getPageSource } from '@api-utils/locales-sources'
 //* Importing global and specific styled components
 import { 
    Container,
-   Section,
-   Paragraph
+	Section,
+	Paragraph,
+	SecTitle,
+	TextEffect
 } from '@p-styles/global'
 import {
-   calloutAlignment,
-   introductionSizing
+	containerMargins
 } from '@p-styles/projects'
 
 //* Importing used components
-import { Callout } from '@components/mini-components/Callout'
 import { InTextLink } from '@components/mini-components/InTextLink'
 
 export interface ProjectsPageStaticLocalesSource {
-   mainParagraph: {
-      1: string
-      2: string
-      3: string
-      4: string
-   }
+	mainParagraphTitle: string
+   mainParagraph: string
+
 }
 
 type ProjectsPageSource = PageFullType<ProjectsPageStaticLocalesSource>
@@ -51,6 +48,10 @@ export const getStaticProps: GetStaticProps<{
 }
 
 const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource, locale: string}> = ({ pageSource, locale }) => {
+	const {
+		mainParagraphTitle,
+		mainParagraph
+	} = pageSource.content
 
    return (
       <>
@@ -64,42 +65,17 @@ const ProjectsComponent: NextPage<{pageSource: ProjectsPageSource, locale: strin
                alt: pageSource.mainProps!.header!.backgroundAlt,
             }}
          />
-         <Container>
-				<Section>
-					<Callout icon={{
-						type: 'emoji',
-						source: '⚠️🚧'
-					}}>
-						<>
-							{locale === 'en' && (
-								<>
-									This webpage is still under development, so many of its features and pages<br/>
-									are still missing. Also many design and breaking changes will still occur.<br/>
-									<br/>
-									You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>old version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
-									Or you can follow this page progress...<br/>
-								</>
-							)}
-							{locale === 'pt' && (
-								<>
-									Este site ainda está em desenvolvimento, então muitas peças e paginas<br/> 
-									ainda estão faltando. Ainda ocorreram várias mudanças no design.<br/>
-									<br/>
-									Caso deseje, pode ver a <InTextLink href='https://old.victorgomez.dev'>versão antiga</InTextLink>.<br/>
-									Ou seguir o progresso desta site aqui...<br/>
-								</>
-							)}
-							{locale === 'fr' && (
-								<>
-									Ce site est encore en cours de développement, donc quelques de ses elements et pages<br/>
-									sont encore manquants. Encore des modifications sur le design et fonctionnalités seront fréquentes.<br/>
-									<br/>
-									Si vous le souhaitez, vous pouvez acceder la <InTextLink href='https://old.victorgomez.dev'>version antérieure</InTextLink> {"("}seulement disponible en portugais :{"( )"}.<br/>
-									Ou vous pouvez suivre le progrès de ce site ici...<br/>
-								</>
-							)}
-						</>
-					</Callout>
+         <Container className={containerMargins}>
+				<Section data-vert data-gap
+				data-widthMax data-limitWidthBig>
+					<SecTitle>
+						<TextEffect data-codeBigArrow>
+							{mainParagraphTitle}
+						</TextEffect>
+					</SecTitle>
+					<Paragraph data-limitWidthBig>
+						{mainParagraph.split(/\n/).map(val => <>{val}<br key={val}/></>)}
+					</Paragraph>
 				</Section>
          </Container>
       </>
