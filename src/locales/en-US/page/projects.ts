@@ -10,11 +10,7 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
       }
    },
    content: {
-      mainParagraph: {
-         1: 'Projects are very important, they show and help you practice your skills.',
-         2: 'Here you may find most of my projects (at least the ones code-related. Non related ones can be probably found on the',
-         3: 'here (cv page)',
-         4: 'For each project you can expect resources links, github repo and/or a link to the project\'s page.',
-      },
+      mainParagraphTitle: 'yarn run projects',
+      mainParagraph: "As already declared, since my 12th birthday, I have invested in learning about software development and computer science, not only conceptually, but also largely with hands-on projects.\n\nListing all projects here wouldn't be a good fit for this portfolio, so I’ll be developing an archive to store them all, in case you may want to check them ALLL.\n\nBut here, you may check out my favorite ones. Furthermore, each project contains info about its core technologies/frameworks/libraries/etc, its scope, its area of actuation, and a description, plus its name (obviously...).\n\nI hope you like them as much as I liked conceiving them 😄!"
    }
 }
