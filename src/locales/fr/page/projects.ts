@@ -10,11 +10,19 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
       }
    },
    content: {
-      mainParagraph: {
-         1: 'Projects are very important, they show and help you practice your skills.',
-         2: 'Here you may find most of my projects (at least the ones code-related. Non related ones can be probably found on the',
-         3: 'here (cv page)',
-         4: 'For each project you can expect resources links, github repo and/or a link to the project\'s page.',
-      },
+      mainParagraphTitle: 'git checkout projects',
+      mainParagraph: "",
+      projectsList: {
+         sources: {
+            github: 'Repositoir sur GitHub',
+            www: 'Site web',
+            moreInf: 'Plus d\'informations',
+            related: 'Reliés',
+         },
+         techStack: 'Stack technologique',
+         scope: { plural: 'Domaines', singular: 'Domaine'},
+         topics: { plural: 'Sujets', singular: 'Sujet'},
+         access: 'Accès',
+      }
    }
 }

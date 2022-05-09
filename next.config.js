@@ -29,6 +29,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
+    domains: ['victorgomez.dev', 'alpescap-canary.victorgomez.dev'],
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {

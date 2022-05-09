@@ -10,58 +10,41 @@ interface ProjectFrontmatter {
    smallDescription: string
 }
 
-interface ProjectContent {
-   mainText: string
-}
+type ProjectSourcesType = 'GITHUB' | 'WEBSITE' | 'MOREINFO' | 'RELATED'
 
-interface ProjectsSource {
-   frontmatter: ProjectFrontmatter & {
-      title: string
-      smallDescription: string
+export interface ProjectsSource {
+   frontmatter: {
       image: string
       locales?: Record<localeType, ProjectFrontmatter>
    }
    metadata: {
-      projectDate: Date
-      ongoing: boolean
-      topics?: ProjectTopis[]
+      projectDate: string
+      topics: ProjectTopis[]
       scopes?: ProjectsScopes[]
-      techStack?: {
+      techStack: {
          techName: string
          techLink?: string
       }[]
-      relatedTo?: {
-         projectName: string
-         projectLink: string
-      }[]
-   }
-   content: ProjectContent & {
-      locales?: Record<localeType, ProjectContent>
-      mainText: string
-      feats?: {
-         personName: string
-         profileLink?: string
-      }[]
-      usefulLinks?: {
-         title: string
-         link: string
-      }[]
-      moreFotos?: {
-         alt: string
-         source: string
-      }[]
-   }
-   sources?: {
-      github?: string
-      pageUrl?: string
-   }
+   } & ({
+      ongoing: true
+   } | {
+      ongoing: false
+      projectEndDate: string
+   })
+   sources: Array<{
+      sourceLink: string
+   } & ({
+      sourceType: 'CUSTOM'
+      sourceIcon: string
+      sourceText: string
+   } | {
+      sourceType: ProjectSourcesType
+   })>
 } 
 
 const temporarySource: ProjectsSource[] = [
    {
       frontmatter: {
-         title: 'AlpesCap Webpage', 
-         smallDescription: 'A webpage for the AlpesCap ORG to which I actively contribute',
          image: 'https://alpescap-canary.victorgomez.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FdefaultHeaderBg.66d044c7.jpg&w=1920&q=95',
          locales: {
             'en': {
@@ -79,7 +62,7 @@ const temporarySource: ProjectsSource[] = [
          }
       },
       metadata: {
-         projectDate: new Date('2020-08-01'),
+         projectDate: new Date('2020-08-01').toISOString(),
          ongoing: true,
          topics: ['Frontend', 'DevOps', 'Backend'],
          scopes: ['Non-profit'],
@@ -110,44 +93,38 @@ const temporarySource: ProjectsSource[] = [
             }
          ]
       },
-      content: {
-         mainText: 'Lorem impsum only as this website is under construction...',
-         locales: {
-            'en': {
-               mainText: 'Lorem impsum only as this website is under construction...',
-            },
-            'fr': {
-               mainText: 'Lorem impsum only as this website is under construction...',
-            },
-            'pt': {
-               mainText: 'Lorem impsum only as this website is under construction...',
-            },
+      sources: [
+         {
+            sourceType: 'GITHUB',
+            sourceLink: 'https://github.com/Alpes-Capital/landing-page-v2'
          },
-         feats: [
-            {
-               personName: 'Tem at AlpesCap',
-               profileLink: 'https://alpescap-canary.victorgomez.dev/team'
-            }
-         ],
-      },
-      sources: {
-         pageUrl: 'https://alpescap-canary.victorgomez.dev/',
-         github: 'https://github.com/Alpes-Capital/landing-page-v2'
-      }
+         {
+            sourceType: 'WEBSITE',
+            sourceLink: 'https://alpescap-canary.victorgomez.dev/'
+         },
+      ]
    }
 ]
 
-export function getProjectsList(locale: localeType): Pick<ProjectsSource, 'frontmatter' | 'metadata'>[] {
+export type ProjectsListType = (Pick<ProjectsSource, 'metadata' | 'sources'> & {
+   frontmatter: Omit<ProjectsSource['frontmatter'], 'locales'> & {
+      title: ProjectFrontmatter['title']
+      description: ProjectFrontmatter['smallDescription']
+   }
+})[]
+
+export function getProjectsList(locale: localeType, defaultLocale: localeType): ProjectsListType {
    const projectsList = temporarySource.map(project => {
-      const localeFrontmatter = project.frontmatter.locales?.[locale] ?? project.frontmatter
+      const localeFrontmatter = project.frontmatter.locales?.[locale] ?? project.frontmatter.locales?.[defaultLocale]!
 
       return {
          frontmatter: {
             ...project.frontmatter,
-            ...localeFrontmatter,
-            locales: undefined
+            title: localeFrontmatter.title,
+            description: localeFrontmatter.smallDescription
          },
-         metadata: project.metadata
+         metadata: project.metadata,
+         sources: project.sources
       }
    })
 

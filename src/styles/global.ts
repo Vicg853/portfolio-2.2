@@ -142,7 +142,7 @@ export const CaptionedImage = styled.div`
 //* Simple paragraph component
 export const Paragraph = styled.p`
    color: var(--pallete-text);
-   font-size: 0.95rem;
+   font-size: 0.83rem;
    font-family: var(--fonts-primary);
 
    ul {
@@ -150,6 +150,76 @@ export const Paragraph = styled.p`
       margin: 0.6rem 1.7rem;
 
    }
+
+   &&[data-limitWidthSmall] {
+      max-width: 450px;
+   }
+   &&[data-limitWidthMed] {
+      max-width: 650px;
+   }
+   &&[data-limitWidthBig] {
+      max-width: 900px;
+   }
+`
+
+//* Text effects
+export const TextEffect = styled.span`
+   &&[data-italic] {
+      font-style: italic;
+   }
+   &&[data-bold] {
+      font-weight: 600;
+   }
+   &&[data-underline] {
+      text-decoration: underline;
+   }
+   &&[data-lineThrough] {
+      text-decoration: line-through;
+   }
+   &&[data-uppercase] {
+      text-transform: uppercase;
+   }
+   &&[data-lowercase] {
+      text-transform: lowercase;
+   }
+   &&[data-capitalize] {
+      text-transform: capitalize;
+   }
+   &&[data-err] {
+      color: var(--pallete-constants-err);
+   }
+   &&[data-warn] {
+      color: var(--pallete-constants-warn);
+   }
+   &&[data-success] {
+      color: var(--pallete-constants-success);
+   }
+   &&[data-info] {
+      color: var(--pallete-constants-info);
+   }
+   &&[data-code], &&[data-codeBigArrow] {
+      background-color: var(--pallete-bgContrast);
+      font-style: italic;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0.35rem;
+      font-family: var(--fonts-tertiary);
+      
+      ::before {
+         content: '> ';
+         display: block;
+         font-size: 0.8rem;
+         font-weight: 400;
+         margin-right: 0.5rem;
+      }
+   }
+   &&[data-codeBigArrow]::before {
+      font-size: 1.1rem;
+      font-weight: 600;
+   }
+      
 `
 
 //* Form components
