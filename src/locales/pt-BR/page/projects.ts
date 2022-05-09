@@ -10,7 +10,19 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
       }
    },
    content: {
-      mainParagraphTitle: 'yarn run projects',
-      mainParagraph: "Como já declarado, desde meus 12 anos, eu me invisto em desenvolvimento de software e ciência da computação, não só conceitualmente, mas também com projetos práticos.\n\nListar todos os meus projetos aqui, não combinaria corretamente com esse portfólio, então estarei desenvolvendo um arquivo com todos meus projetos, caso queira consultar TODOSSSSS os seus.\n\nAinda assim, aqui você poderá consultar os meus favoritos. Ainda mais, para cada projeto há uma lista das suas principais tecnologias/frameworks/bibliotecas/etc, seu escopo, área de atuação e uma descrição, acompanhada do nome (obviamente…).\n\nEspero que goste deles o tanto quanto gostei de desenvolver eles 😄!"
+      mainParagraphTitle: 'git checkout projects',
+      mainParagraph: "Como já declarado, desde meus 12 anos, eu me invisto em desenvolvimento de software e ciência da computação, não só conceitualmente, mas também com projetos práticos.\n\nListar todos os meus projetos aqui, não combinaria corretamente com esse portfólio, então estarei desenvolvendo um arquivo com todos meus projetos, caso queira consultar TODOSSSSS os seus.\n\nAinda assim, aqui você poderá consultar os meus favoritos. Ainda mais, para cada projeto há uma lista das suas principais tecnologias/frameworks/bibliotecas/etc, seu escopo, área de atuação e uma descrição, acompanhada do nome (obviamente…).\n\nEspero que goste deles o tanto quanto gostei de desenvolver eles 😄!",
+      projectsList: {
+         sources: {
+            github: 'Repositorio do GitHub',
+            www: 'Site',
+            moreInf: 'Mais informações',
+            related: 'Relacionados',
+         },
+         techStack: 'Stack tecnológica',
+         scope: { plural: 'Escopos', singular: 'Escopo'},
+         topics: { plural: 'Tópicos', singular: 'Tópico'},
+         access: 'Acesso',
+      }
    }
 }

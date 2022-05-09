@@ -10,7 +10,19 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
       }
    },
    content: {
-      mainParagraphTitle: 'yarn run projects',
-      mainParagraph: ""
+      mainParagraphTitle: 'git checkout projects',
+      mainParagraph: "",
+      projectsList: {
+         sources: {
+            github: 'Repositoir sur GitHub',
+            www: 'Site web',
+            moreInf: 'Plus d\'informations',
+            related: 'Reliés',
+         },
+         techStack: 'Stack technologique',
+         scope: { plural: 'Domaines', singular: 'Domaine'},
+         topics: { plural: 'Sujets', singular: 'Sujet'},
+         access: 'Accès',
+      }
    }
 }
