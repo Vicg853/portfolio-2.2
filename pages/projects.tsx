@@ -28,11 +28,29 @@ import {
 	accessProjectLinksStyle
 } from '@p-styles/projects'
 
-//* Importing used assets
-import GithubIcon from '@p-images/projects/github-source-icon-icons8.svg'
-import WWWIcon from '@p-images/projects/www-source-icon-icons8.svg'
-import MoreInfIcon from '@p-images/projects/moreInf-source-icon-icons8.svg'
-import RelatedIcon from '@p-images/projects/related-sources-icon-icons8.svg'
+
+const sourceAssetLinks = [
+	{ 
+		type: 'GITHUB', 
+		url: '/images/pages/projects/github-source-icon-icons8.svg', 
+		alt: 'Github icon', 
+	},
+	{ 
+		type: 'WEBSITE', 
+		url: '/images/pages/projects/www-source-icon-icons8.svg', 
+		alt: 'Website icon', 
+	},
+	{ 
+		type: 'MOREINFO', 
+		url: '/images/pages/projects/moreInf-source-icon-icons8.svg', 
+		alt: 'More info icon', 
+	},
+	{ 
+		type: 'RELATED', 
+		url: '/images/pages/projects/related-sources-icon-icons8.svg', 
+		alt: 'Related sources icon'
+	},
+]
 
 export interface ProjectsPageStaticLocalesSource {
 	mainParagraphTitle: string
@@ -165,27 +183,21 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 													<a className={accessProjectLinksStyle} 
             		      					   rel='noopener noreferrer'
             		      					   target='_blank'>
-														{source.sourceType === 'GITHUB' && (<>
-																<GithubIcon class='icon' />
-																{projectsListCaptions.sources.github}
-														</>)}
-														{source.sourceType === 'WEBSITE' && (<>
-																<WWWIcon class='icon' />
-																{projectsListCaptions.sources.www}
-														</>)}
-														{source.sourceType === 'MOREINFO' && (<>
-																<MoreInfIcon class='icon' />
-																{projectsListCaptions.sources.moreInf}
-														</>)}
-														{source.sourceType === 'RELATED' && (<>
-																<RelatedIcon class='icon' />
-																{projectsListCaptions.sources.related}
-														</>)}
-														{source.sourceType === 'CUSTOM' && (<>
-															<Image className='icon' layout='fill'
+														{source.sourceType !== 'CUSTOM' ? (<>
+															<Image className='icon' width={19} height={19}
+															priority
+															src={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.url} 
+															alt={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.alt} />
+															{source.sourceType === 'GITHUB' && projectsListCaptions.sources.github}
+															{source.sourceType === 'MOREINFO' && projectsListCaptions.sources.moreInf}
+															{source.sourceType === 'RELATED' && projectsListCaptions.sources.related}
+															{source.sourceType === 'WEBSITE' && projectsListCaptions.sources.www}
+														</>) : (<>
+															<Image className='icon' width={10} height={10}
 															src={source.sourceIcon} alt={source.sourceText} />
 															{source.sourceText}
 														</>)}
+
             		      					</a>
 												</Link>
 											))}
