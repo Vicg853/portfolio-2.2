@@ -18,7 +18,6 @@ import {
    menuButtonStyle,
    logoStyle
 } from './style'
-const windowCheck = typeof window !== 'undefined'
 
 //* This is a temporary solution
 //TODO - Find a better way to handle this

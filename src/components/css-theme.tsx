@@ -197,16 +197,12 @@ function CssTheme<ThemeType extends object>(
       themeKeyStore = typeof action === 'function' ? action(themeKeyStore) : action
       themeKeyListeners.forEach(listener => listener(() => themeKeyStore))
    }
-
-   //const themeKeyState = createState<keyof typeof themes>(initialTheme).attach(Downgraded)
    const themesValState = createState<{ currentTheme: ThemeType, themes: typeof themes}>({
       themes,
       currentTheme: themes[initialTheme]
    }).attach(Downgraded)
 
    //* Creating state hooks for current theme key and theme values
-   // eslint-disable-next-line react-hooks/rules-of-hooks
-   //const cssTHemeKeyHook = () => useHookstate(themeKeyState)
    //eslint-disable-next-line react-hooks/rules-of-hooks
    const cssThemeValHook = () => useHookstate(themesValState)
    
