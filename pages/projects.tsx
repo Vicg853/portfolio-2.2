@@ -60,6 +60,7 @@ export interface ProjectsPageStaticLocalesSource {
 		scope: { plural: string, singular: string }
 		topics: { plural: string, singular: string }
 		access: string
+		noProjects: string
 	}
 }
 
@@ -94,7 +95,6 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 		projectsList: projectsListCaptions
 	} = pageSource.content
 
-	console.log(projectsList)
    return (
       <>
          <Header 
@@ -119,7 +119,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 						{mainParagraph.split(/\n/).map(val => <>{val}<br key={val}/></>)}
 					</Paragraph>
 				</Section>
-				{projectsList!.map((project, i) => {
+				{projectsList?.map((project, i) => {
 					const {
 						frontmatter,
 						metadata,
@@ -207,7 +207,13 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 							</ProjectCard>
 						</Section>
 					)
-				})}
+				}) ?? (
+					<Section data-widthMax data-jusCent>
+						<Paragraph>
+							{projectsListCaptions.noProjects} 🤔😩
+						</Paragraph>
+					</Section>
+				)}
          </Container>
       </>
    )

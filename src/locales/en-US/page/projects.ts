@@ -24,6 +24,7 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
          scope: { plural: 'Scopes', singular: 'Scope'},
          topics: { plural: 'Topics', singular: 'Topic'},
          access: 'Access',
+         noProjects: 'Weird... No projects were found',
       }
    }
 }
