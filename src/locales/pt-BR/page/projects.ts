@@ -18,11 +18,13 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
             www: 'Site',
             moreInf: 'Mais informações',
             related: 'Relacionados',
+            other: 'Outro',
          },
          techStack: 'Stack tecnológica',
          scope: { plural: 'Escopos', singular: 'Escopo'},
          topics: { plural: 'Tópicos', singular: 'Tópico'},
          access: 'Acesso',
+         noProjects: 'Estranho... Nenhum projeto foi encontrado',
       }
    }
 }

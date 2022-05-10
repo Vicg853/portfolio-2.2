@@ -28,27 +28,20 @@ import {
 	accessProjectLinksStyle
 } from '@p-styles/projects'
 
+import GithubIcon from '@p-images/projects/github-source-icon-icons8.svg'
+import MoreInfoIcon from '@p-images/projects/moreInf-source-icon-icons8.svg'
+import WebsiteIcon from '@p-images/projects/www-source-icon-icons8.svg'
 
 const sourceAssetLinks = [
-	{ 
-		type: 'GITHUB', 
-		url: '/images/pages/projects/github-source-icon-icons8.svg', 
-		alt: 'Github icon', 
-	},
-	{ 
-		type: 'WEBSITE', 
-		url: '/images/pages/projects/www-source-icon-icons8.svg', 
-		alt: 'Website icon', 
-	},
-	{ 
-		type: 'MOREINFO', 
-		url: '/images/pages/projects/moreInf-source-icon-icons8.svg', 
-		alt: 'More info icon', 
-	},
 	{ 
 		type: 'RELATED', 
 		url: '/images/pages/projects/related-sources-icon-icons8.svg', 
 		alt: 'Related sources icon'
+	},
+	{ 
+		type: 'CUSTOM', 
+		url: '/images/pages/projects/related-sources-icon-icons8.svg', 
+		alt: 'Custom source icon'
 	},
 ]
 
@@ -61,11 +54,13 @@ export interface ProjectsPageStaticLocalesSource {
 			www: string
 			moreInf: string
 			related: string
+			other: string
 		}
 		techStack: string
 		scope: { plural: string, singular: string }
 		topics: { plural: string, singular: string }
 		access: string
+		noProjects: string
 	}
 }
 
@@ -124,7 +119,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 						{mainParagraph.split(/\n/).map(val => <>{val}<br key={val}/></>)}
 					</Paragraph>
 				</Section>
-				{projectsList.map((project, i) => {
+				{projectsList?.map((project, i) => {
 					const {
 						frontmatter,
 						metadata,
@@ -150,7 +145,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 											projectsListCaptions.scope.plural
 											: projectsListCaptions.scope.singular 
 										}{":"}
-										<span className='detail'>{metadata.scopes.join(',')}</span>
+										<span className='detail'>{metadata.scopes.toLocaleLowerCase()}</span>
 									</span>}
 									<span className='project-card-section-title'>
 										{metadata.topics.length > 1 ? 
@@ -183,21 +178,26 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 													<a className={accessProjectLinksStyle} 
             		      					   rel='noopener noreferrer'
             		      					   target='_blank'>
-														{source.sourceType !== 'CUSTOM' ? (<>
+														{source.sourceType === 'GITHUB' && (<>
+															<GithubIcon className='icon'/>
+															{projectsListCaptions.sources.github}
+														</>)}
+														{source.sourceType === 'MOREINFO' && (<>
+															<MoreInfoIcon className='icon'/>
+															{projectsListCaptions.sources.moreInf}
+														</>)}
+														{source.sourceType === 'WEBSITE' && (<>
+															<WebsiteIcon className='icon'/>
+															{projectsListCaptions.sources.www}
+														</>)}
+														{(source.sourceType === 'CUSTOM' || source.sourceType === 'RELATED') && 
 															<Image className='icon' width={19} height={19}
 															priority
 															src={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.url} 
 															alt={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.alt} />
-															{source.sourceType === 'GITHUB' && projectsListCaptions.sources.github}
-															{source.sourceType === 'MOREINFO' && projectsListCaptions.sources.moreInf}
-															{source.sourceType === 'RELATED' && projectsListCaptions.sources.related}
-															{source.sourceType === 'WEBSITE' && projectsListCaptions.sources.www}
-														</>) : (<>
-															<Image className='icon' width={10} height={10}
-															src={source.sourceIcon} alt={source.sourceText} />
-															{source.sourceText}
-														</>)}
-
+														}
+														{source.sourceType === 'RELATED' && projectsListCaptions.sources.related}
+														{source.sourceType === 'CUSTOM' && projectsListCaptions.sources.other}
             		      					</a>
 												</Link>
 											))}
@@ -207,7 +207,13 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 							</ProjectCard>
 						</Section>
 					)
-				})}
+				}) ?? (
+					<Section data-widthMax data-jusCent>
+						<Paragraph>
+							{projectsListCaptions.noProjects} 🤔😩
+						</Paragraph>
+					</Section>
+				)}
          </Container>
       </>
    )
