@@ -154,7 +154,7 @@ function CssTheme<ThemeType extends object>(
    defaultTheme: ThemeProviderProps<ThemeType>['defaultTheme'],
    isPersistent?: ThemeProviderProps<ThemeType>['isPersistent'], 
    customPersistentKey?: ThemeProviderProps<ThemeType>['customPersistentKey'], 
-   systemSchemePreferenceKey? : ThemeProviderProps<ThemeType>['systemSchemePreferenceKey']
+   systemSchemePreferenceKey: ThemeProviderProps<ThemeType>['systemSchemePreferenceKey'] = 'none'
 ): CssThemeExportPromise<ThemeType, keyof typeof themes> {
    const initialTheme = (() => {
       if(typeof document !== 'undefined' && isPersistent) {
@@ -225,17 +225,22 @@ function CssTheme<ThemeType extends object>(
    //* Script that willll be injected before body for pre-hydration execution
    function getInitialTheme() {
       const themeKey = localStorage.getItem('theme-key');
-   
+      
+      const systemColorPreference = window.matchMedia(`(prefers-color-scheme: '-sysSchemeKey-')`)
+            .matches
+      
       if (themeKey) {
          document.documentElement.classList.add('use-theme-' + themeKey);
          document.documentElement.style.setProperty('--initial-theme', themeKey);
+      } else if(systemColorPreference) {
+         document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
+         document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
       }
-      
-      return true;
+      return;
    }
    
    const ThemePreHydration = () => {
-     const codeToRunOnClient = `(${getInitialTheme.toString()})()`
+     const codeToRunOnClient = `(${getInitialTheme.toString().replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
      
      // eslint-disable-next-line react/no-danger
      return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
@@ -245,8 +250,9 @@ function CssTheme<ThemeType extends object>(
    return {
       useCssThemeKey: () => {
          const hook = cssTHemeKeyHook()
+
          return [
-            hook.get(),
+            hook.promised ? initialTheme : hook.get(),
             hook.set
          ]
       },
