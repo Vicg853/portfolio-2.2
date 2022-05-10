@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import Image from 'next/image'
@@ -35,22 +35,25 @@ export const NavBar = () => {
    const [themeKey, setThemeKey] = useCssThemeKey()
 
    //* Setting deps to make nav's background change after scrolling through a target
+   
+   const [scrolled, setScrolled] = useState(false)
    function windowsScrollCheck() {
       const scrolledThroughLimit = window.scrollY > (window.innerHeight/2)
       if(scrolledThroughLimit) return true
       else return false
    }
-
-   const [scrolled, setScrolled] = useState(() => {
-      if(!windowCheck) return false
-      return windowsScrollCheck()
-   })
+   
    useEffect(() => {
-      if(!windowCheck) return
-      window.addEventListener('scroll', () => {
+      const handleScroll = () => {
          setScrolled(windowsScrollCheck())
-      })
-   })
+      }
+
+      handleScroll()
+
+      window.removeEventListener('scroll', handleScroll)
+      window.addEventListener('scroll', handleScroll)
+      return () => { window.removeEventListener('scroll', handleScroll) }
+   }, [])
    
    //* Locales menu state
    const [localesMenuOpen, setLocalesMenuOpen] = useState(false)
