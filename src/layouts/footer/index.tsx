@@ -62,7 +62,7 @@ export const Footer = () => {
       {
          name: footer.thanksAndReferencesTexts['icons8'].name,
          url: 'https://icons8.com',
-         description: footer.thanksAndReferencesTexts['googleFonts'].description,
+         description: footer.thanksAndReferencesTexts['icons8'].description,
          alt: footer.thanksAndReferencesTexts['icons8'].alt
       },
       {
@@ -74,8 +74,8 @@ export const Footer = () => {
       {
          name: footer.thanksAndReferencesTexts['unsplash'].name,
          url: 'https://unsplash.com',
-         description: footer.thanksAndReferencesTexts['googleFonts'].description,
-         alt: footer.thanksAndReferencesTexts['googleFonts'].alt
+         description: footer.thanksAndReferencesTexts['unsplash'].description,
+         alt: footer.thanksAndReferencesTexts['unsplash'].alt
       }
     ]
 
