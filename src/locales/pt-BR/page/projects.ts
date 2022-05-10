@@ -18,6 +18,7 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
             www: 'Site',
             moreInf: 'Mais informações',
             related: 'Relacionados',
+            other: 'Outro',
          },
          techStack: 'Stack tecnológica',
          scope: { plural: 'Escopos', singular: 'Escopo'},
