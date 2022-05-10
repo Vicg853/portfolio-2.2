@@ -1,6 +1,6 @@
 import type React from 'react'
 import type { State } from '@hookstate/core'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { createState, useHookstate, Downgraded } from '@hookstate/core'
 
 import { makeCssThemeVars } from '@utils'
@@ -106,6 +106,29 @@ type CssThemeExportPromise<ThemeType, themeKeysType> = {
     getThemesStyles: () => string
 }
 
+type StoreReturnType<T> = [() => T, (action?: any | undefined) => void, Set<React.Dispatch<React.SetStateAction<string | undefined>>>]
+
+const createStore = <T extends string>(initialStore: T): StoreReturnType<T> => {
+   let store = initialStore
+   const listeners = new Set<React.Dispatch<React.SetStateAction<string | undefined>>>()
+ 
+   const dispatch = (action?: any | undefined) => {
+     store = typeof action === 'function' ? action(store) : action
+     listeners.forEach(listener => listener(() => store))
+   }
+ 
+   const useStore = () => {
+     const [, listener] = useState<string>()
+     useEffect(() => {
+       listeners.add(listener)
+       return () => { listeners.delete(listener) }
+     }, [])
+     return store
+   }
+ 
+   return [useStore, dispatch, listeners]
+ }
+
  /**
     * Creates a global css theme state and css vars provider.
    * @params themes - Object containing objects for your theme, where these objects keys are the ones used to select the theme.
@@ -149,12 +172,13 @@ type CssThemeExportPromise<ThemeType, themeKeysType> = {
    *   )
    * }
    */
+
 function CssTheme<ThemeType extends object>( 
    themes: ThemeProviderProps<ThemeType>['themes'], 
    defaultTheme: ThemeProviderProps<ThemeType>['defaultTheme'],
    isPersistent?: ThemeProviderProps<ThemeType>['isPersistent'], 
    customPersistentKey?: ThemeProviderProps<ThemeType>['customPersistentKey'], 
-   systemSchemePreferenceKey? : ThemeProviderProps<ThemeType>['systemSchemePreferenceKey']
+   systemSchemePreferenceKey: ThemeProviderProps<ThemeType>['systemSchemePreferenceKey'] = 'none'
 ): CssThemeExportPromise<ThemeType, keyof typeof themes> {
    const initialTheme = (() => {
       if(typeof document !== 'undefined' && isPersistent) {
@@ -162,26 +186,23 @@ function CssTheme<ThemeType extends object>(
          if(preHydrationVal) return preHydrationVal
       }
       
-      //* Checking for user system color preference scheme 
-      if(typeof document !== 'undefined' && systemSchemePreferenceKey) {
-         const systemColorPreference = window.matchMedia(`(prefers-color-scheme: ${systemSchemePreferenceKey})`)
-            .matches
-
-         if(systemColorPreference) return systemSchemePreferenceKey
-      }
       return defaultTheme
-   })()
+   })().toString()
 
    //* Creating the hookstate global state for current theme key and theme values
-   const themeKeyState = createState<keyof typeof themes>(initialTheme).attach(Downgraded)
+   const themeKeyListeners = new Set<React.Dispatch<React.SetStateAction<string | undefined>>>()
+   let themeKeyStore = initialTheme
+
+   const dispatch = (action?: any | undefined) => {
+      themeKeyStore = typeof action === 'function' ? action(themeKeyStore) : action
+      themeKeyListeners.forEach(listener => listener(() => themeKeyStore))
+   }
    const themesValState = createState<{ currentTheme: ThemeType, themes: typeof themes}>({
       themes,
       currentTheme: themes[initialTheme]
    }).attach(Downgraded)
 
    //* Creating state hooks for current theme key and theme values
-   // eslint-disable-next-line react-hooks/rules-of-hooks
-   const cssTHemeKeyHook = () => useHookstate(themeKeyState)
    //eslint-disable-next-line react-hooks/rules-of-hooks
    const cssThemeValHook = () => useHookstate(themesValState)
    
@@ -197,10 +218,16 @@ function CssTheme<ThemeType extends object>(
    const ProviderComponent: React.FC = () => {
       const setThemeVals = cssThemeValHook().set
       const themePromised = cssThemeValHook().promised
+
+      const [, listener] = useState<string>()
+      useEffect(() => {
+         themeKeyListeners.add(listener)
+        return () => { themeKeyListeners.delete(listener) }
+      }, [])
       
       //*Updates css vars state when theme key value changes
       useEffect(() => {
-         const themeKey = themePromised ? initialTheme : themeKeyState.value
+         const themeKey = themePromised ? initialTheme : themeKeyStore
          
          //* Saves user theme preference in local storage
          if(typeof document !== 'undefined' && isPersistent) 
@@ -210,12 +237,12 @@ function CssTheme<ThemeType extends object>(
             themes,
             currentTheme: themes[themeKey.toString()]
          })
-         
+
          const invalidClass = 
             document.documentElement.classList.value.match(RegExp(`${bodyThemeClassPrefix}-\\w+`, 'g'))
          if(invalidClass) document.documentElement.classList.remove(invalidClass.toString())
          document.documentElement.classList.add(`${bodyThemeClassPrefix}-${themeKey}`)
-      }, [cssTHemeKeyHook().get()])
+      }, [themeKeyStore])
 
       //* Actually renders the provider component with css vars
       //TODO Give a look into this hydration isseus caused by html entities
@@ -225,17 +252,22 @@ function CssTheme<ThemeType extends object>(
    //* Script that willll be injected before body for pre-hydration execution
    function getInitialTheme() {
       const themeKey = localStorage.getItem('theme-key');
-   
+      
+      const systemColorPreference = window.matchMedia(`(prefers-color-scheme: '-sysSchemeKey-')`)
+            .matches
+      
       if (themeKey) {
          document.documentElement.classList.add('use-theme-' + themeKey);
          document.documentElement.style.setProperty('--initial-theme', themeKey);
+      } else if(systemColorPreference) {
+         document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
+         document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
       }
-      
-      return true;
+      return;
    }
    
    const ThemePreHydration = () => {
-     const codeToRunOnClient = `(${getInitialTheme.toString()})()`
+     const codeToRunOnClient = `(${getInitialTheme.toString().replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
      
      // eslint-disable-next-line react/no-danger
      return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
@@ -244,10 +276,17 @@ function CssTheme<ThemeType extends object>(
    //* Return the provider and hooks to access values
    return {
       useCssThemeKey: () => {
-         const hook = cssTHemeKeyHook()
+         const themePromised = cssThemeValHook().promised
+         const [state, setState] = useState<string>('')
+
+         useEffect(() => {
+            const themeKey = themePromised ? initialTheme : themeKeyStore
+            setState(themeKey)
+         }, [themeKeyStore])
+
          return [
-            hook.get(),
-            hook.set
+            state,
+            dispatch
          ]
       },
       useGetCssThemesVal: () => {

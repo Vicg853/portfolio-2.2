@@ -28,6 +28,8 @@
        "@g-images/*": ["./public/images/global/*"],
        "@pages/*": ["./pages/*"],
        "@api-utils/*": ["./src/api/*"],
+       "@gql-gen/*": ["./graphql/generated/*"],
+       "@lib/*": ["./src/lib/*"],
      },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "./types/*.d.ts"],

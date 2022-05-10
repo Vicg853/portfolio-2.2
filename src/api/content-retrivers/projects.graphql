@@ -1,0 +1,29 @@
+query projects {
+   getAllProjects {
+      frontmatter {
+         image
+         projectName {
+            en
+            pt
+         }
+         projectDescription {
+            en
+            pt
+         }
+      }
+      metadata {
+         scopes
+         topics
+         startDate
+         endDate
+         techStack {
+            techName
+            techLink
+         }
+      }
+      sources {
+         sourceLink
+         sourceType
+      }
+   }
+}

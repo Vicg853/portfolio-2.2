@@ -5,7 +5,7 @@ export const PageTitle = styled.h1`
    font-size: 1.3rem;
    font-weight: 700;
    color: var(--pallete-text);
-   margin-top: 12rem;
+   margin-top: 7rem;
    margin-bottom: 3rem;
    text-align: center;
 `

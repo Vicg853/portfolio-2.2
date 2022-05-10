@@ -9,13 +9,11 @@ const Container = styled.div`
    justify-content: center;
    align-items: center;
    transform-origin: center center;
+   min-height: 100vh;
    
    transition: transform 0.5s;
    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
    
-   && > sub {
-      min-height: 100vh;
-   }
    &&[data-menu-open="true"] {
       filter: blur(5px) brightness(0.8);
       transform: scale(0.85);

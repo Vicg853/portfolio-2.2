@@ -22,7 +22,7 @@ const { Provider: CssThemeProvider, useGetCssThemesVal,
     useCssThemeKey, ThemePreHydration, getThemesStyles } = CssTheme<ThemeTyping>({ 
    dark: DarkTheme,
    light: LightTheme
-}, 'dark', true)
+}, 'dark', true, undefined, 'light')
 
 export {
    useGetCssThemesVal,
