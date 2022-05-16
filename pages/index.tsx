@@ -72,6 +72,7 @@ export const getStaticProps: GetStaticProps<{
 			},
 			locale: locale ?? locales![0],
 		},
+		revalidate: 604800
 	}
 }
 

@@ -85,6 +85,7 @@ export const getStaticProps: GetStaticProps<GetStaticPropsResult> = async ({ loc
 			projectsList,
 			locale: locale ?? locales![0],
 		},
+		revalidate: 604800
 	}
 }
 
