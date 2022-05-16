@@ -107,6 +107,13 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
                src: '/images/pages/projects/background.jpg',
                alt: pageSource.mainProps!.header!.backgroundAlt,
             }}
+				button={{
+					text: 'Resume',
+					action: {
+						type: 'link',
+						href: '/resume'
+					}
+				}}
          />
          <Container className={containerMargins}>
 				<Section data-vert data-gap

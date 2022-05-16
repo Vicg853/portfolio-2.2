@@ -98,6 +98,13 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
   	  		  	  srcType: 'local',
   	  		  	  src: '/images/pages/index/LRM_20200528_151756 (1).jpg',
   	  		  	}}
+				button={{
+					text: 'Projects',
+					action: {
+						type: 'link',
+						href: '/projects'
+					}
+				}}
   	  		 />
   	  		 <Container>
 				<Section>
