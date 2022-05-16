@@ -111,7 +111,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 									This webpage is still under development, so many of its features and pages<br/>
 									are still missing. Also many design and breaking changes will still occur.<br/>
 									<br/>
-									You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>old version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
+									You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>older version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
 									Or you can follow this page progress...<br/>
 								</>
 							)}
@@ -122,15 +122,6 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 									<br/>
 									Caso deseje, pode ver a <InTextLink href='https://old.victorgomez.dev'>versão antiga</InTextLink>.<br/>
 									Ou seguir o progresso desta site aqui...<br/>
-								</>
-							)}
-							{locale === 'fr' && (
-								<>
-									Ce site est encore en cours de développement, donc quelques de ses elements et pages<br/>
-									sont encore manquants. Encore des modifications sur le design et fonctionnalités seront fréquentes.<br/>
-									<br/>
-									Si vous le souhaitez, vous pouvez acceder la <InTextLink href='https://old.victorgomez.dev'>version antérieure</InTextLink> {"("}seulement disponible en portugais :{"( )"}.<br/>
-									Ou vous pouvez suivre le progrès de ce site ici...<br/>
 								</>
 							)}
 						</>
