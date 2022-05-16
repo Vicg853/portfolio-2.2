@@ -6,7 +6,6 @@ import type {
 //* Importing needed modules
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { scale } from '@utils'
 
 //* Importing header styles and styled components
 import { 

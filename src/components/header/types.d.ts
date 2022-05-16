@@ -15,10 +15,10 @@ export type HeaderBackground = ({
    type: 'threejs'
    scene: any
 } | {
-   type: 'transparent'
-} | {
    type: 'color'
    color: string
+} | {
+   type: undefined | 'transparent' | never | null
 })
 
 

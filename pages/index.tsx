@@ -96,6 +96,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
   	  		  	background={{
   	  		  	  type: 'image',
   	  		  	  srcType: 'local',
+				  alt: header!.backgroundAlt,
   	  		  	  src: '/images/pages/index/LRM_20200528_151756 (1).jpg',
   	  		  	}}
 				button={{
