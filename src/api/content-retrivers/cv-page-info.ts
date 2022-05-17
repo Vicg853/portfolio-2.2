@@ -15,9 +15,56 @@ export interface CVPageCMSContent {
          relatedProjectList?: undefined
       }[]
    }
+   experience: {
+      company: string
+      from: string
+      to?: string
+      descriptionLocales: Record<string, string>
+      relatedProjects?: undefined
+   }[]
+   education: {
+      institutionAndDiploma: string
+      from: string
+      to?: string
+      descriptionLocales: Record<string, string>
+      relatedProjects?: undefined
+   }[]
 }
 
 export const getCVPageContent: () => Promise<CVPageCMSContent> = async () => {
+   const experience: CVPageCMSContent['experience'] = [
+      {
+         company: 'IBM',
+         from: '2018-10-27',
+         to: '2018-11-27',
+         descriptionLocales: {
+            'en': 'Observational Internship at IBM Brasil',
+            'pt': 'Estágio de observação na IBM Brasil'
+         }
+      },
+      {
+         company: 'Alpes Capital',
+         from: '2020-09-01',
+         to: undefined,
+         descriptionLocales: {
+            'en': 'Voluntary work at a Brazilian endowment fund as a full-stack developer',
+            'pt': 'Trabalho voluntário no Fundo de Financiamento de Investimento no Brasil como desenvolvedor full-stack'
+         }
+      }
+   ]
+
+   const education: CVPageCMSContent['education'] = [
+      {
+         institutionAndDiploma: 'Lycée Pasteur, São Paulo - Baccalauréat Général Scientifique',
+         from: new Date('2006-02-01').toISOString(),
+         to: undefined,
+         descriptionLocales: {
+            'en': 'French Baccalaureate - Baccalauréat Général Scientifique, Option Internationale',
+            'pt': 'Ensino Médio Francês - Baccalauréat Général Scientifique, Option Internationale'
+         }
+      }
+   ]
+
    const skills: CVPageCMSContent['skills']['list'] = [
       { 
          skill: 'NextJs',
@@ -237,7 +284,8 @@ export const getCVPageContent: () => Promise<CVPageCMSContent> = async () => {
             }
             return 0
          })
-      }
-
+      },
+      experience,
+      education,
    }
 }
