@@ -1,5 +1,6 @@
 import type { ResumePageLocaleContent } from '@pages/resume'
 import type { CVPageCMSContent, SkillCategoryType } from '@api-utils/content-retrivers/cv-page-info'
+
 //* Importing main components and deps
 import { useState, memo } from 'react'
 
@@ -8,9 +9,11 @@ import {
    Input
 } from '@p-styles/global'
 import { 
-   skillsContainerStyles,
-   SkillCard
-} from '@p-styles/resume'
+   SkillCard,
+   skillsContainerStyles
+} from './skil-section-styles'
+
+
 
 const RawSkillsContainer = ({ 
    skills,

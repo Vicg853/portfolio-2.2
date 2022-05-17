@@ -23,7 +23,7 @@ import {
 import { 
    introParagraphStyles,
    IndexCard,
-   filterSkillsSectionStyle,
+   skillsSectionStyle,
 } from '@p-styles/resume'
 
 
@@ -154,7 +154,7 @@ const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
                </IndexCard>
             </Section>
             <Section data-widthMax
-            data-vert className={filterSkillsSectionStyle}>
+            data-vert className={skillsSectionStyle}>
                <SecTitle id='skills-section'>
                   {`#${cvSections.skills.title}`}
                </SecTitle>
@@ -162,6 +162,12 @@ const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
                   skills={skills} 
                   captionsLocaleSources={cvSections.skills} 
                   />
+            </Section>
+            <Section data-widthMax
+            data-vert className={skillsSectionStyle}>
+               <SecTitle id='skills-section'>
+                  {`#${cvSections.experience}`}
+               </SecTitle>
             </Section>
          </Container>
       </>
