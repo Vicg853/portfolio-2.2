@@ -5,7 +5,8 @@ export const skillsContainerStyles = css`
    --card-width: 340px;
    --card-height: 170px;
    display: grid;
-   max-height: 45vh;
+   height: 45vh;
+   max-height: 1000px;
 
    overflow-y: scroll;
 

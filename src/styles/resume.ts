@@ -1,6 +1,11 @@
 import { styled } from 'linaria/react'
 import { css } from 'linaria'
 
+export const containerStyles = css`
+   gap: 7rem;
+   padding: 7rem 0rem;
+`
+
 export const introParagraphStyles = css`
    gap: 2rem;
 
@@ -118,5 +123,6 @@ export const skillsSectionStyle = css`
    }
 `
 
-
-   
+export const educAndExpCardStyle = css`
+   gap: 1.4rem;
+`   

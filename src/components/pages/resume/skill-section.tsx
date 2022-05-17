@@ -13,8 +13,6 @@ import {
    skillsContainerStyles
 } from './skil-section-styles'
 
-
-
 const RawSkillsContainer = ({ 
    skills,
    captionsLocaleSources
