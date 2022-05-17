@@ -85,6 +85,7 @@ export const getStaticProps: GetStaticProps<GetStaticPropsResult> = async ({ loc
 			projectsList,
 			locale: locale ?? locales![0],
 		},
+		revalidate: 604800
 	}
 }
 
@@ -106,6 +107,13 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
                src: '/images/pages/projects/background.jpg',
                alt: pageSource.mainProps!.header!.backgroundAlt,
             }}
+				button={{
+					text: 'Resume',
+					action: {
+						type: 'link',
+						href: '/resume'
+					}
+				}}
          />
          <Container className={containerMargins}>
 				<Section data-vert data-gap

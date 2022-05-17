@@ -4,14 +4,14 @@ import type { ProjectsPageStaticLocalesSource } from '@pages/projects'
 export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
    mainProps: {
       header: {
-         title: 'Projects',
-         description: 'A collection of my projects',
-         backgroundAlt: "Project's page background",
+         title: 'Projetos',
+         description: 'Uma coleção dos meus projetos',
+         backgroundAlt: "Ilustração da página de projetos",
       }
    },
    content: {
       mainParagraphTitle: 'git checkout projects',
-      mainParagraph: "Como já declarado, desde meus 12 anos, eu me invisto em desenvolvimento de software e ciência da computação, não só conceitualmente, mas também com projetos práticos.\n\nListar todos os meus projetos aqui, não combinaria corretamente com esse portfólio, então estarei desenvolvendo um arquivo com todos meus projetos, caso queira consultar TODOSSSSS os seus.\n\nAinda assim, aqui você poderá consultar os meus favoritos. Ainda mais, para cada projeto há uma lista das suas principais tecnologias/frameworks/bibliotecas/etc, seu escopo, área de atuação e uma descrição, acompanhada do nome (obviamente…).\n\nEspero que goste deles o tanto quanto gostei de desenvolver eles 😄!",
+      mainParagraph: "Como dito, tenho profundo interesse pela área e me invisto nela, não só conceitualmente, mas também com projetos práticos.\n\n Listar todos os meus projetos aqui, não combinaria corretamente com esse portfólio, então desenvolverei um arquivo com todos meus projetos.\n\nMas, aqui você poderá consultar os meus favoritos. Cada projeto contem uma lista das suas principais tecnologias/frameworks/bibliotecas/etc, seu escopo, área de atuação e uma descrição, acompanhada do nome (obviamente…).",
       projectsList: {
          sources: {
             github: 'Repositorio do GitHub',

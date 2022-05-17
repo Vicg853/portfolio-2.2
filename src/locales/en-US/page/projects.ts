@@ -11,7 +11,7 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
    },
    content: {
       mainParagraphTitle: 'git checkout projects',
-      mainParagraph: "As already declared, since my 12th birthday, I have invested in learning about software development and computer science, not only conceptually, but also largely with hands-on projects.\n\nListing all projects here wouldn't be a good fit for this portfolio, so I’ll be developing an archive to store them all, in case you may want to check them ALLL.\n\nBut here, you may check out my favorite ones. Furthermore, each project contains info about its core technologies/frameworks/libraries/etc, its scope, its area of actuation, and a description, plus its name (obviously...).\n\nI hope you like them as much as I liked conceiving them 😄!",
+      mainParagraph: "I love learning new software development concepts but also engaging in projects.\n\n Sadly, listing all my projects, wouldn't be a good fit for this portfolio, so I’m currently integrating an archive to store them all (in case you may be willing to check them all out).\n\n Still you’ll find here a selection of my favorite ones. Each project card contains a list with its core technologies, tech division(s) (full-stack, backend, …), description, scope and name (obviously...).",
       projectsList: {
          sources: {
             github: 'Github repository',

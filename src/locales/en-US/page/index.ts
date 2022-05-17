@@ -19,7 +19,7 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    mainProps: {
       header: {
          title: 'Hi! I code dinosaurs 🦖',
-         description: 'I\'m Victor: a computer science and whole-stack lover, but deeper into full-stack for the moment.',
+         description: 'I\'m Victor full-stack developer passionate about computer science and the whole-stack.',
          backgroundAlt: 'Home page background.'
       },
    }
