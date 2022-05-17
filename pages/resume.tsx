@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
-import type { CVPageCMSContent } from '@api-utils/content-retrivers/cv-page-info'
+import type { CVPageCMSContent, ExpAndEducContent } from '@api-utils/content-retrivers/cv-page-info'
 
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { Header } from '@components/header'
 import { InTextLink } from '@components/mini-components/InTextLink'
 import { SkillsContainer } from '@components/pages/resume/skill-section'
+import { ExpAndEcudCard } from '@components/pages/resume/exp-and-educ-cards'
 
 //* Importing styled components
 import {
@@ -21,9 +22,11 @@ import {
    SecTitle,
 } from '@p-styles/global'
 import { 
+   containerStyles,
    introParagraphStyles,
    IndexCard,
    skillsSectionStyle,
+   educAndExpCardStyle
 } from '@p-styles/resume'
 
 
@@ -65,19 +68,48 @@ interface PageProps {
    locale: string
    pageSource: PageFullType<ResumePageLocaleContent>
    skills: CVPageCMSContent['skills']
+   experience: (Omit<ExpAndEducContent, 'descriptionLocales' | 'to'> & {
+      description: string
+      to: ExpAndEducContent['to'] | null
+   })[]
+   education: (Omit<ExpAndEducContent, 'descriptionLocales' | 'to'> & {
+      description: string
+      to: ExpAndEducContent['to'] | null
+   })[]
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = 
    async ({ locale, locales }) => {
    const pageSource = getPageSource(locale, 'resume')
 
+   const errDescGet = locale === 'pt' ? 'Erro ao obter descrição da página' : 
+      locale === 'en' ? 'Error getting page description' : 'Error getting page description'
+
    const getCVPageContentResult = await getCVPageContent()
+
+   const experience = getCVPageContentResult.experience
+      .map(exp => ({
+         ...exp,
+         descriptionLocales: null,
+         to: exp.to ?? null,
+         description: exp.descriptionLocales[locale ?? locales![0]] ?? errDescGet,
+      }))
+
+   const education = getCVPageContentResult.education
+      .map(edu => ({
+         ...edu,
+         descriptionLocales: null,
+         to: edu.to ?? null,
+         description: edu.descriptionLocales[locale ?? locales![0]] ?? errDescGet,
+      }))
 
    return {
       props: {
          locale: locale!,
          pageSource,
-         skills: getCVPageContentResult.skills
+         skills: getCVPageContentResult.skills,
+         experience,
+         education
       }
    }
 }
@@ -91,7 +123,13 @@ const scrollTo = (id: string) => {
 }
 
 
-const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
+const Resume: NextPage<PageProps> = ({ 
+   locale, 
+   skills, 
+   pageSource,
+   experience,
+   education
+}) => {
    useEffect(() => {
       if(document.location.hash !== '') 
          return scrollTo(`${document.location.hash.replace('#', '')}-section`)
@@ -117,7 +155,7 @@ const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
                alt: 'Resume page background image',
             }}
          />
-         <Container>
+         <Container className={containerStyles}>
             <Section data-widthMax data-wrap data-gap>
                <Section data-vert 
                className={introParagraphStyles}>
@@ -170,11 +208,43 @@ const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
                   captionsLocaleSources={cvSections.skills} 
                   />
             </Section>
-            <Section data-widthMax
-            data-vert className={skillsSectionStyle}>
-               <SecTitle id='skills-section'>
+            <Section data-widthMax data-vert 
+            className={educAndExpCardStyle}>
+               <SecTitle id='experience-section'>
                   {`#${cvSections.experience.title}`}
                </SecTitle>
+               {experience.map((exp, i) => (
+                  <ExpAndEcudCard
+                     key={i}
+                     from={exp.from}
+                     to={exp.to}
+                     captionSources={cvSections.experience}
+                     description={exp.description}
+                     type='experience'
+                     institution={exp.institution}
+                     relatedProjects={exp.relatedProjects}
+                     moreAbout={exp.moreAbout}
+                  />
+               ))}
+            </Section>
+            <Section data-widthMax data-vert
+            className={educAndExpCardStyle}>
+               <SecTitle id='education-section'>
+                  {`#${cvSections.education.title}`}
+               </SecTitle>
+               {education.map((educ, i) => (
+                  <ExpAndEcudCard
+                     key={i}
+                     from={educ.from}
+                     to={educ.to}
+                     captionSources={cvSections.education}
+                     description={educ.description}
+                     type='experience'
+                     institution={educ.institution}
+                     relatedProjects={educ.relatedProjects}
+                     moreAbout={educ.moreAbout}
+                  />
+               ))}
             </Section>
          </Container>
       </>
