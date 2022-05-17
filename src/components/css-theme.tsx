@@ -106,29 +106,6 @@ type CssThemeExportPromise<ThemeType, themeKeysType> = {
     getThemesStyles: () => string
 }
 
-type StoreReturnType<T> = [() => T, (action?: any | undefined) => void, Set<React.Dispatch<React.SetStateAction<string | undefined>>>]
-
-const createStore = <T extends string>(initialStore: T): StoreReturnType<T> => {
-   let store = initialStore
-   const listeners = new Set<React.Dispatch<React.SetStateAction<string | undefined>>>()
- 
-   const dispatch = (action?: any | undefined) => {
-     store = typeof action === 'function' ? action(store) : action
-     listeners.forEach(listener => listener(() => store))
-   }
- 
-   const useStore = () => {
-     const [, listener] = useState<string>()
-     useEffect(() => {
-       listeners.add(listener)
-       return () => { listeners.delete(listener) }
-     }, [])
-     return store
-   }
- 
-   return [useStore, dispatch, listeners]
- }
-
  /**
     * Creates a global css theme state and css vars provider.
    * @params themes - Object containing objects for your theme, where these objects keys are the ones used to select the theme.
@@ -250,7 +227,7 @@ function CssTheme<ThemeType extends object>(
    }
 
    //* Script that willll be injected before body for pre-hydration execution
-   function getInitialTheme() {
+   const initialThemeFuncRef = function getInitialTheme() {
       const themeKey = localStorage.getItem('theme-key');
       
       const systemColorPreference = window.matchMedia(`(prefers-color-scheme: '-sysSchemeKey-')`)
@@ -263,11 +240,10 @@ function CssTheme<ThemeType extends object>(
          document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
          document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
       }
-      return;
    }
    
    const ThemePreHydration = () => {
-     const codeToRunOnClient = `(${getInitialTheme.toString().replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
+     const codeToRunOnClient = `(${initialThemeFuncRef.toString().replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
      
      // eslint-disable-next-line react/no-danger
      return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
