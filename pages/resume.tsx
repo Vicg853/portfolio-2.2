@@ -27,6 +27,13 @@ import {
 } from '@p-styles/resume'
 
 
+export interface ExperienceAndEducationSources {
+   title: string
+   fromCaption: string
+   toCaption: string
+   sinceCaption: string
+}
+
 export interface ResumePageLocaleContent {
    mainParagraph: string
    contactMePageLink: string
@@ -42,8 +49,8 @@ export interface ResumePageLocaleContent {
          skillSource: string
          relatedProjects: string
       }
-      experience: string
-      education: string
+      experience: ExperienceAndEducationSources
+      education: ExperienceAndEducationSources
    }
    index: {
       title: string
@@ -166,7 +173,7 @@ const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
             <Section data-widthMax
             data-vert className={skillsSectionStyle}>
                <SecTitle id='skills-section'>
-                  {`#${cvSections.experience}`}
+                  {`#${cvSections.experience.title}`}
                </SecTitle>
             </Section>
          </Container>

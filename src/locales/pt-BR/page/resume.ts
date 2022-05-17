@@ -14,8 +14,18 @@ export const ResumePage: PageFullType<ResumePageLocaleContent> = {
          cvLink: 'Baixar/Ver meu CV em PDF',
       },
       cvSections: {
-         education: 'Educação',
-         experience: 'Experiência',
+         education: {
+            title: 'Educação',
+            fromCaption: 'Inicio:',
+            toCaption: 'Final:',
+            sinceCaption: 'Desde:',
+         },
+         experience: {
+            title: 'Experiência',
+            fromCaption: 'Inicio:',
+            toCaption: 'Final:',
+            sinceCaption: 'Desde:',
+         },
          skills: {
             title: 'Habilidades',
             categoryAllOption: 'Todas',
