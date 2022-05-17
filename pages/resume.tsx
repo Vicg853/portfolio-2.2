@@ -1,16 +1,17 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
-import type { CVPageCMSContent, SkillCategoryType } from '@api-utils/content-retrivers/cv-page-info'
+import type { CVPageCMSContent } from '@api-utils/content-retrivers/cv-page-info'
 
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
 import { getCVPageContent } from '@api-utils/content-retrivers/cv-page-info'
 
 //* Importing main components and deps
-import { useEffect, useState, memo } from 'react'
+import { useEffect } from 'react'
 import { Header } from '@components/header'
 import { InTextLink } from '@components/mini-components/InTextLink'
+import { SkillsContainer } from '@components/pages/resume/skill-section'
 
 //* Importing styled components
 import {
@@ -18,14 +19,11 @@ import {
    Section,
    Paragraph,
    SecTitle,
-   Input
 } from '@p-styles/global'
 import { 
    introParagraphStyles,
    IndexCard,
-   skillsContainerStyles,
    filterSkillsSectionStyle,
-   SkillCard
 } from '@p-styles/resume'
 
 
@@ -85,82 +83,6 @@ const scrollTo = (id: string) => {
       el.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
 
-const RawSkillsContainer = ({ 
-      skills,
-      captionsLocaleSources
-   }: { 
-      skills: CVPageCMSContent['skills'], 
-      captionsLocaleSources: ResumePageLocaleContent['cvSections']['skills']
-   }) => {
-   const [techSearch, setTechSearch] = useState<string>('')
-   const [selectedCategory, setSelectedCategory] = useState<SkillCategoryType | 'all'>('all')
-
-   return (
-      <>
-         <Section id="filters-sections-container">
-            <Section className='filters-sections' data-vert data-gap>
-               <span>{`${captionsLocaleSources.categoryFilter}:`}</span>
-               <select className={Input.__linaria.className} onChangeCapture={e => 
-                     setSelectedCategory(e.currentTarget
-                        .value as SkillCategoryType)
-                  }>
-                  <option value='all'>{`${captionsLocaleSources.categoryAllOption}`}</option>
-                  {skills.categories.map(category => (
-                     <option key={category} value={category}>{category}</option>
-                  ))}
-               </select>
-            </Section>
-            <Section className='filters-sections' data-vert data-gap>
-               <span>{`${captionsLocaleSources.searchFilter}:`}</span>
-               <Input onChange={e => 
-                  setTechSearch(e.currentTarget.value)
-               } placeholder={`e.g.: NextJs`} />
-            </Section>
-         </Section>
-         <Section data-wrap className={skillsContainerStyles}>
-            {skills.list.map(skill => {
-               if ((selectedCategory === 'all' || skill.category.includes(selectedCategory))
-                  && (techSearch.length === 0 || !skill.skill.search(techSearch))) return (
-                  <SkillCard
-                     key={skill.skill}>
-                     <sub>
-                        <h5>{skill.skill}</h5>
-                        <span>
-                           <span className='detail'>{`${captionsLocaleSources.techExpYears}:`}</span> 
-                           {skill.experienceYears}
-                        </span>
-                        <span>
-                           <span className='detail'>{`${captionsLocaleSources.projectsNumber}:`}</span> 
-                           {skill.projects}
-                        </span>
-                     </sub>
-                     {(skill.relatedProjectList || skill.skillSource) && (
-                        <sub className='mini-cards-sub'>
-                           {skill.relatedProjectList && (
-                              <button onClick={() => {}}
-                              className='skill-projects'>
-                                 {`${captionsLocaleSources.relatedProjects}:`}
-                              </button>
-                           )}
-                           {skill.skillSource && (
-                              <a href={skill.skillSource} 
-                              target='_blank' 
-                              rel='noopener noreferrer'
-                              className='skill-source'>
-                                 {`${captionsLocaleSources.skillSource}:`}
-                              </a>
-                           )}
-                        </sub>
-                     )}
-                  </SkillCard>
-               )
-            })}
-         </Section>
-      </>
-   )
-}
-
-const SkillsContainer = memo(RawSkillsContainer, () => true)
 
 const Resume: NextPage<PageProps> = ({ locale, skills, pageSource }) => {
    useEffect(() => {
