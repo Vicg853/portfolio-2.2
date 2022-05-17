@@ -1,4 +1,5 @@
 import type { LinkProps } from 'next/link'
+import type { ReactChild } from 'react'
 import Link from 'next/link'
 import { styled } from 'linaria/react'
 
@@ -18,19 +19,27 @@ const IntTextLinkStyled = styled.a`
    }
 `
 
-type InTextLinkProps = LinkProps & {
-   children: JSX.Element | string
+interface InTextLinkProps extends LinkProps {
+   action?: () => any
+   children: ReactChild
 }
 
 const InTextLink: React.FC<InTextLinkProps> = ({
    children,
+   action,
    ...props
 }) => {
    return ( 
       <Link {...props} passHref>
-         <IntTextLinkStyled>
-            {children}
-         </IntTextLinkStyled>
+         {action ? (
+            <IntTextLinkStyled onClick={action}>
+               {children}
+            </IntTextLinkStyled>
+         ) : (
+            <IntTextLinkStyled>
+               {children}
+            </IntTextLinkStyled>
+         )}
       </Link>
    )
 }

@@ -170,6 +170,9 @@ export const TextEffect = styled.span`
    &&[data-bold] {
       font-weight: 600;
    }
+   &&[data-bolder] {
+      font-weight: 700;
+   }
    &&[data-underline] {
       text-decoration: underline;
    }
