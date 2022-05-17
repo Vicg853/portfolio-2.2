@@ -1,6 +1,15 @@
 export type SkillCategoryType = 'Web-frontend' | 'Backend' | 'Mobile' | 'Database' | 'Devops&Infrastructure' 
 | 'Desktop' | 'Cross-platform' | 'Runtime' | 'Language' | 'Tool'
 
+export interface ExpAndEducContent {
+   institution: string
+   from: string
+   to?: string
+   descriptionLocales: Record<string, string>
+   relatedProjects?: undefined
+   moreAbout?: string
+}
+
 export interface CVPageCMSContent {
    skills: {
       categories: SkillCategoryType[]
@@ -15,9 +24,45 @@ export interface CVPageCMSContent {
          relatedProjectList?: undefined
       }[]
    }
+   experience: ExpAndEducContent[]
+   education: ExpAndEducContent[]
 }
 
 export const getCVPageContent: () => Promise<CVPageCMSContent> = async () => {
+   const experience: CVPageCMSContent['experience'] = [
+      {
+         institution: 'IBM',
+         from: '2018-10-27',
+         to: '2018-11-27',
+         descriptionLocales: {
+            'en': 'Observational Internship at IBM Brasil',
+            'pt': 'Estágio de observação na IBM Brasil'
+         }
+      },
+      {
+         institution: 'Alpes Capital',
+         from: '2020-09-01',
+         to: undefined,
+         descriptionLocales: {
+            'en': 'Voluntary work at a Brazilian endowment fund as a full-stack developer',
+            'pt': 'Trabalho voluntário no Fundo de Financiamento de Investimento no Brasil como desenvolvedor full-stack'
+         },
+         moreAbout: 'https://www.alpescap.com.br/gestao'
+      }
+   ]
+
+   const education: CVPageCMSContent['education'] = [
+      {
+         institution: 'Lycée Pasteur, São Paulo - Baccalauréat Général Scientifique',
+         from: new Date('2006-02-01').toISOString(),
+         to: new Date('2020-10-01').toISOString(),
+         descriptionLocales: {
+            'en': 'French Baccalaureate - Baccalauréat Général Scientifique, Option Internationale',
+            'pt': 'Ensino Médio Francês - Baccalauréat Général Scientifique, Option Internationale'
+         }
+      }
+   ]
+
    const skills: CVPageCMSContent['skills']['list'] = [
       { 
          skill: 'NextJs',
@@ -237,7 +282,8 @@ export const getCVPageContent: () => Promise<CVPageCMSContent> = async () => {
             }
             return 0
          })
-      }
-
+      },
+      experience,
+      education,
    }
 }
