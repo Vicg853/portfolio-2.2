@@ -225,25 +225,24 @@ function CssTheme<ThemeType extends object>(
       //TODO Give a look into this hydration isseus caused by html entities
       return <></>
    }
-
-   //* Script that willll be injected before body for pre-hydration execution
-   const initialThemeFuncRef = function getInitialTheme() {
-      const themeKey = localStorage.getItem('theme-key');
-      
-      const systemColorPreference = window.matchMedia(`(prefers-color-scheme: '-sysSchemeKey-')`)
-            .matches
-      
-      if (themeKey) {
-         document.documentElement.classList.add('use-theme-' + themeKey);
-         document.documentElement.style.setProperty('--initial-theme', themeKey);
-      } else if(systemColorPreference) {
-         document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
-         document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
-      }
-   }
    
    const ThemePreHydration = () => {
-     const codeToRunOnClient = `(${initialThemeFuncRef.toString().replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
+     const codeToRunOnClient = `(${`
+      function getInitialTheme() {
+         const themeKey = localStorage.getItem('theme-key');
+
+         const systemColorPreference = window.matchMedia(\`(prefers-color-scheme: '-sysSchemeKey-')\`)
+               .matches
+
+         if (themeKey) {
+            document.documentElement.classList.add('use-theme-' + themeKey);
+            document.documentElement.style.setProperty('--initial-theme', themeKey);
+         } else if(systemColorPreference) {
+            document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
+            document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
+         }
+      }
+     `.replaceAll(/-sysSchemeKey-/g, systemSchemePreferenceKey)})()`
      
      // eslint-disable-next-line react/no-danger
      return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />
