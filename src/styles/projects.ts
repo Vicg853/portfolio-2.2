@@ -43,7 +43,7 @@ export const ProjectCard = styled.div`
       z-index: 1;
       width: 600px;
       max-width: calc(100% - var(--sub-card-margin) * 2);
-      min-height: calc(100% - 2 * var(--sub-card-margin));
+      height: calc(100% - 2 * var(--sub-card-margin));
       margin: var(--sub-card-margin);
 
       display: flex;
@@ -72,11 +72,21 @@ export const ProjectCard = styled.div`
       color: var(--pallete-text);
    }
 
+   section, span:not(.project-card-project-description) {
+      justify-self: flex-end;
+   }
+
+   .project-card-project-description {
+      flex-shrink: 2;
+      overflow-y: scroll;
+      word-break: break-word;
+   }
+
    .project-card-project-scope {
       display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      margin-top: 15%;
+      margin-top: auto;
    }
    .project-card-project-scope > .detail {
       color: var(--pallete-accent);
