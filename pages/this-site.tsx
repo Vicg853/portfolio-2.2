@@ -1,10 +1,14 @@
 import type { PageFullType } from '../src/locales'
+import type { Service } from '@api-utils/content-retrivers/services'
 import type { GetStaticProps, NextPage } from 'next'
 
 //* Importing API utils
 import { getPageSource } from '@api-utils/locales-sources'
+import { getServices } from '@api-utils/content-retrivers/services'
 
 //* Required deps and components
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { Header } from '@components/header'
 import { ServiceCard } from '@components/pages/this-webs/service-card'
 import {
@@ -13,12 +17,17 @@ import {
    SecTitle,
    Paragraph
 } from '@p-styles/global'
+import {
+   servicesCardGridStye,
+   thisWebSContainerStyles
+} from '@p-styles/this-webs'
 export interface ThisWebSPageLocaleContent {
 
 }
 
 type PageProps = {
    localeSource: PageFullType<ThisWebSPageLocaleContent>
+   services: Service[]
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({
@@ -26,16 +35,52 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
 }) => {
    const localeSource = getPageSource(locale ?? locales![0], 'thisWebS')
 
+   const services = await getServices(locale ?? locales![0] as any)
+
    return {
       props: {
-         localeSource
+         localeSource,
+         services
       }
    }
 }
 
 const ThisWebpage: NextPage<PageProps> = ({
-   localeSource
+   localeSource,
+   services
 }) => {
+   const {
+      push,
+      prefetch,
+      beforePopState,
+      asPath
+   } = useRouter()
+
+   const [initTransition, setInitTransition] = useState(false)
+
+   useEffect(() => {
+
+      //* When coming back from service description will cause scroll 
+      //* to restore to top. So when clicking on the back button (on svc details page)
+      //* a query parram with #services-{id} will be added to the url.
+      //* If this param is present, we will scroll to the service card with that id or
+      //* fallback to the services container
+      const queryPathCheckRgx = /^\/this-site#services/
+      if(asPath.match(queryPathCheckRgx)) document
+         .getElementById(`services-section-this-site-page-${asPath.replace(queryPathCheckRgx, '')}`)?.scrollIntoView({
+         behavior: 'auto',
+         block: 'nearest'
+      }) ?? document.getElementById('services-section-this-site-page')?.scrollIntoView({
+         behavior: 'auto',
+         block: 'nearest'
+      })
+
+      beforePopState(() => {
+         setInitTransition(true)
+         return true
+      })
+   })
+
    return (
       <>
          <Header 
@@ -47,7 +92,8 @@ const ThisWebpage: NextPage<PageProps> = ({
                src: '/images/pages/this-site/Screenshot 2022-05-19 165800.jpg',
                alt: 'This website page header background'
             }} /> 
-         <Container>
+         <Container data-transition={initTransition ? 'true' : 'false'}
+         className={thisWebSContainerStyles}>
             <Section data-vert data-widthMax data-smallGap>
                <SecTitle>Tumex proj</SecTitle>
                <Paragraph data-limitWidthMed>
@@ -66,17 +112,23 @@ const ThisWebpage: NextPage<PageProps> = ({
                <Paragraph>
                   p.s.: Press a card to get details about each service.
                </Paragraph>
-               <Section data-smallGap data-wrap>
-                  <ServiceCard
-                     name='Portfolio (this website)'
-                     version='2.0.0'
-                     devStatus='dev'
-                     healthEndpoint={{
-                        url: 'http://localhost:4000/.well-known/apollo/server-health',
-                        justCheckStatusCode: 200,
-                        method: 'GET'
-                     }}
-                   />
+               <Section data-smallGap data-wrap 
+               className={servicesCardGridStye}
+               id='services-section-this-site-page'>
+                  {services.map((service, key) => {
+                     const hover = service.details ? 
+                        () => prefetch(`/this-webs/${service.id}`) : undefined
+                     const click = service.details ? 
+                        () => push(`this-site/${service.id}`) : undefined
+
+                     return (
+                        <ServiceCard key={key}
+                           compId={`services-section-this-site-page-${service.id}`}
+                           onMouseOver={hover}
+                           onClick={click}
+                           {...service} />
+                     )
+                  })}
                </Section>
             </Section>
          </Container>
