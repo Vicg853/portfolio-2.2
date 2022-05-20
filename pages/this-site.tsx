@@ -1,5 +1,6 @@
 import type { PageFullType } from '../src/locales'
 import type { Service } from '@api-utils/content-retrivers/services'
+import type { OnlySvcPageLocaleContent } from './this-site/[svc]'
 import type { GetStaticProps, NextPage } from 'next'
 
 //* Importing API utils
@@ -22,7 +23,26 @@ import {
    thisWebSContainerStyles
 } from '@p-styles/this-webs'
 export interface ThisWebSPageLocaleContent {
-
+   onlySvc: OnlySvcPageLocaleContent
+   pageTitle: string
+   services: {
+      title: string
+      caption: string
+      cardDevStats: {
+         title: string
+         underDev: string
+         ready: string
+         draft: string
+      }
+      version: string
+      healthStats: {
+         title: string
+         running: string
+         down: string
+         unknown: string
+         maintenance: string
+      }
+   }
 }
 
 type PageProps = {

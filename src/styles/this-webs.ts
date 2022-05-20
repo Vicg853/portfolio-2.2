@@ -1,4 +1,3 @@
-import { styled } from 'linaria/react'
 import { css } from 'linaria'
 
 export const onlySvcContainerStyles = css`
@@ -15,6 +14,8 @@ export const onlySvcContainerStyles = css`
       opacity: 1 !important;
       width: auto !important;
       align-self: flex-start;
+
+      font-size: 1rem;
    }
 
    @keyframes fadeIn {
@@ -38,7 +39,7 @@ export const thisWebSContainerStyles = css`
    }
 `
 
-export const thisWebPFirstSectionStyles = css`
+export const thisWebPSectionsStyles = css`
    gap: 3rem;
    section {
       width: calc(50% - 3rem);   
@@ -73,9 +74,24 @@ export const servicesCardGridStye = css`
    }
 `
 
-export const onlySvcTechStackSectionStyles = css`
+const onlySvcTechStackSubShared = `
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-between;
    gap: 0.5rem;
+`
+   
+export const onlySvcTechStackSubStyles = css`
+   ${onlySvcTechStackSubShared}
+   justify-content: space-between;
+   `
+
+export const onlySvcTechStackSubSecondStyles = css`
+   ${onlySvcTechStackSubShared}
+   justify-content: flex-start;
+`
+
+export const onlySvcLinksSectionStyles = css`
+   sub {
+      justify-self: flex-end;
+   }
 `
