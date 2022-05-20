@@ -44,6 +44,9 @@ export const Section = styled.section`
    &&[data-widthHundred] {
       width: 100%;
    }
+   &&[data-widthHalf] {
+      width: 50%;
+   }
 
    &&[data-wrap] {
       flex-wrap: wrap;
@@ -81,6 +84,10 @@ export const Section = styled.section`
    }
    &&[data-justSpEven] {
       justify-content: space-evenly;
+   }
+
+   &&[data-stretch] {
+      align-items: stretch;
    }
 `
 
