@@ -1,52 +1,30 @@
-import { Card } from './service-card-styles'
+import type {
+   Service,
+   HealthStates
+} from '@api-utils/content-retrivers/services'
+
 import { useEffect, useState, memo } from 'react'
-
-type DevStatuses = 'dev' | 'ready' | 'planned'
-
-type HealthResponses = ({
-   justCheckStatusCode: number
-   checkSpecificJson?: undefined
-} | {
-   justCheckStatusCode?: undefined
-   checkSpecificJson: string
-})
-
-type HealthEndpoint = HealthResponses & {
-   url: string
-   method: 'GET' | 'POST'
-   checkInterval?: number
-   plannedMaintenance?: boolean
-}
-
-export interface ServiceCardProps {
-   name: string
-   version: string
-   devStatus: DevStatuses
-   healthEndpoint?: HealthEndpoint
-   details?: {
-      description?: string
-      techStack?: string[]
-      links?: {
-         type: 'GITHUB' | 'WEBSITE' | 'ENDPOINT' | 'OTHER'
-         url: string
-         label?: string
-      }[]
-      runsOn?: string[]
-   }
-}
-   
-type HealthStates = 'MAINT' | 'OK' | 'DOWN' | 'UNKNOWN'
+import { 
+   Card
+} from './service-card-styles'
 
 const defaultHealthCheckInterval = 5 * 60 * 1000
 
+interface ServiceCardProps extends Service {
+   onClick?: () => void
+   onMouseOver?: () => void
+   compId?: string
+}
+
 const RawServiceCard: React.FC<ServiceCardProps> = ({
-   name, version, devStatus, healthEndpoint, details
+   name, version, devStatus, healthEndpoint, onClick, details, onMouseOver,
+   compId
 }) => {
    const [health, setHealth] = useState<HealthStates>('UNKNOWN')
 
    {/* eslint-disable-next-line react-hooks/exhaustive-deps */}
    useEffect(() => {
-      if(!healthEndpoint || devStatus === 'planned') 
+      if(!healthEndpoint || devStatus === 'DRAFT') 
          return 
       
       if(healthEndpoint.plannedMaintenance) 
@@ -54,6 +32,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
 
       const check = async () => await fetch(healthEndpoint.url, {
          method: healthEndpoint.method,
+         mode: 'same-origin',
       }).then(async res => {
          console.log(res)
          if(healthEndpoint.justCheckStatusCode) 
@@ -79,38 +58,43 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
    })
 
    return (
-      <Card data-details={details ? 'true' : 'false'}>
-         <span className='service-card-title'>
-            {name}
-         </span>
-         <span className='service-card-sub-titles'>
-            Development<br/>status:
-         </span>
-         <span className='service-card-dev-status' data-devStatus={devStatus}>
-            {devStatus === 'ready' && 'Ready on production'}
-            {devStatus === 'dev' && 'Under development'}
-            {devStatus === 'planned' && 'Under design'}
-         </span>
-         {healthEndpoint && (
-            <>
-               <span className='service-card-sub-titles'>
-                  Health (operational status):<br/>
-               </span>
-               <span className='service-card-health-status' data-health={health}>
-                  {health === 'OK' && 'Up & running (tchu tchu 🚂)'}
-                  {health === 'MAINT' && 'Under maintenance 🛠️'}
-                  {health === 'DOWN' && 'Down (⚠️)'}
-                  {health === 'UNKNOWN' && '?'}
-               </span>
-            </>
-         )}
-         <span className='service-card-sub-titles'>
-            Version:
-         </span>
-         <span className='service-card-svc-version'>
-            {version}
-         </span>
-      </Card>
+      <>
+         <Card onClick={onClick} id={compId}
+         onMouseOver={onMouseOver}
+         className='service-card'
+         data-details={details ? 'true' : 'false'}>
+            <span className='service-card-title'>
+               {name}
+            </span>
+            <span className='service-card-sub-titles'>
+               Development<br/>status:
+            </span>
+            <span className='service-card-dev-status' data-devStatus={devStatus}>
+               {devStatus === 'READY' && 'Ready (on production)'}
+               {devStatus === 'DEV' && 'Under development'}
+               {devStatus === 'DRAFT' && 'Drafting'}
+            </span>
+            {healthEndpoint && (
+               <>
+                  <span className='service-card-sub-titles'>
+                     Health (operational status):<br/>
+                  </span>
+                  <span className='service-card-health-status' data-health={health}>
+                     {health === 'OK' && 'Up & running (tchu tchu 🚂)'}
+                     {health === 'MAINT' && 'Under maintenance 🛠️'}
+                     {health === 'DOWN' && 'Down (⚠️)'}
+                     {health === 'UNKNOWN' && '?'}
+                  </span>
+               </>
+            )}
+            <span className='service-card-sub-titles'>
+               Version:
+            </span>
+            <span className='service-card-svc-version'>
+               {version}
+            </span>
+         </Card>
+      </>
    )
 }
 

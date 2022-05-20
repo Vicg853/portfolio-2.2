@@ -1,10 +1,56 @@
 import { styled } from 'linaria/react'
 
+export const ServiceDetailsCard = styled.div`
+   position: absolute;
+   width: 90%;
+   height: 90%;
+   z-index: 2;
+   top: 5%;
+   
+   border-radius: 0.7rem;
+   background: var(--pallete-bg);
+   border: 1px solid var(--pallete-accent);
+
+   --scale: 1.08;
+   --opacity: 0.4;
+   --anim-dur: 0.2s;
+
+   transition: var(--anim-dur) ease-in-out;
+   transition-property: transform, opacity;
+   &[data-active="true"] {
+      left: 5%;
+      transform: scale(1);
+      opacity: 1;
+   }
+   &[data-active="false"] {
+      left: 100vw;
+      transform: scale(var(--scale));
+      opacity: var(--opacity);
+      animation: zoomOut var(--anim-dur) ease-in-out;
+   }
+
+   @keyframes zoomOut {
+      0% {
+         transform: scale(1);
+         opacity: 1;
+         left: 5%;
+      }
+      99% {
+         transform: scale(var(--scale));
+         opacity: var(--opacity);
+         left: 5%;
+      }
+      100% {
+         left: 100vw;
+      }
+      
+   }
+`
+
 export const Card = styled.div`
-   display: flex;
+   position: relative;
+   display: inline-flex;
    flex-direction: column;
-   width: 340px;
-   min-height: 290px;
    
    background: var(--pallete-bg);
    border-radius: 0.8rem;
@@ -61,17 +107,20 @@ export const Card = styled.div`
       color: var(--pallete-opaque-text);
    }
 
-   span[data-devStatus="ready"], span[data-health="OK"] {
+   span[data-devStatus="READY"], span[data-health="OK"] {
       color: var(--pallete-constants-success);
    }
-   span[data-devStatus="planned"], span[data-health="UNKNOWN"] {
+   span[data-devStatus="DRAFT"], span[data-health="UNKNOWN"] {
       color: var(--pallete-opaque-text);
    }
-   span[data-devStatus="dev"], span[data-health="MAINT"] {
+   span[data-devStatus="DEV"], span[data-health="MAINT"] {
       color: var(--pallete-constants-info);
    }   
    span[data-health="DOWN"] {
       color: var(--pallete-constants-err);
    }
 
+   transition: 0.2s ease-in-out;
+   transition-property: transform, filter, opacity;
 `
+
