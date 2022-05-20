@@ -54,6 +54,15 @@ export const Section = styled.section`
    &&[data-gap] {
       gap: 4rem;
    }
+   &&[data-smallGap] {
+      gap: 1rem;
+   }
+   &&[data-medGap] {
+      gap: 2rem;
+   }
+   &&[data-bigGap] {
+      gap: 3.5rem;
+   }
 
    &&[data-justStart] {
       justify-content: flex-start;
