@@ -95,7 +95,8 @@ const ServiceDetails: React.FC<PageProps> = ({
       name,
       id,
       details
-   }
+   },
+   localeSource
 }) => {
    const {
       description,
@@ -104,13 +105,17 @@ const ServiceDetails: React.FC<PageProps> = ({
       techStack
    } = details!
 
+   const {
+      content: localeContent
+   } = localeSource
+
    return (
       <>
          <Container className={onlySvcContainerStyles}>
             <Section data-wrap className={onlySvcLinksSectionStyles}>
                <Link href={`/this-site#services-${id}`} passHref>
                   <a className={miniNavItems}>
-                     Back
+                     {localeContent.back}
                   </a>
                </Link>
                {links && (
@@ -132,12 +137,12 @@ const ServiceDetails: React.FC<PageProps> = ({
             data-widthMax data-stretch data-wrap>
                <Section data-vert data-smallGap 
                data-justStart>
-                  <SecTitle>Service: {name}</SecTitle>
+                  <SecTitle>{localeContent.serviceName}: {name}</SecTitle>
                   {description &&  (<Paragraph>{description}</Paragraph>)}
                </Section>
                {techStack && (
                   <Section data-vert data-smallGap>
-                     <SecTitle>Tech stack</SecTitle>
+                     <SecTitle>{localeContent.techStack}</SecTitle>
                      <sub className={onlySvcTechStackSubStyles}>
                         {techStack.map((tech, i) => (
                            <TechElCard key={i} techLabel={tech} />
@@ -147,7 +152,7 @@ const ServiceDetails: React.FC<PageProps> = ({
                )}
                {runsOn && (
                   <Section data-vert data-smallGap >
-                     <SecTitle>Runs on:</SecTitle>
+                     <SecTitle>{localeContent.runsOn}:</SecTitle>
                      <sub className={onlySvcTechStackSubSecondStyles} >
                         {runsOn.map((run, i) => (
                            <TechElCard key={i} techLabel={run} />
