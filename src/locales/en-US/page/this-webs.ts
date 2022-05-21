@@ -9,19 +9,19 @@ export const ThisWebS: PageFullType<ThisWebSPageLocaleContent> = {
          serviceName: 'Service',
          techStack: 'Tech Stack',
       },
-      pageDescription: 'Although I often ingress in third-party projects, my most remarkable one, which will never stop evolving, is my laboratory or as I call it the: “tumex-project”.\n\nCurrently, it only features this website and a couple of backend services hosted on Railway.app and Vercel... but I have bigger plans for it. I plan on building a self-managed Kubernetes cluster, that will provide a wide range of features (CI/CD environments, hosting, LXD VMs, etc).\n\nFrom that, I’ll probably develop storage services (a.k.a. google drive alternative), other useful services (e.g.: VPN), whole-home automation from scratch, a Jarvis-like A.I., and anything that comes to mind\n\nThe biggest advantage/reason of it all?\n\nI get to experience near-production original environments, solve challenges, broaden my knowledge and also have fun on the way. All without causing no one/no company any harm.',
+      pageDescription: 'The current website you’re looking at is a part of a bigger life-long project. So, I decided to dedicate an entire page just to it.\nYou can get to know some of the services that are a part of it, their status and details (only for some of them), along with their development progress.\n\nIn the future, I plan on expanding this project. After setting up Kubernetes Cluster that will serve as project hosting, CI/CD environment, etc, and migrating into it, I’ll probably use it for projects like home automation, natural language A.I. learning, and others...\n\nTo be fair, anything fun that comes to mind!\n\nApart from that, another objective of this project is having hands-on experience with complex/near-production environments for learning.',
       pageTitle: 'Tumex project',
       services: {
          title: 'Main services',
          caption: 'p.s.: press a card to get more info',
          cardDevStats: {
-            title: 'Development status',
+            title: 'Dev progress',
             draft: 'Draft',
             underDev: 'Under development',
             ready: 'Running',
          },
          healthStats: {
-            title: 'Operational status',
+            title: 'Status',
             maintenance: 'Maintenance',
             running: 'Up & running (tchu-tchu 🚂)',
             down: 'Down',
