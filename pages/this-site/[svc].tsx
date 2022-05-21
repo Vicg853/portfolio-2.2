@@ -33,7 +33,7 @@ type StaticPaths = {
 }
 
 export const getStaticPaths: GetStaticPaths<StaticPaths> = async () => {
-   const services = await getServicesId()
+   const services = await getServicesId(true)
 
    return {
       paths: services.map(svc => ({ params: { svc } })),

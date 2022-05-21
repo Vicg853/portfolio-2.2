@@ -296,9 +296,10 @@ export async function getServices(locale: typeof localeEnName | typeof localeFrN
    return services
 }
 
-export async function getServicesId(): Promise<string[]> {
+export async function getServicesId(excludeNoDetail: boolean = false): Promise<string[]> {
    
-   return services.map(service => service.id)
+   return services.filter(service => excludeNoDetail ? typeof service.details !== 'undefined' 
+      : true).map(service => service.id)
 }
 
 export async function getService(
