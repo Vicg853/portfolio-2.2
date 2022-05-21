@@ -38,7 +38,6 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
          method: healthEndpoint.method,
          mode: 'same-origin',
       }).then(async res => {
-         console.log(res)
          if(healthEndpoint.justCheckStatusCode) 
             return setHealth(res.status === healthEndpoint.justCheckStatusCode ? 'OK' : 'DOWN')
          else if(healthEndpoint.checkSpecificJson) {

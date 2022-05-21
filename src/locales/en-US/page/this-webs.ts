@@ -13,7 +13,7 @@ export const ThisWebS: PageFullType<ThisWebSPageLocaleContent> = {
       pageTitle: 'Tumex project',
       services: {
          title: 'Main services',
-         caption: 'p.s.: click on cards to see more details',
+         caption: 'p.s.: press a card to get more info',
          cardDevStats: {
             title: 'Development status',
             draft: 'Draft',

@@ -145,7 +145,8 @@ const ServiceDetails: React.FC<PageProps> = ({
                      <SecTitle>{localeContent.techStack}</SecTitle>
                      <sub className={onlySvcTechStackSubStyles}>
                         {techStack.map((tech, i) => (
-                           <TechElCard key={i} techLabel={tech} />
+                           <TechElCard url={tech.techLink}
+                           key={i} techLabel={tech.techName} />
                         ))}
                      </sub>
                   </Section>
