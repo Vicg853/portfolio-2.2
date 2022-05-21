@@ -53,7 +53,7 @@ const services: Service[] = [
          checkSpecificJson: '{"status":"pass","message":"Everything is fine!"}'
       },
       details: {
-         description: 'The current website you\'re visiting right now.\n I use it to show of my work, abilities and as a global online profile.',
+         description: 'The current website you\'re visiting right now. I use it to show my work and abilities.',
          techStack: [
             {
                techName: 'Next.js',
@@ -112,7 +112,7 @@ const services: Service[] = [
          checkSpecificJson: '{"status":"pass"}'
       },
       details: {
-         description: 'The CMS server for my portfolio and etc. It is a first version and will probably go through many improvements',
+         description: 'The CMS server for my portfolio, etc. It is the first version and will probably go through many improvements.',
          techStack: [
             {
                techName: 'Apollo Server',
@@ -163,7 +163,7 @@ const services: Service[] = [
       version: '1.0.0',
       devStatus: 'DEV',
       details: {
-         description: 'The dashboard where for the moment serves as CMS content management interface. Although will do more in the future with new projects.',
+         description: 'For the moment serves as a CMS content management interface. Although it is not limited to it, as it will provide interaction and management features for future projects.',
          techStack: [
             {
                techName: 'Remix.run',
@@ -211,7 +211,7 @@ const services: Service[] = [
          justCheckStatusCode: 422,
       },
       details: {
-         description: 'First version of my mailer API that is currently used to send messages via my website. Second version (under dev) does more.',
+         description: 'The first version of my mailer API. that is being currently used to send messages through here (contact page). The second version (that is under dev) has more features.',
          techStack: [
             {
                techName: 'Express',
@@ -260,7 +260,7 @@ const services: Service[] = [
       version: '1.0.0',
       devStatus: 'DEV',
       details: {
-         description: 'Still not fully operational and will go through many breaking changes. Using it to learn about microservices with Kubernetes. It will later become my own Cluster for project hosting, CI/CD, etc',
+         description: 'Still not fully operational and will go through many breaking changes. I am using it to learn about microservices with Kubernetes. It should later become my Cluster for project hosting, CI/CD, etc',
          techStack: [
             {
                techName: 'Kubernetes (k8s)',
