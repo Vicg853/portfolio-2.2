@@ -38,7 +38,7 @@ const menu: LinksLocale = {
 }
 
 const footer: FooterLocale = {
-   footerMessage: 'Hey! Obrigado por acessar e ler meu site!\n Aqui estão alguns links úteis + referências!\n\n Cordialmente,\n Assinado:\n Victor Rosa Gomez 😄🖥️,\n Desenvolvendo dinossauros desde 2003...',
+   footerMessage: 'Hey! Obrigado por acessar meu site!\n Aqui estão alguns links úteis e referências!\n\n Cordialmente,\n Victor Rosa Gomez 😄🖥️,\n Desenvolvendo dinossauros desde 2003...',
    footerSocialsTexts: {
       github: {
          name: 'Github',
@@ -56,17 +56,12 @@ const footer: FooterLocale = {
    thanksAndReferencesTexts: {
       icons8: {
          name: 'Icons8',
-         description: 'Esse site usa icônes do Icons8.',
+         description: 'Esse site usa alguns icônes do Icons8.',
          alt: 'Acessar ao Icons8.',
-      },
-      unsplash: {
-         name: 'Unsplash',
-         description: 'Esse site usa imagens do Unsplash.',
-         alt: 'Acessar ao Unsplash.',
       },
       googleFonts: {
          name: 'Google Fonts',
-         description: 'Esse site usa fontes do Google Fonts.',
+         description: 'Esse site usa fontes fornecidas pela Google Fonts.',
          alt: 'Acessar ao Google Fonts.',
       },
    },

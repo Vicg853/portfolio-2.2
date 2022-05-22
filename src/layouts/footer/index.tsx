@@ -70,12 +70,6 @@ export const Footer = () => {
          url: 'https://fonts.google.com',
          description: footer.thanksAndReferencesTexts['googleFonts'].description,
          alt: footer.thanksAndReferencesTexts['googleFonts'].alt
-      },
-      {
-         name: footer.thanksAndReferencesTexts['unsplash'].name,
-         url: 'https://unsplash.com',
-         description: footer.thanksAndReferencesTexts['unsplash'].description,
-         alt: footer.thanksAndReferencesTexts['unsplash'].alt
       }
     ]
 

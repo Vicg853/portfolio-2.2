@@ -44,6 +44,9 @@ export const Section = styled.section`
    &&[data-widthHundred] {
       width: 100%;
    }
+   &&[data-widthHalf] {
+      width: 50%;
+   }
 
    &&[data-wrap] {
       flex-wrap: wrap;
@@ -53,6 +56,15 @@ export const Section = styled.section`
    }
    &&[data-gap] {
       gap: 4rem;
+   }
+   &&[data-smallGap] {
+      gap: 1rem;
+   }
+   &&[data-medGap] {
+      gap: 2rem;
+   }
+   &&[data-bigGap] {
+      gap: 3.5rem;
    }
 
    &&[data-justStart] {
@@ -72,6 +84,10 @@ export const Section = styled.section`
    }
    &&[data-justSpEven] {
       justify-content: space-evenly;
+   }
+
+   &&[data-stretch] {
+      align-items: stretch;
    }
 `
 

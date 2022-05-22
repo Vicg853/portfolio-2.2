@@ -3,7 +3,7 @@ import type { ContactPageLocaleContent } from '@pages/contact'
 
 export const ContactPage: PageFullType<ContactPageLocaleContent> = {
    content: {
-      title: 'Send me a message',
+      title: 'Reach me out',
       contactForm: {
          name: 'Name',
          email: 'E-mail',
@@ -18,7 +18,7 @@ export const ContactPage: PageFullType<ContactPageLocaleContent> = {
          inputError: 'Please fill all fields!',
          success: 'Your message was sent successfully!',
          serverError: 'The following error occurred:',
-         toMany: 'Calm DOWN!!! You are sending too many messages! 😖😲',
+         toMany: 'Calm DOWN!!! To many messages were sent! 😖😲',
       }
    },
 }

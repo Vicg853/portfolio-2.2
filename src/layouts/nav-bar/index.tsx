@@ -21,7 +21,7 @@ import {
 
 //* This is a temporary solution
 //TODO - Find a better way to handle this
-const noHeaderPages: string[] = ['/contact']
+const noHeaderPages: RegExp = /^\/(this-site\/.*|contact)/
 
 export const NavBar = () => {
    const { route } = useRouter()
@@ -63,7 +63,7 @@ export const NavBar = () => {
    return (
       <Container 
       data-showBg={(scrolled && !isMenuOpen) ? 'true' : 'false'}
-      data-scrolled={(scrolled || noHeaderPages.includes(route)) ? 'true' : 'false'}
+      data-scrolled={(scrolled || route.match(noHeaderPages)) ? 'true' : 'false'}
       data-theme={themeKey}
       data-menuOpen={isMenuOpen ? 'true' : 'false'} >
          <div id="subcontainer">
@@ -81,7 +81,7 @@ export const NavBar = () => {
             data-active={(localesMenuOpen || localesMenuClicked) ? 'true' : 'false'}
             onMouseOver={() => setLocalesMenuOpen(true)}
             onMouseLeave={() => setLocalesMenuOpen(false)}
-            data-scrolled={(scrolled || noHeaderPages.includes(route)) ? 'true' : 'false'}
+            data-scrolled={(scrolled || route.match(noHeaderPages)) ? 'true' : 'false'}
             data-theme={themeKey}
             data-menuOpen={isMenuOpen ? 'true' : 'false'}
             aria-label={navTranslations.localesMenu.mainAlt()((localesMenuOpen || localesMenuClicked))}>

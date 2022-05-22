@@ -143,16 +143,22 @@ const Resume: NextPage<PageProps> = ({
       index
    } = pageSource.content
 
+   const {
+      title: headerTitle,
+      description: headerDescription,
+      backgroundAlt: headerBackgroundAlt,
+   } = pageSource.mainProps?.header!
+
    return ( 
       <>
          <Header 
-            title='Resume'
-            description='Skills, experience, education and CV'
+            title={headerTitle}
+            description={headerDescription}
             background={{
                type: 'image',
                srcType: 'local',
                src: '/images/pages/resume/IMG_20220516_154424613-01.jpeg',
-               alt: 'Resume page background image',
+               alt: headerBackgroundAlt,
             }}
          />
          <Container className={containerStyles}>

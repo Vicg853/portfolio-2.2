@@ -4,11 +4,18 @@ import { css } from 'linaria'
 export const ObjectivesGridS = styled.div`
 	display: grid;
    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+   grid-template-rows: auto;
    align-items: stretch;
    gap: 1rem;
    
    a {
       cursor: pointer;
+      display: block;
+      position: relative;
+   }
+
+   a > div {
+      height: 100%;
    }
 
    @media (max-width: 862px) {
@@ -76,7 +83,6 @@ export const ObjectiveCard = styled.div`
    border: 1px solid var(--pallete-opaque-bgAlt);
    padding: 1rem;
    gap: 0.8rem;
-   height: 100%;
 
    sub {
       display: inline-flex;
