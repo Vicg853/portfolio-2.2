@@ -5,11 +5,11 @@ import type { NavAltsLocale } from '@custom-types/locales/nav-bar'
 import { pages } from './pages'
 
 const nav: NavAltsLocale = {
-   logoAlt: 'My logo',
+   logoAlt: 'V.G.\'s logo',
    menuButton: () => (mode) => `${mode ? 'Close' : 'Open'} menu.`,
    themeButton: () => (theme) => `Set theme to ${theme === 'dark' ? 'light' : 'dark'} mode.`,
    localesMenu: {
-      closeMeMsg: 'Clcik me again to close me.',
+      closeMeMsg: 'Pres again to close.',
       mainAlt: () => (isActive) => `Press or ${isActive ? 'un-' : ''}hover me to ${isActive ? 'close' : 'open'} the main menu.`,
    }
 }
@@ -38,35 +38,35 @@ const menu: LinksLocale = {
 }
 
 const footer: FooterLocale = {
-   footerMessage: 'Hey! Thank you for checking out my portfolio!\n Here are some useful links + references\n Best regards,\n\n Signed:\n Victor Rosa Gomez 😄🖥️,\n Coding dinosaurs since 2003...',
+   footerMessage: 'Hey! Thanks for checking out my portfolio!\nHere are some useful links and references,\nBest regards,\n\nVictor Rosa Gomez 😄🖥️,\nCoding dinosaurs since 2003...',
    footerSocialsTexts: {
       github: {
          name: 'Github',
-         alt: 'Go to my github profile.' ,
+         alt: 'Check out my github profile.' ,
       },
       linkedin: {
          name: 'LinkedIn',
-         alt: 'Go to my LinkedIn profile.' ,
+         alt: 'Check out my LinkedIn profile.' ,
       },
       stackOverflow: {
          name: 'Stack Overflow',
-         alt: 'Go to my Stack Overflow profile.' ,
+         alt: 'Check out my Stack Overflow profile.' ,
       },
    },
    thanksAndReferencesTexts: {
       icons8: {
          name: 'Icons8',
-         description: 'This webpage uses icons from Icons8.',
+         description: 'This webpage uses some of Icons8\'s icons.',
          alt: 'Go to Icons8.',
       },
       unsplash: {
          name: 'Unsplash',
-         description: 'This webpage uses images from Unsplash.',
+         description: 'This webpage uses some of Unsplash\'s images.',
          alt: 'Go to Unsplash.',
       },
       googleFonts: {
          name: 'Google Fonts',
-         description: 'This webpage uses fonts from Google Fonts.',
+         description: 'This webpage uses fonts provided by Google Fonts.',
          alt: 'Go to Google Fonts.',
       },
    },
