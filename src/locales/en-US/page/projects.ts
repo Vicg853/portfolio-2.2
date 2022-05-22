@@ -5,13 +5,13 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
    mainProps: {
       header: {
          title: 'Projects',
-         description: 'A collection of my projects',
+         description: 'Some of my software dev. related projects',
          backgroundAlt: "Project's page background",
       }
    },
    content: {
       mainParagraphTitle: 'git checkout projects',
-      mainParagraph: "I love learning new software development concepts but also engaging in projects.\n\n Sadly, listing all my projects, wouldn't be a good fit for this portfolio, so I’m currently integrating an archive to store them all (in case you may be willing to check them all out).\n\n Still you’ll find here a selection of my favorite ones. Each project card contains a list with its core technologies, tech division(s) (full-stack, backend, …), description, scope and name (obviously...).",
+      mainParagraph: 'Here you may go through some of my projects. Sadly listing them all wouldn’t be a good fit. As a result, I’m integrating an archive for storage.\n\nStill, you may find a section underneath containing my favorite ones!\n\nEach project card describes itself and catalogs its: tech stack, topics, and scope.',
       projectsList: {
          sources: {
             github: 'Github repository',
@@ -24,7 +24,7 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
          scope: { plural: 'Scopes', singular: 'Scope'},
          topics: { plural: 'Topics', singular: 'Topic'},
          access: 'Access',
-         noProjects: 'Weird... No projects were found',
+         noProjects: 'Weirdly no projects were found!',
       }
    }
 }
