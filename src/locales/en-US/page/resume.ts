@@ -2,6 +2,13 @@ import type { PageFullType } from '../../index'
 import type { ResumePageLocaleContent } from '@pages/resume'
 
 export const ResumePage: PageFullType<ResumePageLocaleContent> = {
+   mainProps: {
+      header: {
+         title: 'C.V.',
+         description: 'Experience and access to my resume',
+         backgroundAlt: "Resume page header's illustration",
+      }
+   },
    content: {
       mainParagraph: 'On this page, you will find a list of my experiences, knowledge, skills, and a direct link to my CV.\n\nAs knowledge is sometimes harder to picture than just describing projects, I’m taking the following approach (which I think is the best way to stream it): each technology skill card has its years/month of usage/research and the number of projects using it.\n\nAlthough if you need clarification or any tips for a different approach, feel free to contact me',
       contactMePageAlt: 'or via email at',
