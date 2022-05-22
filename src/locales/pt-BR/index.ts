@@ -59,11 +59,6 @@ const footer: FooterLocale = {
          description: 'Esse site usa alguns icônes do Icons8.',
          alt: 'Acessar ao Icons8.',
       },
-      unsplash: {
-         name: 'Unsplash',
-         description: 'Esse site usa algumas imagens de Unsplash.',
-         alt: 'Acessar ao Unsplash.',
-      },
       googleFonts: {
          name: 'Google Fonts',
          description: 'Esse site usa fontes fornecidas pela Google Fonts.',
