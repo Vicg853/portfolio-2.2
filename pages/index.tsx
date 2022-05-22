@@ -108,33 +108,6 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 				}}
   	  		 />
   	  		 <Container>
-				<Section>
-					<Callout icon={{
-						type: 'emoji',
-						source: '⚠️🚧'
-					}}>
-						<>
-							{locale === 'en' && (
-								<>
-									This webpage is still under development, so many of its features and pages<br/>
-									are still missing. Also many design and breaking changes will still occur.<br/>
-									<br/>
-									You may if you want check out the <InTextLink href='https://old.victorgomez.dev'>older version</InTextLink> {"("}only available in portuguese sorry :{"( )"}.<br/>
-									Or you can follow this page progress...<br/>
-								</>
-							)}
-							{locale === 'pt' && (
-								<>
-									Este site ainda está em desenvolvimento, então muitas peças e paginas<br/> 
-									ainda estão faltando. Ainda ocorreram várias mudanças no design.<br/>
-									<br/>
-									Caso deseje, pode ver a <InTextLink href='https://old.victorgomez.dev'>versão antiga</InTextLink>.<br/>
-									Ou seguir o progresso desta site aqui...<br/>
-								</>
-							)}
-						</>
-					</Callout>
-				</Section>
 				<Section  data-wrapRev 
 				data-widthMax data-gap
 				className={mainPMediaQueryStyle}>
