@@ -13,6 +13,8 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
             done: 'Done 🎉',
             inProgress: 'Ongoing ...',
             todo: 'On standby / not started yet',
+            hasSource: 'Press card for related info',
+            hasSourceEG: 'Underlined',
          }
       }
    },

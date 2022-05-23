@@ -30,7 +30,8 @@ import {
 	Section,
 	SecTitle,
 	CaptionedImage,
-	SectionDesc
+	SectionDesc,
+	TextEffect
 } from '@p-styles/global'
 
 
@@ -45,6 +46,8 @@ export interface IndexPageLocaleContent {
 			done: string
 			inProgress: string
 			todo: string
+			hasSource: string
+			hasSourceEG: string
 		}
 	}
 }
@@ -133,10 +136,15 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 						</Section>
 						<Section data-vert id='captions'>
 							<span id='title'>{objectivesText.objectivesCaption.title}</span>
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `✅ ${objectivesText.objectivesCaption.done}`}} />
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `✍️ ${objectivesText.objectivesCaption.inProgress}`}} />
-							<SectionDesc dangerouslySetInnerHTML={{ __html: `⌛ ${objectivesText.objectivesCaption.todo}`}} />
-						</Section>
+							<SectionDesc> ✅ {objectivesText.objectivesCaption.done}</SectionDesc>
+							<SectionDesc> ✍️ {objectivesText.objectivesCaption.inProgress} </SectionDesc>
+							<SectionDesc> ⌛ {objectivesText.objectivesCaption.todo} </SectionDesc>
+							<SectionDesc> 
+								<TextEffect data-underline >
+									{objectivesText.objectivesCaption.hasSourceEG}:
+								</TextEffect>
+								&nbsp;{objectivesText.objectivesCaption.hasSource}
+							</SectionDesc>
 					</Section>
 					<ObjectivesGridS>
 						{objectivesFetch.map(objective => {
