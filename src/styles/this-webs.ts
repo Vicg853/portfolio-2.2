@@ -1,5 +1,14 @@
 import { css } from 'linaria'
 
+export const mainPSectionStyle = css`
+   display: block;
+   width: 85vw;
+   max-width: 100%;
+   p {
+      margin-top: 1.3rem;
+   }
+`
+
 export const onlySvcContainerStyles = css`
    padding-top: 13rem;
    min-height: 100vh;
@@ -55,7 +64,6 @@ export const thisWebPSectionsStyles = css`
 export const servicesCardGridStye = css`
    position: relative;
    margin-top: 0.9rem;
-   overflow: hidden;
    
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
@@ -71,6 +79,15 @@ export const servicesCardGridStye = css`
 
    @media (max-width: 750px) {
       grid-template-columns: repeat(auto-fill, minmax(300px, 100%));
+   }
+`
+
+export const servicesSectionStyle = css`
+   && > p {
+      margin-top: 0.6rem;
+      margin-bottom: 2rem;
+      display: block;
+      text-align: start;
    }
 `
 

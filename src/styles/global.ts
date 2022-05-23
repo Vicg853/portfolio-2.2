@@ -95,6 +95,7 @@ export const Section = styled.section`
 export const SecTitle = styled.h3`
    --font-size: 1.3rem;
    --font-weight: 600;
+   display: inline-block;
    width: auto;
    font-size: var(--font-size);
    font-weight: var(--font-weight);
