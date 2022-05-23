@@ -8,8 +8,6 @@ import Link from 'next/link'
 
 //* Importing essential components
 import { Header } from '@components/header'
-import { InTextLink } from '@components/mini-components/InTextLink'
-import { Callout } from '@components/mini-components/Callout'
 
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
