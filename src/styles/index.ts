@@ -58,6 +58,7 @@ export const objectivesSectionTitleStyle = css`
 
 export const objectivesDescriptionStyle = css`
    margin-top: 0.7rem !important;
+   display: block;
 `
 
 export const introTextStyles = css`

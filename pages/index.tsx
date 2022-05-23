@@ -133,8 +133,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					className={objectivesSectionTitleStyle}>
 						<div data-vert>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
-							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
-							className={objectivesDescriptionStyle}/>
+							<SectionDesc className={objectivesDescriptionStyle}>{objectivesText.description}</SectionDesc>
 						</div>
 						<div data-vert id='captions'>
 							<span id='title'>{objectivesText.objectivesCaption.title}</span>
