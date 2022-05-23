@@ -43,7 +43,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <CssThemeProvider />
       <div className={GlobalStyles}/>
-      <GlobalSeo />
       <>
          <NavBar />
          <MiniMenu />
