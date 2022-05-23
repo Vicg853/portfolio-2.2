@@ -17,7 +17,7 @@ import { getObjectivesList } from '@api-utils/content-retrivers/objectives'
 import {
   Paragraph,
   meImageStyle,
-  addGap,
+  introTextStyles,
   ObjectivesGridS,
   ObjectiveCard,
   objectivesSectionStyle,
@@ -112,10 +112,10 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 				<Section  data-wrapRev 
 				data-widthMax data-gap
 				className={mainPMediaQueryStyle}>
-					<Section className={addGap} data-vert>
+					<div className={introTextStyles}>
 						<SecTitle>Hello<br/> World</SecTitle>
 						<Paragraph>{mainP.split(/\n/).map(val => <>{val}<br key={val}/></>)}</Paragraph>
-					</Section>
+					</div>
 					<CaptionedImage data-topCaption>
 						<Image src='/images/pages/index/IMG-20200226-WA0034.jpg'
 							className={meImageStyle}
@@ -126,15 +126,17 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 						<span>{pageSource.content.imageCaption}</span>
 					</CaptionedImage>
 				</Section>
-				<Section data-vert data-gap
+				<section
 				className={objectivesSectionStyle}>
-					<Section data-wrap className={objectivesSectionTitleStyle}>
-						<Section data-vert>
+					<Section data-wrap data-jusSpBet data-stretch
+					data-widthHundred	
+					className={objectivesSectionTitleStyle}>
+						<div data-vert>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
 							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
 							className={objectivesDescriptionStyle}/>
-						</Section>
-						<Section data-vert id='captions'>
+						</div>
+						<div data-vert id='captions'>
 							<span id='title'>{objectivesText.objectivesCaption.title}</span>
 							<SectionDesc> ✅ {objectivesText.objectivesCaption.done}</SectionDesc>
 							<SectionDesc> ✍️ {objectivesText.objectivesCaption.inProgress} </SectionDesc>
@@ -145,11 +147,13 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 								</TextEffect>
 								&nbsp;{objectivesText.objectivesCaption.hasSource}
 							</SectionDesc>
+						</div>
 					</Section>
 					<ObjectivesGridS>
 						{objectivesFetch.map(objective => {
 							const comp = (
-								<ObjectiveCard key={objective.id}>
+								<ObjectiveCard key={objective.id} 
+								data-has-source={objective.objectiveSource ? 'true' : 'false'}>
 									<sub>
 										<h4>{objective.objectiveName}</h4>
 										<span>
@@ -173,7 +177,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 							return comp
 						})}
 					</ObjectivesGridS>
-				</Section>
+				</section>
   	  		 </Container>
   	  	</>
   	)
