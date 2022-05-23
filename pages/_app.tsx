@@ -3,7 +3,9 @@ import type { ThemeTyping } from '@custom-types/theme'
 
 import Head from 'next/head'
 
+import { defaultLocale } from '../src/locales/configs'
 import CssTheme from '@components/css-theme'
+import { useLocale } from '@hooks/locale-hook'
 
 import { 
    DarkTheme,  
@@ -24,6 +26,7 @@ const { Provider: CssThemeProvider, useGetCssThemesVal,
    light: LightTheme
 }, 'dark', true, undefined, 'light')
 
+
 export {
    useGetCssThemesVal,
    useCssThemeKey,
@@ -32,7 +35,12 @@ export {
    getThemesStyles
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
+   const {
+      page: {
+         defaults: pageLocaleDefaults,
+      }
+   } = useLocale()
 
   return (
     <>
@@ -43,6 +51,10 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <CssThemeProvider />
       <div className={GlobalStyles}/>
+      <GlobalSeo defaultLocaleSources={pageLocaleDefaults}
+      locale={router.locale ?? router.defaultLocale!}
+      defaultLocale={router.defaultLocale!}
+      location={router.pathname} />
       <>
          <NavBar />
          <MiniMenu />
