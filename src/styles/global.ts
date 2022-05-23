@@ -95,6 +95,7 @@ export const Section = styled.section`
 export const SecTitle = styled.h3`
    --font-size: 1.3rem;
    --font-weight: 600;
+   display: inline-block;
    width: auto;
    font-size: var(--font-size);
    font-weight: var(--font-weight);
@@ -116,13 +117,12 @@ export const SecTitle = styled.h3`
    }
 `
 export const SectionDesc = styled.p`
-   display: inline-flex;
+   display: inline-block;
    font-size: 0.8rem;
    font-weight: 300;
    color: var(--pallete-text);
    font-family: var(--fonts-secondary);
-   width: 100%;
-   text-align: start;
+   text-align: center;
 `
 
 //* Image with small <span> caption 

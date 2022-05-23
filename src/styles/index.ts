@@ -12,34 +12,32 @@ export const ObjectivesGridS = styled.div`
       cursor: pointer;
       display: block;
       position: relative;
+      perspective: 1500px;
    }
 
    a > div {
       height: 100%;
    }
-
-   @media (max-width: 862px) {
-      justify-content: center;
-   }
 `
 
 export const objectivesSectionStyle = css`
+   display: block;
    background: var(--pallete-opaque-bgContrast);
    border-radius: 0.7rem;
    padding: 1.5rem;
    margin-top: 10rem;
    margin-bottom: 5rem;
-   border: 1px solid var(--pallete-opaque-bgAlt);
 `
 
 export const mainPMediaQueryStyle = css`
    @media (max-width: 745px) {
-      justify-content: center;
+      justify-content: center !important;
    }
 `
 
 export const objectivesSectionTitleStyle = css`
-   gap: 0.5rem;
+   margin-bottom: 3.5rem;
+   gap: 1rem;
    #captions > #title {
       font-size: 0.9rem;
       font-weight: 500;
@@ -47,8 +45,14 @@ export const objectivesSectionTitleStyle = css`
       color: var(--pallete-text);
    }
    #captions {
+      min-width: 300px;
+      justify-self: flex-end;
       height: 100%;
-      align-self: stretch;
+      gap: 0.5rem;
+      * {
+         text-align: start;
+         display: block;
+      }
    }
 `
 
@@ -56,9 +60,14 @@ export const objectivesDescriptionStyle = css`
    margin-top: 0.7rem !important;
 `
 
-export const addGap = css`
-   gap: 1rem;
+export const introTextStyles = css`
    width: 600px;
+   
+   h3 {
+      width: fit-content;
+      margin-bottom: 2.3rem;
+   }
+
    @media (max-width: 1140px) {
 		width: 500px;
    }
@@ -80,7 +89,6 @@ export const ObjectiveCard = styled.div`
    align-items: stretch;
    background-color: var(--pallete-bg);
    border-radius: 0.5rem;
-   border: 1px solid var(--pallete-opaque-bgAlt);
    padding: 1rem;
    gap: 0.8rem;
 
@@ -92,7 +100,7 @@ export const ObjectiveCard = styled.div`
          font-size: 0.9rem;
          font-weight: 600;
          color: var(--pallete-accent);
-         font-family: var(--fonts-secondary);
+         font-family: var(--fonts-secondary);         
       }
    }
 
@@ -101,6 +109,28 @@ export const ObjectiveCard = styled.div`
       font-weight: 400;
       color: var(--pallete-text);
       font-family: var(--fonts-secondary);
+   }
+
+   &&[data-has-source="true"] {
+      transition-property: transform, box-shadow;
+      transition-duration: 0.65s;
+      transition-timing-function: cubic-bezier(0.4,-0.52, 0.55, 1.49);
+      box-shadow: none;
+
+      sub > h4 {
+         text-decoration: underline;
+         text-decoration-color: var(--pallete-accent);
+      }
+      
+      &&:hover {
+         transform:
+           rotate3d(0.5,-0.566, 0, 10deg)
+           rotate(1deg)
+           translateZ(-3px);
+         box-shadow:
+           2em 4em 6em -2em rgba(0,0,0,.5),
+           1em 2em 3.5em -2.5em rgba(0,0,0,.5);
+      }
    }
 `
 
