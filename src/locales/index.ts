@@ -18,12 +18,11 @@ export interface PageFullType<PageContentType> {
    mainProps?: PageLocale
    content: PageContentType
 }
-//TODO Add pages !!! when they are ready
 interface RosettaPerLocaleProps<PagesList> {
    nav: NavAltsLocale
    menu: LinksLocale
    page: {
-      //defaults: PageDefaults
+      defaults: PageDefaults
       pages: {
          [key in keyof PagesList]: PageFullType<PagesList[key]>
       }
