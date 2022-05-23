@@ -16,9 +16,6 @@ export interface PageDefaults {
    seo: {
       title: string;
       description: string;
-      keywords: string;
-   }
-   header: {
-      defaultBackgroundAlt: string;
+      keywords: string[];
    }
 }

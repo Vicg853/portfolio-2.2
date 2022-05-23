@@ -45,7 +45,7 @@ const services: Service[] = [
       id: 'this-webs',
       name: 'Portfolio (this website)',
       version: '2.0.0',
-      devStatus: 'DEV',
+      devStatus: 'READY',
       healthEndpoint: {
          url: '/api/health',
          method: 'GET',
