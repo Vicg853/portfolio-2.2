@@ -30,7 +30,7 @@ Project is created with:
   * **Before running...**
     > ... add at least a ``` .env.dev ``` file with the following minimum required variables
   ```.env
-    SITE_URL='http://localhost:3000'
+    NEXT_PUBLIC_SITE_URL='http://localhost:3000'
   ```
 
   * **...Development**
