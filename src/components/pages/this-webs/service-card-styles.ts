@@ -60,11 +60,28 @@ export const Card = styled.div`
    
    &&[data-details="true"] {
       cursor: pointer;
-      transition-property: border-color;
-      transition-duration: 0.3s;
 
-      :hover {
-         border-color: var(--pallete-accent);
+      transition-property: transform, box-shadow, border-color;
+      transition-duration: 0.65s;
+      transition-timing-function: cubic-bezier(0.4,-0.52, 0.55, 1.49);
+      box-shadow: none;
+      
+      .service-card-title {
+         text-decoration: underline;
+         text-decoration-color: var(--pallete-accent);
+      }
+      
+      transform: perspective(1500px);
+      &&:hover {
+         border-color: var(--pallete-bgAlt);
+         transform:
+           perspective(1500px)
+           rotate3d(0.5,-0.566, 0, 10deg)
+           rotate(1deg)
+           translateZ(-3px);
+         box-shadow:
+           2em 4em 6em -2em rgba(0,0,0,.5),
+           1em 2em 3.5em -2.5em rgba(0,0,0,.5);
       }
    }
    span {
