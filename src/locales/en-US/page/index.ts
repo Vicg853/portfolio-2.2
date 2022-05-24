@@ -24,5 +24,10 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
          description: 'I\'m Victor, a full-stack developer, passionate about computer science and the whole-stack!',
          backgroundAlt: 'Home page background.'
       },
+      seo: {
+         title: 'Home',
+         description: 'I\'m Victor, a full-stack developer, passionate about computer science and the whole-stack!\n Check out my portfolio\'s homepage here, and learn more about me.',
+         
+      }
    }
 }

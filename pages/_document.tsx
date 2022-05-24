@@ -1,6 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
-import { GlobalSeo } from '@layout/gobal-seo'
 import {
    ThemePreHydration
 } from './_app'

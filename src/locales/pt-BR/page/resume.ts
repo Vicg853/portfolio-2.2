@@ -7,6 +7,11 @@ export const ResumePage: PageFullType<ResumePageLocaleContent> = {
          title: 'C.V.',
          description: 'Minhas experiencias e acesso ao meu C.V.',
          backgroundAlt: "Ilustração da página de C.V.",
+      },
+      seo: {
+         title: 'C.V.',
+         description: 'Saiba mais sobre minhas experiencias e competencias. Você também pode encontrar um anexo ao meu C.V.',
+         keywords: ['experiencia', 'conhecimentos', 'competencias', 'desenvolvedor', 'fullstack', 'backend', 'frontend'],
       }
    },
    content: {

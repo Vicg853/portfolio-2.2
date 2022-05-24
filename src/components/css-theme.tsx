@@ -3,7 +3,7 @@ import type { State } from '@hookstate/core'
 import { useEffect, useState } from "react"
 import { createState, useHookstate, Downgraded } from '@hookstate/core'
 
-import { makeCssThemeVars } from '@utils'
+import { makeCssThemeVars } from '@utils/css-theme-vars'
 
 type ThemesObject<ThemeType> = { themes: { [key: string]: ThemeType } } 
 
