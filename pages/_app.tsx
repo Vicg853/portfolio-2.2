@@ -59,7 +59,7 @@ export default function App({ Component, pageProps, router }: Props) {
       <CssThemeProvider />
       <div className={GlobalStyles}/>
       <GlobalSeo defaultLocaleSources={pageLocaleDefaults}
-      customLocaleSources={pageProps.pageSource.mainProps?.seo ?? undefined}
+      customLocaleSources={pageProps.pageSource?.mainProps?.seo ?? undefined}
       locale={router.locale ?? router.defaultLocale!}
       locales={router.locales!}
       defaultLocale={router.defaultLocale!}
