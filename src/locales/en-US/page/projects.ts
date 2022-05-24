@@ -7,6 +7,11 @@ export const ProjectsPage: PageFullType<ProjectsPageStaticLocalesSource> = {
          title: 'Projects',
          description: 'Some of my software dev. related projects',
          backgroundAlt: "Project's page background",
+      },
+      seo: {
+         title: 'Projects',
+         description: 'Check out some of my software development related projects.',
+         keywords: ['projects', 'software', 'development', 'full-stack', 'developer', 'computer science', 'fullstack', 'backend', 'frontend']
       }
    },
    content: {
