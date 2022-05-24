@@ -2,6 +2,13 @@ import type { PageFullType } from '../../index'
 import type { ContactPageLocaleContent } from '@pages/contact'
 
 export const ContactPage: PageFullType<ContactPageLocaleContent> = {
+   mainProps: {
+      seo: {
+         title: 'Contato',
+         description: 'Olá! Sou Victor Gomez, um desenvolvedor full-stack. Entre em contato comigo acessando esta página!',
+         keywords: ['contato', 'victor gomez', 'full-stack', 'desenvolvedor', 'fullstack', 'backend', 'frontend'],
+      }
+   },
    content: {
       title: 'Entre em contato',
       contactForm: {
