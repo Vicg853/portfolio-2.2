@@ -20,6 +20,10 @@ export const ThisWebS: PageFullType<ThisWebSPageLocaleContent> = {
          runsOn: 'Hospedado com/em',
          serviceName: 'Serviço',
          techStack: 'Stack tecnológica',
+         seo: {
+            title: 'Serviço',
+            description: 'Detalhes de um dos serviços constituintes deste site',
+         }
       },
       pageDescription: 'O site atual que você está acessando, faz parte de um projeto maior de duração indeterminada. Então, eu tomei a decisão de dedicar a ele uma página inteira.\nVocê pode consultar aqui alguns dos serviços disponíveis que o constituem, seus status, progresso de desenvolvimento, e outros detalhes (somente disponíveis para alguns).\n\nTenho planos para uma expansão desse projeto. Após configurar o Cluster Kubernetes que providenciará hospedagem para projetos, ambiente para CI/CD, etc, e finalizar a migração, farei uso deste para projetos como automação residencial, I.A. de processamento de linguagem natural e outros…\n\nSendo sincero, qualquer projeto interessante que vier em mente!\n\nFora isso, outro objetivo desse projeto é ter experiências em ambientes complexos/próximos a produção para aprendizado.',
       pageTitle: 'Projeto Tumex',
