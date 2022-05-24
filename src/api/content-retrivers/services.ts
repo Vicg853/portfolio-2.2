@@ -290,9 +290,18 @@ const services: Service[] = [
    }  
 ]
 
-export async function getServices(locale: typeof localeEnName | typeof localeFrName | typeof localePtBrName): Promise<Service[]> {
+export type GetServicePromise = Omit<Service, 'healthEndpoint'> & {
+   checkInterval: HealthEndpoint['checkInterval'] | null
+   doHealthCheck: boolean
+}
+export async function getServices(locale: typeof localeEnName | typeof localeFrName | typeof localePtBrName): Promise<GetServicePromise[]> {
 
-   return services
+   return services.map(service => ({
+      ...service,
+      checkInterval: service.healthEndpoint?.checkInterval ?? null,
+      doHealthCheck: service.healthEndpoint ? true : false,
+      healthEndpoint: null
+   }))
 }
 
 export async function getServicesId(excludeNoDetail: boolean = false): Promise<string[]> {

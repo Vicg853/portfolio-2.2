@@ -1,5 +1,5 @@
 import type {
-   Service,
+   GetServicePromise,
    HealthStates
 } from '@api-utils/content-retrivers/services'
 import type {
@@ -13,7 +13,7 @@ import {
 
 const defaultHealthCheckInterval = 5 * 60 * 1000
 
-interface ServiceCardProps extends Service {
+interface ServiceCardProps extends GetServicePromise {
    onClick?: () => void
    onMouseOver?: () => void
    compId?: string
@@ -21,21 +21,19 @@ interface ServiceCardProps extends Service {
 }
 
 const RawServiceCard: React.FC<ServiceCardProps> = ({
-   name, version, devStatus, healthEndpoint, onClick, details, onMouseOver,
+   name, version, devStatus, checkInterval: serviceCheckInterval, 
+   onClick, details, onMouseOver, doHealthCheck,
    compId, localeSources, id
 }) => {
    const [health, setHealth] = useState<HealthStates>('UNKNOWN')
 
    {/* eslint-disable-next-line react-hooks/exhaustive-deps */}
    useEffect(() => {
-      if(!healthEndpoint || devStatus === 'DRAFT') 
+      if(!doHealthCheck || devStatus === 'DRAFT') 
          return 
-      
-      if(healthEndpoint.plannedMaintenance) 
-         return setHealth('MAINT')
 
       const check = async () => await fetch(`/api/health-checker?checkId=${id}`, {
-         method: healthEndpoint.method,
+         method: 'GET',
          mode: "same-origin",
       }).then(async res => {
          if(res.status === 200) {
@@ -44,7 +42,6 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
          } else console
             .error(`Health checker failed with status ${res.status} and message ${await res.text()}`)
          
-
          return setHealth('UNKNOWN')
       }).catch(err => {
          console.error(`Error trying to check ${name}'s health:`, err)
@@ -53,7 +50,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
       check()
 
       const checkInterval = 
-         setInterval(check, healthEndpoint.checkInterval 
+         setInterval(check, serviceCheckInterval
             ?? defaultHealthCheckInterval)
 
       return () => clearInterval(checkInterval)
@@ -64,7 +61,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
          <Card onClick={onClick} id={compId}
          onMouseOver={onMouseOver}
          className='service-card'
-         data-has-health={healthEndpoint ? 'true' : 'false'}
+         data-has-health={doHealthCheck ? 'true' : 'false'}
          data-details={details ? 'true' : 'false'}>
             <span className='service-card-title'>
                {name}
@@ -77,7 +74,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
                {devStatus === 'DEV' && localeSources.cardDevStats.underDev}
                {devStatus === 'DRAFT' && localeSources.cardDevStats.draft}
             </span>
-            {healthEndpoint && (
+            {doHealthCheck && (
                <>
                   <span className='service-card-sub-titles'>
                      {localeSources.healthStats.title}:
