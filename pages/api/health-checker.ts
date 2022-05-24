@@ -13,6 +13,9 @@ const healthCheckerAPI: NextApiHandler = async (req, res) => {
    if(!serviceInfo)
       return res.status(404).json({ status: 'fail', message: 'Service ID not found' })
    
+   if(serviceInfo.plannedMaintenance)
+      return res.status(200).json({ status: 'MAINT' })
+
    const fetchRes = await fetch(serviceInfo.url, {
       method: serviceInfo.method
    }).then(async res => {
