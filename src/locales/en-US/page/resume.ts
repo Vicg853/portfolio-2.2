@@ -7,6 +7,11 @@ export const ResumePage: PageFullType<ResumePageLocaleContent> = {
          title: 'C.V.',
          description: 'Experience and access to my resume',
          backgroundAlt: "Resume page header's illustration",
+      },
+      seo: {
+         title: 'C.V.',
+         description: 'Know more about my experiences, knowledge and skills. You can also find an attachment url to my resume.',
+         keywords: ['experience', 'knowledge', 'skills', 'resume', 'attachment', 'backend', 'frontend', 'developer', 'full-stack'],
       }
    },
    content: {
