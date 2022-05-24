@@ -2,6 +2,18 @@ import type { PageFullType } from '../../index'
 import type { ThisWebSPageLocaleContent } from '@pages/this-site'
 
 export const ThisWebS: PageFullType<ThisWebSPageLocaleContent> = {
+   mainProps: {
+      header: {
+         title: 'Este site',
+         description: 'Saiba mais sobre um das minhas maiores realizações...',
+         backgroundAlt: "Ilustração da página sobre este site.",
+      },
+      seo: {
+         title: 'Este site',
+         description: 'Saiba mais sobre um dos meus mais importantes e longos projetos...',
+         keywords: ['portfólio', 'site', 'desenvolvimento', 'full-stack', 'developer', 'computer science', 'fullstack', 'backend', 'frontend', 'laboratorio'],
+      }
+   },
    content: {
       onlySvc: {
          back: 'Voltar',
