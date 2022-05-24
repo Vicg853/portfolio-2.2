@@ -1,5 +1,5 @@
 import type { PageFullType } from '../src/locales'
-import type { Service } from '@api-utils/content-retrivers/services'
+import type { GetServicePromise } from '@api-utils/content-retrivers/services'
 import type { OnlySvcPageLocaleContent } from './this-site/[svc]'
 import type { GetStaticProps, NextPage } from 'next'
 
@@ -51,7 +51,7 @@ export interface ThisWebSPageLocaleContent {
 
 type PageProps = {
    pageSource: PageFullType<ThisWebSPageLocaleContent>
-   services: Service[]
+   services: GetServicePromise[]
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({

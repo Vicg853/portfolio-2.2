@@ -47,9 +47,8 @@ const services: Service[] = [
       version: '2.0.0',
       devStatus: 'READY',
       healthEndpoint: {
-         url: '/api/health',
+         url: 'https://victorgomez.dev/api/health',
          method: 'GET',
-         checkInterval: 5000,
          checkSpecificJson: '{"status":"pass","message":"Everything is fine!"}'
       },
       details: {
@@ -206,7 +205,7 @@ const services: Service[] = [
       version: '1.0.0',
       devStatus: 'READY',
       healthEndpoint: {
-         url: 'https://mailer.victorgomez.dev/api/health',
+         url: 'https://mailer.victorgomez.dev/api/mailer/message',
          method: 'POST',
          justCheckStatusCode: 422,
       },
@@ -291,9 +290,18 @@ const services: Service[] = [
    }  
 ]
 
-export async function getServices(locale: typeof localeEnName | typeof localeFrName | typeof localePtBrName): Promise<Service[]> {
+export type GetServicePromise = Omit<Service, 'healthEndpoint'> & {
+   checkInterval: HealthEndpoint['checkInterval'] | null
+   doHealthCheck: boolean
+}
+export async function getServices(locale: typeof localeEnName | typeof localeFrName | typeof localePtBrName): Promise<GetServicePromise[]> {
 
-   return services
+   return services.map(service => ({
+      ...service,
+      checkInterval: service.healthEndpoint?.checkInterval ?? null,
+      doHealthCheck: service.healthEndpoint ? true : false,
+      healthEndpoint: null
+   }))
 }
 
 export async function getServicesId(excludeNoDetail: boolean = false): Promise<string[]> {
@@ -307,4 +315,12 @@ export async function getService(
    id: string): Promise<Service | undefined> {
 
    return services.find(service => service.id === id)
+}
+
+export async function getServiceCheckInfo(id: Service['id']): Promise<HealthEndpoint | undefined> {
+   const service = services.find(service => service.id === id)
+   if (service) {
+      return service.healthEndpoint
+   }
+   return undefined
 }
