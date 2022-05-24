@@ -22,7 +22,7 @@ interface ServiceCardProps extends Service {
 
 const RawServiceCard: React.FC<ServiceCardProps> = ({
    name, version, devStatus, healthEndpoint, onClick, details, onMouseOver,
-   compId, localeSources
+   compId, localeSources, id
 }) => {
    const [health, setHealth] = useState<HealthStates>('UNKNOWN')
 
@@ -34,19 +34,18 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
       if(healthEndpoint.plannedMaintenance) 
          return setHealth('MAINT')
 
-      const check = async () => await fetch(healthEndpoint.url, {
+      const check = async () => await fetch(`/api/health-checker?checkId=${id}`, {
          method: healthEndpoint.method,
-         mode: 'same-origin',
+         mode: "same-origin",
       }).then(async res => {
-         if(healthEndpoint.justCheckStatusCode) 
-            return setHealth(res.status === healthEndpoint.justCheckStatusCode ? 'OK' : 'DOWN')
-         else if(healthEndpoint.checkSpecificJson) {
-            const healthRes = JSON.stringify((await res.json()))
-            return setHealth(healthRes === healthEndpoint.checkSpecificJson 
-               ? 'OK' : 'DOWN')
-         }
+         if(res.status === 200) {
+            const jsonStatus = await res.json()
+            return setHealth(jsonStatus['status'])
+         } else console
+            .error(`Health checker failed with status ${res.status} and message ${await res.text()}`)
+         
 
-         return setHealth('DOWN')
+         return setHealth('UNKNOWN')
       }).catch(err => {
          console.error(`Error trying to check ${name}'s health:`, err)
          return setHealth('UNKNOWN')
@@ -65,6 +64,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
          <Card onClick={onClick} id={compId}
          onMouseOver={onMouseOver}
          className='service-card'
+         data-has-health={healthEndpoint ? 'true' : 'false'}
          data-details={details ? 'true' : 'false'}>
             <span className='service-card-title'>
                {name}
@@ -90,10 +90,10 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
                   </span>
                </>
             )}
-            <span className='service-card-sub-titles'>
+            <span className='service-card-sub-titles service-card-flex-end-els service-card-svc-versiontitle'>
                {localeSources.version}:
             </span>
-            <span className='service-card-svc-version'>
+            <span className='service-card-svc-version service-card-flex-end-els'>
                {version}
             </span>
          </Card>
