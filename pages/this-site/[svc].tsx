@@ -46,11 +46,15 @@ export interface OnlySvcPageLocaleContent {
    runsOn: string
    techStack: string
    back: string
+   seo: {
+      title: string
+      description: string
+   }
 }
 
 
 interface PageProps {
-   localeSource: PageFullType<OnlySvcPageLocaleContent>
+   pageSource: PageFullType<OnlySvcPageLocaleContent>
    service: Service
 }
 
@@ -77,14 +81,22 @@ export const getStaticProps: GetStaticProps<PageProps, StaticPaths> = async ({
       }
    }
 
-   const localeSource = getPageSource(locale ?? defaultLocale as any, 'thisWebS')
+   const pageSource = getPageSource(locale ?? defaultLocale as any, 'thisWebS')
 
    return {
       props: {
          service,
-         localeSource: {
-            ...localeSource,
-            content: localeSource.content.onlySvc
+         pageSource: {
+            mainProps: {
+               seo: {
+                  title: `${pageSource.content.onlySvc.seo.title}: ${service.name}`,
+                  description: pageSource.content.onlySvc.seo.description,
+                  keywords: [''],
+                  robotsFollow: ['none']
+               }
+            },
+            ...pageSource,
+            content: pageSource.content.onlySvc
          }
       }
    }
@@ -96,7 +108,7 @@ const ServiceDetails: React.FC<PageProps> = ({
       id,
       details
    },
-   localeSource
+   pageSource
 }) => {
    const {
       description,
@@ -107,7 +119,7 @@ const ServiceDetails: React.FC<PageProps> = ({
 
    const {
       content: localeContent
-   } = localeSource
+   } = pageSource
 
    return (
       <>

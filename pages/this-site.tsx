@@ -1,5 +1,5 @@
 import type { PageFullType } from '../src/locales'
-import type { Service } from '@api-utils/content-retrivers/services'
+import type { GetServicePromise } from '@api-utils/content-retrivers/services'
 import type { OnlySvcPageLocaleContent } from './this-site/[svc]'
 import type { GetStaticProps, NextPage } from 'next'
 
@@ -50,27 +50,27 @@ export interface ThisWebSPageLocaleContent {
 }
 
 type PageProps = {
-   localeSource: PageFullType<ThisWebSPageLocaleContent>
-   services: Service[]
+   pageSource: PageFullType<ThisWebSPageLocaleContent>
+   services: GetServicePromise[]
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({
    locale, locales
 }) => {
-   const localeSource = getPageSource(locale ?? locales![0], 'thisWebS')
+   const pageSource = getPageSource(locale ?? locales![0], 'thisWebS')
 
    const services = await getServices(locale ?? locales![0] as any)
 
    return {
       props: {
-         localeSource,
+         pageSource,
          services
       }
    }
 }
 
 const ThisWebpage: NextPage<PageProps> = ({
-   localeSource,
+   pageSource,
    services
 }) => {
    const {
@@ -84,7 +84,7 @@ const ThisWebpage: NextPage<PageProps> = ({
       pageTitle,
       pageDescription,
       services: servicesCaptionsLocaleSources
-   } = localeSource.content
+   } = pageSource.content
 
    const [initTransition, setInitTransition] = useState(false)
 

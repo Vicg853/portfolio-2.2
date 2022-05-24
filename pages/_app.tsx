@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import type { ThemeTyping } from '@custom-types/theme'
+import type { PageFullType } from '../src/locales/index'
 
 import Head from 'next/head'
 
@@ -15,7 +16,7 @@ import {
 
 //* Importing layout components
 import { ContentContainer } from '@layout/content-cont'
-import { GlobalSeo } from '@layout/gobal-seo'
+import { GlobalSeo } from '@components/seo'
 import { NavBar } from '@layout/nav-bar'
 import { MiniMenu } from '@layout/menu'
 import { Footer } from '@layout/footer'
@@ -35,7 +36,13 @@ export {
    getThemesStyles
 }
 
-export default function App({ Component, pageProps, router }: AppProps) {
+interface Props extends AppProps {
+   pageProps: {
+      pageSource: PageFullType<any>
+   }
+}
+
+export default function App({ Component, pageProps, router }: Props) {
    const {
       page: {
          defaults: pageLocaleDefaults,
@@ -52,7 +59,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <CssThemeProvider />
       <div className={GlobalStyles}/>
       <GlobalSeo defaultLocaleSources={pageLocaleDefaults}
+      customLocaleSources={pageProps.pageSource?.mainProps?.seo ?? undefined}
       locale={router.locale ?? router.defaultLocale!}
+      locales={router.locales!}
       defaultLocale={router.defaultLocale!}
       location={router.pathname} />
       <>
@@ -60,7 +69,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
          <MiniMenu />
          {/* @ts-ignore */}
          <ContentContainer>
-            <Component {...pageProps} />
+            <Component {...pageProps as any} />
          </ContentContainer>
          <Footer />
       </>

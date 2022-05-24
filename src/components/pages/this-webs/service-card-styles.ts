@@ -86,6 +86,23 @@ export const Card = styled.div`
    }
    span {
       display: block;
+      justify-self: flex-start;
+   }
+
+   &&[data-has-health="true"] > .service-card-health-status{
+      flex-grow: 1;
+      text-align: start;
+      margin-bottom: 0.5rem;
+   }
+
+   &&[data-has-health="false"] > .service-card-dev-status {
+      text-align: start;
+      flex-grow: 1;
+      margin-bottom: 0.5rem;
+   }
+
+   .service-card-flex-end-els {
+      display: block;
       justify-self: flex-end;
    }
    .service-card-title {
@@ -96,10 +113,8 @@ export const Card = styled.div`
       font-weight: 600;
       color: var(--pallete-text);
 
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.13rem;
 
-      justify-self: flex-start;
-      flex-grow: 1;
       overflow: hidden;
    }
    .service-card-sub-titles {
@@ -109,7 +124,7 @@ export const Card = styled.div`
       font-weight: 500;
       color: var(--pallete-text);
 
-      margin-top: 0.75rem;
+      margin-top: 0.45rem;
    }
 
    .service-card-dev-status, 
@@ -122,6 +137,10 @@ export const Card = styled.div`
 
    .service-card-svc-version {
       color: var(--pallete-opaque-text);
+   }
+
+   .service-card-svc-versiontitle {
+      margin-top: 1rem;
    }
 
    span[data-devStatus="READY"], span[data-health="OK"] {
