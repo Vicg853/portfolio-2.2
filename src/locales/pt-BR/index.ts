@@ -3,6 +3,7 @@ import type { LinksLocale } from '@custom-types/locales/menu'
 import type { NavAltsLocale } from '@custom-types/locales/nav-bar'
 
 import { pages } from './pages'
+import { defaults } from './defaults'
 
 const nav: NavAltsLocale = {
    logoAlt: 'Meu logo',
@@ -73,6 +74,7 @@ export const ptBRLocale = {
    nav,
    menu,
    page: {
+      defaults,
       pages,
    },
    footer,

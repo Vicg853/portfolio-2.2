@@ -13,6 +13,8 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
             done: 'Projetos concluidos 🎉',
             inProgress: 'Projetos em andamento',
             todo: 'Projetos para o futuro',
+            hasSource: 'Pressione para detalhes',
+            hasSourceEG: 'Titulo sublinhado',
          }
       }
    },

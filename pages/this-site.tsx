@@ -21,7 +21,9 @@ import {
 } from '@p-styles/global'
 import {
    servicesCardGridStye,
-   thisWebSContainerStyles
+   thisWebSContainerStyles,
+   servicesSectionStyle,
+   mainPSectionStyle
 } from '@p-styles/this-webs'
 export interface ThisWebSPageLocaleContent {
    onlySvc: OnlySvcPageLocaleContent
@@ -122,13 +124,13 @@ const ThisWebpage: NextPage<PageProps> = ({
             }} /> 
          <Container data-transition={initTransition ? 'true' : 'false'}
          className={thisWebSContainerStyles}>
-            <Section data-vert data-widthMax data-smallGap>
+            <section className={mainPSectionStyle}>
                <SecTitle>{pageTitle}</SecTitle>
                <Paragraph data-limitWidthMed>
                   {pageDescription.split('\n').map((p, i) => <>{p}<br key={i} /></>)}
                </Paragraph>
-            </Section>
-            <Section data-vert data-widthMax data-smallGap>
+            </section>
+            <section className={servicesSectionStyle}>
                <SecTitle>{servicesCaptionsLocaleSources.title}</SecTitle>
                <SectionDesc>
                   {servicesCaptionsLocaleSources.caption}
@@ -152,7 +154,7 @@ const ThisWebpage: NextPage<PageProps> = ({
                      )
                   })}
                </Section>
-            </Section>
+            </section>
          </Container>
       </>
    )
