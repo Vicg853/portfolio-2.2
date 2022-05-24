@@ -24,5 +24,9 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
          description: 'Sou Victor, desenvolvedor full-stack, apaixonado por ciencia da computação e a "whole-stack".',
          backgroundAlt: 'Ilustração da pagina.'
       },
+      seo: {
+         title: 'Home',
+         description: 'Sou Victor, desenvolvedor full-stack, apaixonado por ciencia da computação e a "whole-stack".\n Veja aqui o meu portfólio, e saiba mais sobre mim.'
+      }
    }
 }
