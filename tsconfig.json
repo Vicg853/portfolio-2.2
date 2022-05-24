@@ -22,7 +22,7 @@
        "@p-images/*": ["./public/images/pages/*"],
        "@images/*": ["./public/images/*"],
        "@custom-types/*": ["./types/*"],
-       "@utils": ["./src/utils.ts"],
+       "@utils/*": ["./src/utils/*"],
        "@hooks/*": ["./src/hooks/*"],
        "@c-types/*": ["./types/*"],
        "@g-images/*": ["./public/images/global/*"],
