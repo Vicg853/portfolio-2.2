@@ -133,15 +133,23 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					className={objectivesSectionTitleStyle}>
 						<div data-vert>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
-							<SectionDesc dangerouslySetInnerHTML={{ __html: objectivesText.description}}
-							className={objectivesDescriptionStyle}/>
+							<SectionDesc className={objectivesDescriptionStyle}>{objectivesText.description}</SectionDesc>
 						</div>
 						<div data-vert id='captions'>
 							<span id='title'>{objectivesText.objectivesCaption.title}</span>
-							<SectionDesc> ✅ {objectivesText.objectivesCaption.done}</SectionDesc>
-							<SectionDesc> ✍️ {objectivesText.objectivesCaption.inProgress} </SectionDesc>
-							<SectionDesc> ⌛ {objectivesText.objectivesCaption.todo} </SectionDesc>
 							<SectionDesc> 
+								<span className='progress-caption-el' data-type="DONE"/> 
+								{objectivesText.objectivesCaption.done}
+							</SectionDesc>
+							<SectionDesc > 
+								<span className='progress-caption-el' data-type="INPROGRESS"/> 
+								{objectivesText.objectivesCaption.inProgress} 
+							</SectionDesc>
+							<SectionDesc > 
+								<span className='progress-caption-el' data-type="TODO"/> 
+								{objectivesText.objectivesCaption.todo} 
+							</SectionDesc>
+							<SectionDesc >
 								<TextEffect data-underline >
 									{objectivesText.objectivesCaption.hasSourceEG}:
 								</TextEffect>
@@ -152,15 +160,11 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					<ObjectivesGridS>
 						{objectivesFetch.map(objective => {
 							const comp = (
-								<ObjectiveCard key={objective.id} 
+								<ObjectiveCard key={objective.id} data-progress={objective.objectiveProgress}
 								data-has-source={objective.objectiveSource ? 'true' : 'false'}>
 									<sub>
 										<h4>{objective.objectiveName}</h4>
-										<span>
-											{objective.objectiveProgress === 'DONE' && <>✅</> }
-											{objective.objectiveProgress === 'INPROGRESS' && <>✍️</>}
-											{objective.objectiveProgress === 'TODO' && <>⌛</>}
-										</span>
+										<span className='progress-el'></span>
 									</sub>
 									<p>
 										{objective.objectiveDescription}

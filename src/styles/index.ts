@@ -51,13 +51,32 @@ export const objectivesSectionTitleStyle = css`
       gap: 0.5rem;
       * {
          text-align: start;
+         word-break: keep-all;
          display: block;
+      }
+
+      .progress-caption-el[data-type="DONE"] { 
+         background-color: var(--pallete-constants-success); 
+      }
+      .progress-caption-el[data-type="INPROGRESS"] { 
+         background-color: var(--pallete-constants-info); 
+      }
+      .progress-caption-el[data-type="TODO"] { 
+         background-color: var(--pallete-opaque-text); 
+      }
+      .progress-caption-el {
+         display: inline-block;
+         width: 0.6rem;
+         height: 0.6rem;
+         border-radius: 50%;
+         margin-right: 0.4rem;
       }
    }
 `
 
 export const objectivesDescriptionStyle = css`
    margin-top: 0.7rem !important;
+   display: block;
 `
 
 export const introTextStyles = css`
@@ -109,6 +128,23 @@ export const ObjectiveCard = styled.div`
       font-weight: 400;
       color: var(--pallete-text);
       font-family: var(--fonts-secondary);
+   }
+
+   &&[data-progress="DONE"] .progress-el { 
+      background-color: var(--pallete-constants-success); 
+   }
+   &&[data-progress="INPROGRESS"] .progress-el { 
+      background-color: var(--pallete-constants-info); 
+   }
+   &&[data-progress="TODO"] .progress-el { 
+      background-color: var(--pallete-opaque-text); 
+   }
+   .progress-el {
+
+      display: block;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
    }
 
    &&[data-has-source="true"] {
