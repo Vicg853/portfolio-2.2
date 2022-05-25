@@ -59,7 +59,7 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta name='keywords' content={keywords.join(',')} />
          <meta name="owner" content='Victor Rosa Gomez' />
          <meta name="author" content='Victor Rosa Gomez' />
-         <link rel="canonical" href={canonicalPath} />
+         <link rel="canonical" href={`${base}${canonicalPath}`} />
 
          {/* <!-- Locale related SEO --> */}
          <meta name="language" content={locale} />
