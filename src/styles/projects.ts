@@ -1,6 +1,10 @@
 import { css } from 'linaria'
 import { styled } from 'linaria/react'
 
+export const mainPSectionStyles = styled.section`
+   width: 100%;
+`
+
 export const calloutAlignment = css`
    @media (min-width: 900px) {
       position: absolute;
@@ -20,9 +24,6 @@ export const containerMargins = css`
 
 export const ProjectCard = styled.div`
    position: relative;
-   display: inline-flex;
-   align-items: center;
-   justify-content: flex-start;
    
    width: 100%;
    height: 600px;
@@ -50,7 +51,7 @@ export const ProjectCard = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      gap: 1rem;
+      gap: 1.2rem;
       padding: 1.3rem 0.9rem;
 
       border-radius: 0.6rem;
@@ -66,14 +67,12 @@ export const ProjectCard = styled.div`
    .project-card-project-scope,
    .project-card-section-title,
    .project-card-project-access > .title {
+      width: 100%;
       font-size: 0.85rem;
       font-weight: 400;
       font-family: var(--fonts-primary);
       color: var(--pallete-text);
-   }
-
-   section, span:not(.project-card-project-description) {
-      justify-self: flex-end;
+      margin-bottom: -0.6rem;
    }
 
    .project-card-project-description {
@@ -83,9 +82,6 @@ export const ProjectCard = styled.div`
    }
 
    .project-card-project-scope {
-      display: inline-flex;
-      justify-content: flex-start;
-      align-items: center;
       margin-top: auto;
    }
    .project-card-project-scope > .detail {
@@ -95,34 +91,35 @@ export const ProjectCard = styled.div`
 
    .project-card-project-subjects,
    .project-card-project-technologies {
-      display: inline-flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 0.2rem;  
+      display: inline-block;
       max-height: 64px;
       overflow-y: scroll;
+
+      > :not(:last-child) {
+         margin-right: 0.3rem;
+      }
+      * {
+         margin-bottom: 0.3rem;
+      }
    }
 
    .project-card-project-access {
-      display: flex;
-      flex-direction: column;
-
       background: var(--pallete-opaque-bgContrast);
       border-radius: 0.6rem;
       padding: 0.8rem 1.1rem;
-      margin-top: auto;
    }
    .project-card-project-access > .title {
       font-size: 0.9rem;
    }
    .project-card-project-access > .content {
-      display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 0.8rem;
-      margin-top: 0.8rem;
-      flex-wrap: wrap;
+      margin-top: 0.6rem;
+      padding-bottom: 0.4rem;
+
+      > :not(:last-child) {
+         margin-right: 0.5rem;
+      }
    }
 
    @media (max-width: 700px) {
@@ -144,7 +141,7 @@ export const ProjectCardMiniCard = styled.div`
    font-weight: 400;
    font-family: var(--fonts-secondary);
    color: var(--pallete-text);
-   width: auto;
+   display: inline-block;
    
    background-color: var(--pallete-bg);
    border-radius: 0.3rem;
@@ -164,9 +161,10 @@ export const ProjectCardMiniCard = styled.div`
 `
 
 export const accessProjectLinksStyle = css`
+   display: inline-block;
    background-color: var(--pallete-bg);
    color: var(--pallete-text);
-   border-radius: 0.6rem;
+   border-radius: 0.55rem;
    border: 1px solid transparent;
    padding: 0.5rem 0.8rem;
    font-size: 0.8rem;
@@ -177,14 +175,17 @@ export const accessProjectLinksStyle = css`
    transition-timing-function: ease-in-out;
    cursor: pointer;
 
-   display: inline-flex;
-   align-items: center;
-   justify-content: center;
-   gap: 1rem;
+   --icon-size: 1.1rem;
+   * {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+   }
 
    .icon {
-      width: 1.2rem;
-      height: 1.2rem;
+      margin-right: 0.7rem;
+      width: var(--icon-size);
+      height: var(--icon-size);
    }
 
    &:hover {

@@ -11,6 +11,7 @@ import { InTextLink } from '@components/mini-components/InTextLink'
 import { 
    Container,
    Section,
+   BlockSection,
    Input,
    InputLabel,
    TextArea,
@@ -187,7 +188,7 @@ const Contact: NextPage<ContactPageProps>  = ({
          msgBody: message.value
       })
 
-      const res = await fetch(mailerApiEndpoint, {
+      await fetch(mailerApiEndpoint, {
          method: 'POST',
          headers: {
             'Accept': 'application/json',
@@ -264,16 +265,17 @@ const Contact: NextPage<ContactPageProps>  = ({
                   {contactFormSource.send}
                </SendButton>
             </Section>
-            <Section data-vert data-justStart className={otherContactsStyle}>
+            <div data-justStart
+            className={`${otherContactsStyle} ${BlockSection.__linaria.className}`}>
                <SecTitle>{otherContactCardSource.emailTitle}</SecTitle>
                <InTextLink href={`mailto:${emailAddress}`}>
                   {emailAddress}
                </InTextLink>
-            </Section>
-            <Section data-jusCent
-               className={gmtOffsetStyle}>
+            </div>
+            <div data-text-center
+               className={`${gmtOffsetStyle} ${BlockSection.__linaria.className}`}>
                GMT {gmtOffset.gmt} | {gmtOffset.local}
-            </Section>
+            </div>
          </Section>
       </Container>
       <ReqResultMessageCard data-status={sendState.status}>
