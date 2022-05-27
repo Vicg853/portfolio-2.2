@@ -1,10 +1,10 @@
+import type { HTMLAttributes, DetailedHTMLProps, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import type { LinkProps } from 'next/link'
 import type { ReactChild } from 'react'
 import Link from 'next/link'
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 
-const IntTextLinkStyled = styled.a`
-   flex: none;
+const style = css`
    font-size: 0.8rem;
    font-family: var(--font-secondary);
    font-weight: 500;
@@ -12,35 +12,48 @@ const IntTextLinkStyled = styled.a`
    text-decoration: underline;
    text-decoration-color: var(--pallete-opaque-text);
    margin: 0 0.2rem;
-   
+
    :hover {
       text-decoration: none;
       color: var(--pallete-opaque-accent);
    }
 `
 
-interface InTextLinkProps extends LinkProps {
-   action?: () => any
+type LinkAndAnchorProps = LinkProps & DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
+type LinkAndButtonProps = LinkProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+
+interface InTextLinkActionProps extends LinkAndAnchorProps {
+   action: () => any
    children: ReactChild
 }
 
-const InTextLink: React.FC<InTextLinkProps> = ({
-   children,
-   action,
-   ...props
-}) => {
+interface InTextLinkProps extends LinkAndButtonProps {
+   action?: undefined
+   children: ReactChild
+}
+
+function InTextLink(props: InTextLinkProps): JSX.Element
+function InTextLink(props: InTextLinkActionProps): JSX.Element
+function InTextLink(props: InTextLinkProps | InTextLinkActionProps): JSX.Element {
+   const {
+      action,
+      children,
+   } = props
+
    return ( 
-      <Link {...props} passHref>
+      <>
          {action ? (
-            <IntTextLinkStyled onClick={action}>
+            <button className={style} onClick={action}>
                {children}
-            </IntTextLinkStyled>
+            </button>
          ) : (
-            <IntTextLinkStyled>
-               {children}
-            </IntTextLinkStyled>
+            <Link {...props} passHref>
+               <a className={style}> 
+                  {children}
+               </a>
+            </Link>
          )}
-      </Link>
+      </>
    )
 }
 
