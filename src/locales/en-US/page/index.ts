@@ -26,7 +26,7 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
       },
       seo: {
          title: 'Home',
-         description: 'I\'m Victor, a full-stack developer, passionate about computer science and the whole-stack!\n Check out my portfolio\'s homepage here, and learn more about me.',
+         description: 'I\'m Victor, a full-stack developer.\n Check out my portfolio\'s homepage here, and learn more about me.',
          otherOgTags: [
             {
                property: 'og:image',
