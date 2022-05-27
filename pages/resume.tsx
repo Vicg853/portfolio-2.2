@@ -18,6 +18,7 @@ import { ExpAndEcudCard } from '@components/pages/resume/exp-and-educ-cards'
 import {
    Container,
    Section,
+   BlockSection,
    Paragraph,
    SecTitle,
 } from '@p-styles/global'
@@ -25,8 +26,7 @@ import {
    containerStyles,
    introParagraphStyles,
    IndexCard,
-   skillsSectionStyle,
-   educAndExpCardStyle
+   skillsSectionStyle
 } from '@p-styles/resume'
 
 
@@ -163,7 +163,7 @@ const Resume: NextPage<PageProps> = ({
          />
          <Container className={containerStyles}>
             <Section data-widthMax data-wrap data-gap>
-               <Section data-vert 
+               <BlockSection data-vert-small-gap
                className={introParagraphStyles}>
                   <SecTitle>Curriculum<br/>Vitae</SecTitle>
                   <Paragraph data-limitWidthMed>
@@ -172,7 +172,7 @@ const Resume: NextPage<PageProps> = ({
                      {contactMePageAlt}
                      <InTextLink href='mailto:vicg853@gmail.com'>vicg853@gmail.com</InTextLink>.
                   </Paragraph>
-               </Section>
+               </BlockSection>
                <IndexCard>
                   <SecTitle>{index.title}</SecTitle>
                   <span> 
@@ -204,7 +204,7 @@ const Resume: NextPage<PageProps> = ({
                   </span>
                </IndexCard>
             </Section>
-            <Section data-widthMax
+            <BlockSection data-widthMax data-vert-small-gap
             data-vert className={skillsSectionStyle}>
                <SecTitle id='skills-section'>
                   {`#${cvSections.skills.title}`}
@@ -213,9 +213,8 @@ const Resume: NextPage<PageProps> = ({
                   skills={skills} 
                   captionsLocaleSources={cvSections.skills} 
                   />
-            </Section>
-            <Section data-widthMax data-vert 
-            className={educAndExpCardStyle}>
+            </BlockSection>
+            <BlockSection data-widthMax data-vert-small-gap>
                <SecTitle id='experience-section'>
                   {`#${cvSections.experience.title}`}
                </SecTitle>
@@ -232,9 +231,8 @@ const Resume: NextPage<PageProps> = ({
                      moreAbout={exp.moreAbout}
                   />
                ))}
-            </Section>
-            <Section data-widthMax data-vert
-            className={educAndExpCardStyle}>
+            </BlockSection>
+            <BlockSection data-widthMax data-vert-small-gap>
                <SecTitle id='education-section'>
                   {`#${cvSections.education.title}`}
                </SecTitle>
@@ -251,7 +249,7 @@ const Resume: NextPage<PageProps> = ({
                      moreAbout={educ.moreAbout}
                   />
                ))}
-            </Section>
+            </BlockSection>
          </Container>
       </>
    )

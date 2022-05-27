@@ -122,7 +122,3 @@ export const skillsSectionStyle = css`
       height: 30.38px;
    }
 `
-
-export const educAndExpCardStyle = css`
-   gap: 1.4rem;
-`   
