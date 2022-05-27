@@ -1,4 +1,5 @@
 import { styled } from 'linaria/react'
+import { css } from 'linaria'
 
 //* Global container
 export const Container = styled.div`
@@ -15,19 +16,7 @@ export const Container = styled.div`
    padding: 3rem 0rem;
 `
 
-export const Section = styled.section`
-   display: inline-flex;
-   justify-content: space-between;
-   align-items: center;
-   flex-wrap: nowrap;
-   max-width: 100%;
-
-   &&[data-vert] {
-      flex-direction: column;
-      justify-content: center;
-      align-items: stretch;
-   }
-
+const SectionsSharedStyles = `
    &&[data-bigMinWidth] {
       width: 1200px;
    }
@@ -46,6 +35,72 @@ export const Section = styled.section`
    }
    &&[data-widthHalf] {
       width: 50%;
+   }
+`
+
+export const BlockSection = styled.section`
+   display: block;
+   justify-content: start;
+   max-width: 100%;
+
+   &&[data-inline] {
+      vertical-align: middle;
+      > * {
+         display: inline-block;
+      }
+   }
+
+   &&[data-vert-smaller-gap] > :not(:last-child) {
+      margin-bottom: 1.4rem;
+   }
+
+   &&[data-vert-small-gap] > :not(:last-child) {
+      margin-bottom: 2rem;
+   }
+   
+   &&[data-vert-med-gap] > :not(:last-child) {
+      margin-bottom: 3.5rem;
+   }
+   
+   &&[data-vert-big-gap] > :not(:last-child) {
+      margin-bottom: 5rem;
+   }
+   
+   &&[data-horiz-small-gap] > :not(:last-child) {
+      margin-right: 2rem;
+   }
+   
+   &&[data-horiz-med-gap] > :not(:last-child) {
+      margin-right: 3.5rem;
+   }
+   
+   &&[data-horiz-big-gap] > :not(:last-child) {
+      margin-right: 5rem;
+   }
+
+   
+
+   &&[data-alignCenter] {
+      align-content: center;
+      align-items: center;
+   }
+
+   ${SectionsSharedStyles}
+`
+
+export const Section = styled.section`
+   display: inline-flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: nowrap;
+   max-width: 100%;
+
+   ${SectionsSharedStyles}
+
+   &&[data-vert] {
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
    }
 
    &&[data-wrap] {
@@ -175,6 +230,10 @@ export const Paragraph = styled.p`
    }
    &&[data-limitWidthBig] {
       max-width: 900px;
+   }
+
+   &&[data-text-center] {
+      text-align: center;
    }
 `
 
