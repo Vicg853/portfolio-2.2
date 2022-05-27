@@ -83,10 +83,13 @@ export const otherContactsStyle = css`
    width: calc(100% - 750px - var(--gap) - 2rem);
    min-width: 200px;
    max-width: 100%;
-   flex-shrink: 1;
    background: var(--pallete-opaque-bgContrast);
    padding: 1.2rem 1rem;
    border-radius: 0.7rem;
+
+   && > *:not(h3) {
+      display: block;
+   }
 
    h3 {
       font-size: 1rem;
@@ -143,8 +146,6 @@ export const ReqResultMessageCard = styled.div`
       transform: scale(1.4);
       opacity: 0.5;
       transition: all 0.3s ease-in-out;
-
-
    }
 
    &&[data-status="err"], &&[data-status="success"] {

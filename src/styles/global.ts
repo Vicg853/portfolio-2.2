@@ -44,7 +44,6 @@ export const BlockSection = styled.section`
    max-width: 100%;
 
    &&[data-inline] {
-      vertical-align: middle;
       > * {
          display: inline-block;
       }
@@ -78,7 +77,9 @@ export const BlockSection = styled.section`
       margin-right: 5rem;
    }
 
-   
+   &&[data-text-center] {
+      text-align: center;
+   }
 
    &&[data-alignCenter] {
       align-content: center;
