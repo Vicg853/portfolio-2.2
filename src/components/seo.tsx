@@ -90,13 +90,13 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta name="twitter:description" content={twitterDescription} />
          {(twitterCard === 'summary_large_image' || twitterCard === 'summary') && twitterImage && (
             <>
-               <meta name="twitter:image" content={`${base}${twitterImage}`} />
+               <meta name="twitter:image" content={`${twitterImage}`} />
                {twitterImageAlt && <meta name="twitter:image:alt" content={twitterImageAlt} />}
             </>
          )}
          {twitterCard === 'player' && twitterPlayer && (
             <>
-               <meta name="twitter:player" content={`${base}${twitterPlayer.url}`} />
+               <meta name="twitter:player" content={`${twitterPlayer.url}`} />
                <meta name="twitter:player:width" content={twitterPlayer.width.toString()} />
                <meta name="twitter:player:height" content={twitterPlayer.height.toString()} />
             </>
