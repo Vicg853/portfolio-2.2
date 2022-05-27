@@ -53,6 +53,7 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
          <meta name="color-scheme" content="light dark" />
          <meta name="robots" content={robots} />
+         <link rel="manifest" href="/manifest.json" />
          
          <title>V.G. | {title}</title>
          <meta name='description' content={description} />
