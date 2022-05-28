@@ -1,0 +1,62 @@
+{
+   "short_name": "V.G. Portfolio",
+   "name": "Victor Gomez's Portfolio",
+   "description": "Hi! I'm Victor Gomez, a full-stack developer!",
+   "icons": [
+     {
+       "src": "/images/manifest/maskable_icon_x512.png",
+       "type": "image/png",
+       "sizes": "512x512"
+     },
+     {
+       "src": "/images/manifest/maskable_icon_x192.png",
+       "type": "image/png",
+       "sizes": "192x192"
+     },
+     {
+       "src": "/images/manifest/maskable_icon_x96.png",
+       "type": "image/png",
+       "sizes": "96x96"
+     },
+     {
+       "src": "/images/manifest/maskable_icon_x48.png",
+       "type": "image/svg+xml",
+       "sizes": "48x48"
+     },
+     {
+      "src": "/images/global/Principal_darkbg.svg",
+      "sizes": "500x500",
+      "type": "image/svg+xml"
+    }
+   ],
+   "start_url": "/",
+   "background_color": "#0b0a0a",
+   "display": "minimal-ui",
+   "scope": "/",
+   "theme_color": "#ffcb75",
+   "orientation": "portrait",
+   "shortcuts": [
+     {
+       "name": "Victor Gomez's Resume",
+       "short_name": "V.G.'s | Resume",
+       "description": "Check out my resume!",
+       "url": "/resume",
+       "icons": [{
+         "src": "/images/manifest/maskable_icon_x96.png",
+         "type": "image/png",
+         "sizes": "96x96"
+       }]
+     },
+     {
+       "name": "Victor Gomez's Projects",
+       "short_name": "V.G.'s | Projects",
+       "description": "Check out my projects!",
+       "url": "/projects",
+       "icons": [{
+         "src": "/images/manifest/maskable_icon_x96.png",
+         "type": "image/png",
+         "sizes": "96x96"
+       }]
+     }
+   ]
+ }

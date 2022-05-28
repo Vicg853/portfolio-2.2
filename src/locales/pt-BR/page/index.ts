@@ -21,12 +21,35 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    mainProps: {
       header: {
          title: 'Eu desenvolvo dinossauros 🦖!',
-         description: 'Sou Victor, desenvolvedor full-stack, apaixonado por ciencia da computação e a "whole-stack".',
+         description: 'Olá, sou Victor, desenvolvedor full-stack e esse é meu portfólio!',
          backgroundAlt: 'Ilustração da pagina.'
       },
       seo: {
          title: 'Home',
-         description: 'Sou Victor, desenvolvedor full-stack, apaixonado por ciencia da computação e a "whole-stack".\n Veja aqui o meu portfólio, e saiba mais sobre mim.'
+         description: 'Sou Victor, desenvolvedor full-stack.\n Veja aqui o meu portfólio, e saiba mais sobre mim.',
+         otherOgTags: [
+            {
+               property: 'og:image',
+               content:  '/images/pages/index/IMG-20200226-WA0034-squared-resized.jpg',
+            },
+            {
+               property: 'og:image:alt',
+               content: 'Victor Gomez\'s Portfolio Homepage Image.',
+            },
+            {
+               property: 'og:image:width',
+               content: '100',
+            },
+            {
+               property: 'og:image:height',
+               content: '100',
+            },
+         ],
+         twitterTags: {
+            image: '/images/pages/index/IMG-20200226-WA0034-squared-resized.jpg',
+            imageAlt: 'Victor Gomez\'s Portfolio Homepage Image.',
+            cardType: 'summary'
+         }
       }
    }
 }

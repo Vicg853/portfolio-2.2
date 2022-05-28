@@ -53,6 +53,7 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
          <meta name="color-scheme" content="light dark" />
          <meta name="robots" content={robots} />
+         <link rel="manifest" href="/manifest.json" />
          
          <title>V.G. | {title}</title>
          <meta name='description' content={description} />
@@ -90,13 +91,13 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta name="twitter:description" content={twitterDescription} />
          {(twitterCard === 'summary_large_image' || twitterCard === 'summary') && twitterImage && (
             <>
-               <meta name="twitter:image" content={`${base}${twitterImage}`} />
+               <meta name="twitter:image" content={`${twitterImage}`} />
                {twitterImageAlt && <meta name="twitter:image:alt" content={twitterImageAlt} />}
             </>
          )}
          {twitterCard === 'player' && twitterPlayer && (
             <>
-               <meta name="twitter:player" content={`${base}${twitterPlayer.url}`} />
+               <meta name="twitter:player" content={`${twitterPlayer.url}`} />
                <meta name="twitter:player:width" content={twitterPlayer.width.toString()} />
                <meta name="twitter:player:height" content={twitterPlayer.height.toString()} />
             </>

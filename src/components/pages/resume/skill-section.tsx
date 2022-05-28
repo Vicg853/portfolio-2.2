@@ -6,6 +6,7 @@ import { useState, memo } from 'react'
 
 import {
    Section,
+   BlockSection,
    Input
 } from '@p-styles/global'
 import { 
@@ -25,8 +26,10 @@ const [selectedCategory, setSelectedCategory] = useState<SkillCategoryType | 'al
 
 return (
    <>
-      <Section id="filters-sections-container">
-         <Section className='filters-sections' data-vert data-gap>
+      <div id="filters-sections-container" 
+      className={BlockSection.__linaria.className}
+      data-horiz-med-gap data-inline>
+         <div className={`${BlockSection.__linaria.className} filters-sections`}>
             <span>{`${captionsLocaleSources.categoryFilter}:`}</span>
             <select className={Input.__linaria.className} onChangeCapture={e => 
                   setSelectedCategory(e.currentTarget
@@ -37,14 +40,14 @@ return (
                   <option key={category} value={category}>{category}</option>
                ))}
             </select>
-         </Section>
-         <Section className='filters-sections' data-vert data-gap>
+         </div>
+         <div className={`${BlockSection.__linaria.className} filters-sections`}>
             <span>{`${captionsLocaleSources.searchFilter}:`}</span>
             <Input onChange={e => 
                setTechSearch(e.currentTarget.value)
             } placeholder={`e.g.: NextJs`} />
-         </Section>
-      </Section>
+         </div>
+      </div>
       <Section data-wrap className={skillsContainerStyles}>
          {skills.list.map(skill => {
             if ((selectedCategory === 'all' || skill.category.includes(selectedCategory))

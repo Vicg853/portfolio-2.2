@@ -21,13 +21,35 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
    mainProps: {
       header: {
          title: 'Hi! I code dinosaurs 🦖',
-         description: 'I\'m Victor, a full-stack developer, passionate about computer science and the whole-stack!',
+         description: 'Hi I\'m Victor, a full-stack developer and this is my portfolio!',
          backgroundAlt: 'Home page background.'
       },
       seo: {
          title: 'Home',
-         description: 'I\'m Victor, a full-stack developer, passionate about computer science and the whole-stack!\n Check out my portfolio\'s homepage here, and learn more about me.',
-         
+         description: 'I\'m Victor, a full-stack developer.\n Check out my portfolio\'s homepage here, and learn more about me.',
+         otherOgTags: [
+            {
+               property: 'og:image',
+               content:  '/images/pages/index/IMG-20200226-WA0034-squared-resized.jpg',
+            },
+            {
+               property: 'og:image:alt',
+               content: 'Victor Gomez\'s Portfolio Homepage Image.',
+            },
+            {
+               property: 'og:image:width',
+               content: '100',
+            },
+            {
+               property: 'og:image:height',
+               content: '100',
+            },
+         ],
+         twitterTags: {
+            image: '/images/pages/index/IMG-20200226-WA0034-squared-resized.jpg',
+            imageAlt: 'Victor Gomez\'s Portfolio Homepage Image.',
+            cardType: 'summary'
+         }
       }
    }
 }

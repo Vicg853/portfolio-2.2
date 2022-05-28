@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next'
 import type { PageFullType } from '../src/locales'
-import type { ProjectsSource, ProjectsListType } from '@api-utils/content-retrivers/projects'
+import type { ProjectsListType } from '@api-utils/content-retrivers/projects'
 
 //* Importing needed components and deps
 import { Header } from '@components/header'
@@ -15,7 +15,7 @@ import { getProjectsList } from '@api-utils/content-retrivers/projects'
 //* Importing global and specific styled components
 import { 
    Container,
-	Section,
+	BlockSection,
 	Paragraph,
 	SecTitle,
 	TextEffect
@@ -116,7 +116,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 				}}
          />
          <Container className={containerMargins}>
-				<Section data-vert data-gap
+				<BlockSection data-vert-small-gap
 				data-widthMax>
 					<SecTitle>
 						<TextEffect data-codeBigArrow>
@@ -126,7 +126,8 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 					<Paragraph data-limitWidthBig>
 						{mainParagraph.split(/\n/).map(val => <>{val}<br key={val}/></>)}
 					</Paragraph>
-				</Section>
+				</BlockSection>
+				<BlockSection data-vert-big-gap>
 				{projectsList?.map((project, i) => {
 					const {
 						frontmatter,
@@ -135,93 +136,90 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 					} = project
 
 					return (
-						<Section data-widthMax data-vert key={i}> 
-							<ProjectCard>
-								<Image className='project-card-image' layout='fill' objectFit='cover'
-								src={frontmatter.image} alt={`${frontmatter.title} project background illustration!`}/>
-								<sub>
-									<h3 className={cx(
-										SecTitle.__linaria.className, 
-										projectCardTitleStyles)}>
-										{frontmatter.title}
-									</h3>
-									<span className='project-card-project-description'>
-										{frontmatter.description}
-									</span>
-									{metadata.scopes && <span className='project-card-project-scope'>
-										{metadata.scopes.length > 1 ? 
-											projectsListCaptions.scope.plural
-											: projectsListCaptions.scope.singular 
-										}{":"}
-										<span className='detail'>{metadata.scopes.toLocaleLowerCase()}</span>
-									</span>}
-									<span className='project-card-section-title'>
-										{metadata.topics.length > 1 ? 
-											projectsListCaptions.topics.plural 
-											: projectsListCaptions.topics.singular 
-										}{":"}
-									</span>
-									<section className='project-card-project-subjects'>
-										{metadata.topics.map((topic, i) => (
-											<ProjectCardMiniCard key={i}>{topic}</ProjectCardMiniCard>
-										))}
-									</section>
-									<span className='project-card-section-title'>{`${projectsListCaptions.techStack}:`}</span>
-									<section className='project-card-project-technologies'>
-										{metadata.techStack.map((tech, i) => (
-											<ProjectCardMiniCard key={i}>
-												{tech.techLink ?
-													<Link href={tech.techLink} passHref>
-														<a>{tech.techName}</a>
-													</Link>
-												: tech.techName}
-											</ProjectCardMiniCard>
-										))}
-									</section>
-									<section className='project-card-project-access'>
-										<span className='title'>{projectsListCaptions.access}</span>
-										<div className='content'>
-											{sources.map((source, i) => (
-												<Link passHref href={source.sourceLink} key={i}>
-													<a className={accessProjectLinksStyle} 
-            		      					   rel='noopener noreferrer'
-            		      					   target='_blank'>
-														{source.sourceType === 'GITHUB' && (<>
-															<GithubIcon className='icon'/>
-															{projectsListCaptions.sources.github}
-														</>)}
-														{source.sourceType === 'MOREINFO' && (<>
-															<MoreInfoIcon className='icon'/>
-															{projectsListCaptions.sources.moreInf}
-														</>)}
-														{source.sourceType === 'WEBSITE' && (<>
-															<WebsiteIcon className='icon'/>
-															{projectsListCaptions.sources.www}
-														</>)}
-														{(source.sourceType === 'CUSTOM' || source.sourceType === 'RELATED') && 
-															<Image className='icon' width={19} height={19}
-															priority
-															src={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.url} 
-															alt={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.alt} />
-														}
-														{source.sourceType === 'RELATED' && projectsListCaptions.sources.related}
-														{source.sourceType === 'CUSTOM' && projectsListCaptions.sources.other}
-            		      					</a>
+						<ProjectCard key={i}>
+							<Image className='project-card-image' layout='fill' objectFit='cover'
+							src={frontmatter.image} alt={`${frontmatter.title} project background illustration!`}/>
+							<sub>
+								<h3 className={cx(
+									SecTitle.__linaria.className, 
+									projectCardTitleStyles)}>
+									{frontmatter.title}
+								</h3>
+								<span className='project-card-project-description'>
+									{frontmatter.description}
+								</span>
+								{metadata.scopes && <span className='project-card-project-scope'>
+									{metadata.scopes.length > 1 ? 
+										projectsListCaptions.scope.plural
+										: projectsListCaptions.scope.singular 
+									}{":"}
+									<span className='detail'>{metadata.scopes.toLocaleLowerCase()}</span>
+								</span>}
+								<span className='project-card-section-title'>
+									{metadata.topics.length > 1 ? 
+										projectsListCaptions.topics.plural 
+										: projectsListCaptions.topics.singular 
+									}{":"}
+								</span>
+								<div className='project-card-project-subjects'>
+									{metadata.topics.map((topic, i) => (
+										<ProjectCardMiniCard key={i}>{topic}</ProjectCardMiniCard>
+									))}
+								</div>
+								<span className='project-card-section-title'>{`${projectsListCaptions.techStack}:`}</span>
+								<div className='project-card-project-technologies'>
+									{metadata.techStack.map((tech, i) => (
+										<ProjectCardMiniCard key={i}>
+											{tech.techLink ?
+												<Link href={tech.techLink} passHref>
+													<a>{tech.techName}</a>
 												</Link>
-											))}
-										</div>
-									</section>
-								</sub>
-							</ProjectCard>
-						</Section>
+											: tech.techName}
+										</ProjectCardMiniCard>
+									))}
+								</div>
+								<div className='project-card-project-access'>
+									<span className='title'>{projectsListCaptions.access}</span>
+									<div className='content'>
+										{sources.map((source, i) => (
+											<Link passHref href={source.sourceLink} key={i}>
+												<a className={accessProjectLinksStyle} 
+            		   					   rel='noopener noreferrer'
+            		   					   target='_blank'>
+													{source.sourceType === 'GITHUB' && (<>
+														<GithubIcon className='icon'/>
+														<span>{projectsListCaptions.sources.github}</span>
+													</>)}
+													{source.sourceType === 'MOREINFO' && (<>
+														<MoreInfoIcon className='icon'/>
+														<span>{projectsListCaptions.sources.moreInf}</span>
+													</>)}
+													{source.sourceType === 'WEBSITE' && (<>
+														<WebsiteIcon className='icon'/>
+														<span>{projectsListCaptions.sources.www}</span>
+													</>)}
+													{(source.sourceType === 'CUSTOM' || source.sourceType === 'RELATED') && 
+														<Image className='icon' width={19} height={19}
+														priority
+														src={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.url} 
+														alt={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.alt} />
+													}
+													{source.sourceType === 'RELATED' && <span>{projectsListCaptions.sources.related}</span>}
+													{source.sourceType === 'CUSTOM' && <span>{projectsListCaptions.sources.other}</span>}
+            		   					</a>
+											</Link>
+										))}
+									</div>
+								</div>
+							</sub>
+						</ProjectCard>
 					)
 				}) ?? (
-					<Section data-widthMax data-jusCent>
-						<Paragraph>
-							{projectsListCaptions.noProjects} 🤔😩
-						</Paragraph>
-					</Section>
+					<Paragraph data-text-center>
+						{projectsListCaptions.noProjects} 🤔😩
+					</Paragraph>
 				)}
+				</BlockSection>
          </Container>
       </>
    )
