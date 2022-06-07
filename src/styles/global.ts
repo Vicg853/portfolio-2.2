@@ -4,15 +4,16 @@ import { css } from 'linaria'
 //* Global container
 export const Container = styled.div`
    max-width: 85%;
-   display: flex;
-   flex-direction: column;
-   justify-content: flex-start;
-   align-items: stretch;
+   display: block;
    width: auto;
    overflow: visible;
    
    height: auto;
-   gap: 4rem;
+   
+   && > *:not(:first-child), && > *:not(:last-child) {
+      margin-bottom: 2.5rem;
+   }
+
    padding: 3rem 0rem;
 `
 

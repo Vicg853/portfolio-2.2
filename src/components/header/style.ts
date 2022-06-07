@@ -13,7 +13,7 @@ export const Container = styled.header`
    z-index: var(--zIndex-header);
 
    width: 98vw;
-   margin-top: 2.75vh;
+   margin-top: 2.75vh !important;
 
    &&[data-border-radius] {
       border-radius: 0.9rem;
