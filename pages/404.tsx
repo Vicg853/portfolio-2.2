@@ -2,12 +2,6 @@ import type { GetStaticProps, NextPage } from 'next'
 import type { PageFullType } from '../src/locales'
 import type { ErrorPages } from '@c-types/locales/error-pages'
 
-import Image from 'next/image'
-import Link from 'next/link'
-
-//* Importing essential components
-import { Header } from '@components/header'
-
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
 

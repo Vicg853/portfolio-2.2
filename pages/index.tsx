@@ -1,5 +1,4 @@
-import type { NextPage } from 'next'
-import type { GetStaticProps } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import type { PageFullType  } from '../src/locales'
 import type { ObjectivesType } from '@api-utils/content-retrivers/objectives'
 
