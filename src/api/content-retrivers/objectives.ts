@@ -18,7 +18,7 @@ export const getObjectivesList = async (
       data,
       err
    } = await getSdk(graphQlClient).objectives({
-      year: 2022,
+      year: new Date().getFullYear(),
    }).then(data => ({
       data: data.getManyObjectives,
       err: null,
