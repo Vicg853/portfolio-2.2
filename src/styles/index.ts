@@ -27,6 +27,17 @@ export const objectivesSectionStyle = css`
    padding: 1.5rem;
    margin-top: 10rem;
    margin-bottom: 5rem;
+
+   .objectiveIssueMessage {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--fonts-secondary);
+      color: var(--pallete-constants-warn);
+      margin-bottom: 2.2rem;
+   }
 `
 
 export const mainPMediaQueryStyle = css`

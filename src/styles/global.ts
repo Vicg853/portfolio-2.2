@@ -174,7 +174,7 @@ export const SecTitle = styled.h3`
    }
 `
 export const SectionDesc = styled.p`
-   display: inline-block;
+   display: block;
    font-size: 0.8rem;
    font-weight: 300;
    color: var(--pallete-text);
