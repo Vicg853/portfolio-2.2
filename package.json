@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:analyze": "ANALYZE=true yarn build",
-    "gql:gen": "graphql-codegen --config codegen.yml",
-    "dev:full": "yarn dev && yarn build:analyze",
-    "build:full": "yarn gql:gen && yarn build"
+    "gql:gen": "graphql-codegen --config codegen.yml -r dotenv/config",
+    "dev:all": "yarn gql:gen && yarn dev",
+    "build:analyze": "yarn gql:gen && ANALYZE=true yarn build",
+    "build:all": "yarn lint && yarn gql:gen && yarn build"
   },
   "dependencies": {
     "@hookstate/core": "^3.0.13",
