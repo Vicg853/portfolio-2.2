@@ -1,61 +1,58 @@
 import { localeEnName, localeFrName, localePtBrName } from '../../locales/configs'
 import { graphQlClient } from '@lib/graphql-client'
-import { getSdk, Objectives } from '@gql-gen/graphql'
+import { getSdk, ObjectiveQueryFields } from '@gql-gen/gql-cms'
 
 type LocalesType = typeof localeEnName | typeof localeFrName | typeof localePtBrName
-export interface ObjectivesType extends Pick<Objectives, 'id' | 'objectiveProgress' | 'objectiveSource'>{
-   objectiveName: string
-   objectiveDescription: string
+
+export type ObjectivesType = Omit<ObjectiveQueryFields, 'title' | 'description'> & {
+   title: string
+   description: string | null
 }
 
-function notFoundObjName(locale: LocalesType): string {
-   if(locale === localeEnName) 
-      return 'Name not found'
-   if(locale === localeFrName)
-      return 'Nom pas trouvé'
-   if(locale === localePtBrName) 
-      return 'Nome não encontrado'
-   return 'Name not found'
-}
-
-function notFoundObjDesc(locale: LocalesType): string {
-   if(locale === localeEnName)
-      return 'Description not found'
-   if(locale === localeFrName)
-      return 'Description pas trouvée'
-   if(locale === localePtBrName)
-      return 'Descrição não encontrada'
-   return 'Description not found'   
-}
+export type GetObjectivesPromise = ObjectivesType[] | null | 'error'
 
 export const getObjectivesList = async (
    locale: LocalesType | undefined, 
-   defaultLocale: LocalesType): Promise<ObjectivesType[]> => {
+   defaultLocale: LocalesType): Promise<GetObjectivesPromise> => {
    const {
-      getAllObjectives: objectivesSource
-   } = await getSdk(graphQlClient).objectives()
+      data,
+      err
+   } = await getSdk(graphQlClient).objectives({
+      year: 2022,
+   }).then(data => ({
+      data: data.getManyObjectives,
+      err: null,
+   })).catch(err => ({
+      data: null,
+      err: err,
+   }))
+
+   if(err) {
+      console.error('Error fetching objectives from GraphQL', err)
+      return 'error'
+   }
+
+   if(!data) 
+      return null
 
    //* Filter out only the current locale name and descriptions
-	const objectivesFetch: ObjectivesType[] = objectivesSource!.map(objective => {
-		const objectiveNameLocaleSource = (objective.objectiveName[locale ?? defaultLocale] ?? 
-         notFoundObjName(locale ?? defaultLocale)) as string
-		const objectiveDescLocaleSource = (objective.objectiveDescription[locale ?? defaultLocale] ??
-         notFoundObjDesc(locale ?? defaultLocale)) as string
+	const objectivesFetch = data.map(objective => {
+		const objectiveNameLocaleSource = (objective.title![locale ?? defaultLocale]) as string
+		const objectiveDescLocaleSource = (objective.description?.[locale ?? defaultLocale]) as string | null
+         ?? null
 
       return {
-         id: objective.id,
-         objectiveProgress: objective.objectiveProgress,
-         objectiveSource: objective.objectiveSource,
-         objectiveName: objectiveNameLocaleSource,
-         objectiveDescription: objectiveDescLocaleSource,
+         ...objective,
+         title: objectiveNameLocaleSource,
+         description: objectiveDescLocaleSource,
       }
 	}).sort((a, b) => {
-      if(a.objectiveProgress === 'DONE' && b.objectiveProgress !== 'DONE') return -1
-      if(a.objectiveProgress !== 'DONE' && b.objectiveProgress === 'DONE') return 1
-      if(a.objectiveProgress === 'INPROGRESS' && b.objectiveProgress !== 'INPROGRESS') return -1
-      if(a.objectiveProgress !== 'INPROGRESS' && b.objectiveProgress === 'INPROGRESS') return 1
-      if(a.objectiveProgress === 'TODO' && b.objectiveProgress !== 'TODO') return -1
-      if(a.objectiveProgress !== 'TODO' && b.objectiveProgress === 'TODO') return 1
+      if(a.progress === 'DONE' && b.progress !== 'DONE') return -1
+      if(a.progress !== 'DONE' && b.progress === 'DONE') return 1
+      if(a.progress === 'INPROGRESS' && b.progress !== 'INPROGRESS') return -1
+      if(a.progress !== 'INPROGRESS' && b.progress === 'INPROGRESS') return 1
+      if(a.progress === 'TODO' && b.progress !== 'TODO') return -1
+      if(a.progress !== 'TODO' && b.progress === 'TODO') return 1
       return 0
    })
 
