@@ -7,11 +7,20 @@ import { defaults } from './defaults'
 
 const nav: NavAltsLocale = {
    logoAlt: 'Meu logo',
-   menuButton: () => (mode) => `${mode ? 'Fechar' : 'Abrir'} o menu de navegação.`,
-   themeButton: () => (theme) => `Activar o tema ${theme === 'dark' ? 'light' : 'dark'} do site.`,
+   menuButton: {
+      close: 'Fechar o menu de navegação.',
+      open: 'Abrir o menu de navegação.',
+   },
+   themeButton: {
+      setDark: 'Definir o tema do site como escuro.',
+      setLight: 'Definir o tema do site como claro.',
+   },
    localesMenu: {
       closeMeMsg: 'Clique-me novamente para fechar!',
-      mainAlt: () => (isActive) => `Clique ou ${isActive ? 'remova o mouse de' : 'passe o mouse por'} cima para ${isActive ? 'fechar' : 'abrir'} o menu principal.`,
+      mainAlt: {
+         active: 'Pression o botão ou remova seu mouse de cima para fechar o menu principal.',
+         inactive: 'Pressione o botão ou passe seu mouse por cima para abrir o menu principal.',
+      }
    }
 }
 
