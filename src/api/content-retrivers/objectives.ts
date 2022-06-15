@@ -1,6 +1,7 @@
+import type { ObjectiveQueryFields } from '@gql-gen/gql-cms'
 import { localeEnName, localeFrName, localePtBrName } from '../../locales/configs'
 import { graphQlClient } from '@lib/graphql-client'
-import { getSdk, ObjectiveQueryFields } from '@gql-gen/gql-cms'
+import { getSdk } from '@gql-gen/gql-cms'
 
 type LocalesType = typeof localeEnName | typeof localeFrName | typeof localePtBrName
 
