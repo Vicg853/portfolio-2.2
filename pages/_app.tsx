@@ -5,7 +5,6 @@ import type { PageFullType, RosettaPerLocaleProps } from '../src/locales/index'
 import Head from 'next/head'
 
 import CssTheme from '@components/css-theme'
-import { useLocale } from '@hooks/locale-hook'
 
 import { 
    DarkTheme,  
