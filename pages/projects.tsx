@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next'
 import type { PageFullType } from '../src/locales'
-import type { ProjectsListType } from '@api-utils/content-retrivers/projects'
+import type { GetProjectsPromise } from '@api-utils/content-retrivers/projects'
 
 //* Importing needed components and deps
 import { Header } from '@components/header'
@@ -29,21 +29,8 @@ import {
 } from '@p-styles/projects'
 
 import GithubIcon from '@p-images/projects/github-source-icon-icons8.svg'
-import MoreInfoIcon from '@p-images/projects/moreInf-source-icon-icons8.svg'
+import RelatedSourcesIcon from '@p-images/projects/related-sources-icon-icons8.svg'
 import WebsiteIcon from '@p-images/projects/www-source-icon-icons8.svg'
-
-const sourceAssetLinks = [
-	{ 
-		type: 'RELATED', 
-		url: '/images/pages/projects/related-sources-icon-icons8.svg', 
-		alt: 'Related sources icon'
-	},
-	{ 
-		type: 'CUSTOM', 
-		url: '/images/pages/projects/related-sources-icon-icons8.svg', 
-		alt: 'Custom source icon'
-	},
-]
 
 export interface ProjectsPageStaticLocalesSource {
 	mainParagraphTitle: string
@@ -67,7 +54,7 @@ export interface ProjectsPageStaticLocalesSource {
 type ProjectsPageSource = PageFullType<ProjectsPageStaticLocalesSource>
 
 interface GetStaticPropsResult {
-	projectsList: ProjectsListType
+	projectsList: GetProjectsPromise
 	pageSource: ProjectsPageSource
 	locale: string
 }
@@ -128,84 +115,89 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 					</Paragraph>
 				</BlockSection>
 				<BlockSection data-vert-big-gap>
-				{projectsList?.map((project, i) => {
-					const {
-						frontmatter,
-						metadata,
-						sources
-					} = project
-
-					return (
+				
+				{projectsList === null ? (
+					<Paragraph data-text-center>
+						{projectsListCaptions.noProjects} 🤔😩
+					</Paragraph>
+				) : projectsList === 'error' ? (
+					<Paragraph data-text-center>
+						{projectsListCaptions.noProjects} 🤔😩
+					</Paragraph>
+				) : projectsList.map((project, i) => (
 						<ProjectCard key={i}>
 							<Image className='project-card-image' layout='fill' objectFit='cover'
-							src={frontmatter.image} alt={`${frontmatter.title} project background illustration!`}/>
+							src={project.image ?? '/images/pages/projects/background.jpg'} 
+							alt={`${project.title} project background illustration!`}/>
 							<sub>
 								<h3 className={cx(
 									SecTitle.__linaria.className, 
 									projectCardTitleStyles)}>
-									{frontmatter.title}
+									{project.title}
 								</h3>
 								<span className='project-card-project-description'>
-									{frontmatter.description}
+									{project.description}
 								</span>
-								{metadata.scopes && <span className='project-card-project-scope'>
-									{metadata.scopes.length > 1 ? 
+								{project.scopes && <span className='project-card-project-scope'>
+									{project.scopes.length > 1 ? 
 										projectsListCaptions.scope.plural
 										: projectsListCaptions.scope.singular 
 									}{":"}
-									<span className='detail'>{metadata.scopes.toLocaleLowerCase()}</span>
+									<span className='detail'>{project.scopes.toLocaleLowerCase()}</span>
 								</span>}
 								<span className='project-card-section-title'>
-									{metadata.topics.length > 1 ? 
+									{project.topics!.length > 1 ? 
 										projectsListCaptions.topics.plural 
 										: projectsListCaptions.topics.singular 
 									}{":"}
 								</span>
 								<div className='project-card-project-subjects'>
-									{metadata.topics.map((topic, i) => (
+									{project.topics!.map((topic, i) => (
 										<ProjectCardMiniCard key={i}>{topic}</ProjectCardMiniCard>
 									))}
 								</div>
 								<span className='project-card-section-title'>{`${projectsListCaptions.techStack}:`}</span>
 								<div className='project-card-project-technologies'>
-									{metadata.techStack.map((tech, i) => (
+									{project.techStack!.map((tech, i) => (
 										<ProjectCardMiniCard key={i}>
-											{tech.techLink ?
-												<Link href={tech.techLink} passHref>
-													<a>{tech.techName}</a>
+											{tech.url ?
+												<Link href={tech.url} passHref>
+													<a>{tech.name}</a>
 												</Link>
-											: tech.techName}
+											: tech.name}
 										</ProjectCardMiniCard>
 									))}
 								</div>
 								<div className='project-card-project-access'>
 									<span className='title'>{projectsListCaptions.access}</span>
 									<div className='content'>
-										{sources.map((source, i) => (
-											<Link passHref href={source.sourceLink} key={i}>
+										{project.resources?.map((resource, i) => (
+											<Link passHref href={resource.url} key={i}>
 												<a className={accessProjectLinksStyle} 
             		   					   rel='noopener noreferrer'
             		   					   target='_blank'>
-													{source.sourceType === 'GITHUB' && (<>
-														<GithubIcon className='icon'/>
-														<span>{projectsListCaptions.sources.github}</span>
-													</>)}
-													{source.sourceType === 'MOREINFO' && (<>
-														<MoreInfoIcon className='icon'/>
-														<span>{projectsListCaptions.sources.moreInf}</span>
-													</>)}
-													{source.sourceType === 'WEBSITE' && (<>
-														<WebsiteIcon className='icon'/>
-														<span>{projectsListCaptions.sources.www}</span>
-													</>)}
-													{(source.sourceType === 'CUSTOM' || source.sourceType === 'RELATED') && 
-														<Image className='icon' width={19} height={19}
-														priority
-														src={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.url} 
-														alt={sourceAssetLinks.find(asset => asset.type === source.sourceType)!.alt} />
-													}
-													{source.sourceType === 'RELATED' && <span>{projectsListCaptions.sources.related}</span>}
-													{source.sourceType === 'CUSTOM' && <span>{projectsListCaptions.sources.other}</span>}
+													<RelatedSourcesIcon className='icon' />
+													<span>{resource.label ?? projectsListCaptions.sources.related}</span>
+            		   					</a>
+											</Link>
+										))}
+										{project.ghRepo?.map((repo, i) => (
+											<Link passHref href={repo} key={i}>
+												<a className={accessProjectLinksStyle} 
+            		   					   rel='noopener noreferrer'
+            		   					   target='_blank'>
+													<GithubIcon className='icon'/>
+													<span>{projectsListCaptions.sources.github}</span>
+            		   					</a>
+											</Link>
+										))}
+										{project.website?.map((repo, i) => (
+											<Link passHref href={repo} key={i}>
+												<a className={accessProjectLinksStyle} 
+            		   					   rel='noopener noreferrer'
+            		   					   target='_blank'>
+													<WebsiteIcon className='icon'/>
+													<span>{projectsListCaptions.sources.www}</span>
             		   					</a>
 											</Link>
 										))}
@@ -213,12 +205,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 								</div>
 							</sub>
 						</ProjectCard>
-					)
-				}) ?? (
-					<Paragraph data-text-center>
-						{projectsListCaptions.noProjects} 🤔😩
-					</Paragraph>
-				)}
+				))}
 				</BlockSection>
          </Container>
       </>

@@ -30,19 +30,22 @@ Project is created with:
   * **Before running...**
     > ... add at least a ``` .env.dev ``` file with the following minimum required variables
   ```.env
-    NEXT_PUBLIC_SITE_URL='http://localhost:3000'
+    MAILER_API_URL=... (e.g.: ``http://localhost:4000``)
+    MAIN_CMS_GQL_URL=... (e.g.: ``http://localhost:5000``)
+    MAIN_CMS_GQL_URL_SCHEMA=... (e.g.: ``http://localhost:6000```)
+    NEXT_PUBLIC_SITE_URL=... (e.g.: ``http://localhost:6000/schema``)
   ```
 
   * **...Development**
   ```bash
    cd ./portfolio-2.2
-   yarn dev 
+   yarn dev:all
   ```
 
   * **...Production**
   ```bash
    cd ./portfolio-2.2
-   yarn prod
+   yarn build:all
   ```
 
   * Access:

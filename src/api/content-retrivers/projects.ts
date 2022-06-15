@@ -1,74 +1,49 @@
 import type { localeEnName, localeFrName, localePtBrName } from '../../locales/configs'
-import type { ProjectScopes, ProjectSource, ProjectMetadata } from '@gql-gen/graphql'
+import type { ProjectResult, Project, ProjectsQueryQuery } from '@gql-gen/gql-cms'
 
 import { graphQlClient } from '@lib/graphql-client'
-import { getSdk } from '@gql-gen/graphql'
+import { getSdk } from '@gql-gen/gql-cms'
 
 type localeType = typeof localeFrName | typeof localeEnName | typeof localePtBrName
-export interface ProjectsSource {
-   frontmatter: {
-      image: string
-      title: string
-      description: string
-   }
-   metadata: {
-      startDate: ProjectMetadata['startDate']
-      topics: ProjectMetadata['topics']
-      scopes?: ProjectScopes | null
-      techStack: ProjectMetadata['techStack']
-   } & ({
-      ongoing: true
-   } | {
-      ongoing: false
-      endDate: ProjectMetadata['endDate']
-   })
-   sources: {
-      sourceLink: ProjectSource['sourceLink'],
-      sourceType: ProjectSource['sourceType']
-      __typename?: undefined | null
-   }[]
-} 
 
-export type ProjectsListType = ProjectsSource[] | null
+type ProjectType = Omit<NonNullable< ProjectsQueryQuery['getManyProjects']>[0], 'title' | 'description'> & {
+   title: string 
+   description: string
+}
 
-export async function getProjectsList(locale: localeType, defaultLocale: localeType): Promise<ProjectsListType> {
+export type GetProjectsPromise = ProjectType[] | null | 'error'
+
+export async function getProjectsList(locale: localeType, defaultLocale: localeType): Promise<GetProjectsPromise> {
    const {
-      getAllProjects: projectsSource
-   } = await getSdk(graphQlClient).projects().catch(err => {
-      throw new Error(`Error querying projects:`, {
-         cause: err
-      })
-   })
+      data,
+      err
+   } = await getSdk(graphQlClient).projectsQuery().then(data => ({
+      data: data.getManyProjects,
+      err: null,
+   })).catch(err => ({
+      data: null,
+      err: err,
+   }))
 
-   if(!projectsSource) 
+   if(err) {
+      console.error('Error fetching objectives from GraphQL', err)
+      return 'error'
+   }
+
+   if(!data) 
       return null
 
-   const projectsList: ProjectsSource[] = projectsSource.map(project => {
-      
-      const frontmatter = {
-         image: project.frontmatter.image,
-         title: project.frontmatter.projectName[locale as 'en' | 'pt'] 
-            ?? project.frontmatter.projectName[defaultLocale as 'en'] ?? 'Name not found',
-         description: project.frontmatter.projectDescription[locale  as 'en' | 'pt'] 
-            ?? project.frontmatter.projectDescription[defaultLocale  as 'en'] ?? 'Description not found',
-      }
-
-      const metadata = {
-         ...project.metadata,
-         __typename: null,
-         endDate: project.metadata.endDate ?? null,
-         ongoing: project.metadata.endDate ? false : true,
-      }
+   const projectsList: ProjectType[] = data.map(project => {
+      const title = project.title[locale ?? defaultLocale] as string
+      const description = project.description[locale ?? defaultLocale] as string
 
       return {
-         frontmatter,
-         metadata,
-         sources: project.sources.map(source => ({
-            ...source,
-            __typename: null
-         }))
+         ...project,
+         title,
+         description,
       }
-   })
+   }).sort((a, b) => 
+      new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
 
    return projectsList
 }

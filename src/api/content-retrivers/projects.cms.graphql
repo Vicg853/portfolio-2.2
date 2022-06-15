@@ -1,0 +1,33 @@
+query projectsQuery {
+  getManyProjects {
+    id 
+    title {
+      ...LocalesSelect
+    }
+    description {
+      ...LocalesSelect
+    }
+    image
+    scopes
+    startDate
+    endDate
+    topics
+    techStack {
+      name
+      url
+      logo
+    }
+		ghRepo
+    website
+    resources {
+      label
+      url
+    }    
+  }
+}
+
+fragment LocalesSelect on Locales {
+   en
+   fr
+   pt
+}
