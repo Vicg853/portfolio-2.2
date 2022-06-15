@@ -1,4 +1,4 @@
-query objectives($year: Float!) {
+query objectives($year: Float) {
    getManyObjectives(filters: { 
     includeHidden: true,  
     year: $year

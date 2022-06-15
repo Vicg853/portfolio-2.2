@@ -171,20 +171,18 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 						<ObjectivesGridS>
 							{objectivesFetch.map((objective: ObjectivesType) => {
 								const comp = (
-									<ObjectiveCard key={objective.id}>
+									<ObjectiveCard key={objective.id} data-progress={objective.progress}
+									data-has-source={objective.source ? 'true' : 'false'}>
 										<sub>
 											<h4>{objective.title}</h4>
-											<span>
-												{objective.progress === 'DONE' && <>✅</> }
-												{objective.progress === 'INPROGRESS' && <>✍️</>}
-												{objective.progress === 'TODO' && <>⌛</>}
-											</span>
+											<span className='progress-el'></span>
 										</sub>
 										<p>
 											{objective.description}
 										</p>
 									</ObjectiveCard>
 								)
+
 								if(objective.source) return (
 									<Link href={objective.source} passHref>
 										<a>{comp}</a>
