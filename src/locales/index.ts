@@ -18,7 +18,7 @@ export interface PageFullType<PageContentType> {
    mainProps?: PageLocale
    content: PageContentType
 }
-interface RosettaPerLocaleProps<PagesList> {
+export interface RosettaPerLocaleProps<PagesList> {
    nav: NavAltsLocale
    menu: LinksLocale
    page: {

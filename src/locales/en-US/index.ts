@@ -7,11 +7,20 @@ import { defaults } from './defaults'
 
 const nav: NavAltsLocale = {
    logoAlt: 'V.G.\'s logo',
-   menuButton: () => (mode) => `${mode ? 'Close' : 'Open'} menu.`,
-   themeButton: () => (theme) => `Set theme to ${theme === 'dark' ? 'light' : 'dark'} mode.`,
+   menuButton: {
+      close: 'Close the nav menu',
+      open: 'Open the nav menu',
+   },
+   themeButton: {
+      setDark: 'Set the site theme to dark',
+      setLight: 'Set the site theme to light',
+   },
    localesMenu: {
       closeMeMsg: 'Pres again to close.',
-      mainAlt: () => (isActive) => `Press or ${isActive ? 'un-' : ''}hover me to ${isActive ? 'close' : 'open'} the main menu.`,
+      mainAlt: {
+         active: 'Press or un-hover your mouse from the main menu to close it.',
+         inactive: 'Press or hover your mouse from the main menu to open it.',
+      }
    }
 }
 

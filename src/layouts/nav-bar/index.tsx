@@ -1,4 +1,6 @@
-import { useEffect, useState, useRef } from 'react'
+import type { Props } from '@pages/_app'
+
+import { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,7 +9,6 @@ import { useCssThemeKey } from '../../../pages/_app'
 
 //* Importing connected components
 import { useMenu } from '../menu/state'
-import { useLocale } from '@hooks/locale-hook'
 
 //* Importing styled components
 import { 
@@ -23,9 +24,10 @@ import {
 //TODO - Find a better way to handle this
 const noHeaderPages: RegExp = /^\/(this-site\/.*|contact)/
 
-export const NavBar = () => {
+export const NavBar: React.FC<{ pageProps: Props['pageProps']['pageSource'], locale: string, locales: string[] }> = 
+({ pageProps, locale, locales }) => {
    const { route } = useRouter()
-   const { nav: navTranslations, locale, locales } = useLocale()
+   const { nav: navLocales } = pageProps
 
    //* Mini menu state hook
    const [isMenuOpen, setIsMenuOpen] = useMenu()
@@ -71,9 +73,9 @@ export const NavBar = () => {
             <a className={logoStyle}>
                {(themeKey === 'dark' || (!scrolled && !isMenuOpen)) ? 
                <Image src='/images/global/Principal_darkbg.svg' 
-                  priority alt={navTranslations.logoAlt} layout='fill' /> :
+                  priority alt={navLocales.logoAlt} layout='fill' /> :
                <Image src='/images/global/Principal_lightbg.svg' 
-                  priority alt={navTranslations.logoAlt} layout='fill' />}
+                  priority alt={navLocales.logoAlt} layout='fill' />}
             </a>
          </Link>
          <sub>
@@ -84,7 +86,8 @@ export const NavBar = () => {
             data-scrolled={(scrolled || route.match(noHeaderPages)) ? 'true' : 'false'}
             data-theme={themeKey}
             data-menuOpen={isMenuOpen ? 'true' : 'false'}
-            aria-label={navTranslations.localesMenu.mainAlt()((localesMenuOpen || localesMenuClicked))}>
+            aria-label={navLocales.localesMenu
+               .mainAlt[(localesMenuOpen || localesMenuClicked) ? 'active': 'inactive']}>
                <svg onClick={() => setLocalesMenuClicked(!localesMenuClicked)}
                version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink='http://www.w3.org/1999/xlink' viewBox="0 0 171 171">
                   <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{mixBlendMode: 'normal'}}>
@@ -119,7 +122,7 @@ export const NavBar = () => {
                            </Link>
                         )
                      })}
-                     {localesMenuClicked && (<span id='close-me-msg'>{navTranslations.localesMenu.closeMeMsg}</span> )}
+                     {localesMenuClicked && (<span id='close-me-msg'>{navLocales.localesMenu.closeMeMsg}</span> )}
                   </LocalesLinksSub>
                </div>
             </LocalesButtonsContainer>
@@ -128,7 +131,8 @@ export const NavBar = () => {
                role='button'
                data-isDark={themeKey === 'dark' ? 'true' : 'false'}
                onClick={() => setThemeKey(themeKey === 'dark' ? 'light' : 'dark')}
-               aria-label={navTranslations.themeButton()(themeKey.toString())}>
+               aria-label={navLocales.themeButton[themeKey.toString() === 'dark' ? 
+                  'setLight' : 'setDark']}>
                <svg className='theme-button-svg theme-btn-elements' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
                   <mask id='moon-mask'>
                      <rect x='0' y='0' width='100%' height='100%' />
@@ -152,7 +156,7 @@ export const NavBar = () => {
                role='button'
                data-active={isMenuOpen ? 'true' : 'false'}
                onClick={() => setIsMenuOpen(!isMenuOpen)}
-               aria-label={navTranslations.menuButton()(isMenuOpen)}>
+               aria-label={navLocales.menuButton[isMenuOpen ? 'close' : 'open']}>
                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
                   <g className='menu-btn-groups'>
                      <line className='menu-btn-line1 menu-btn-elements' x1='5' y1='11' x2='43' y2='11' strokeWidth='4.5' strokeLinecap='round' strokeLinejoin='round' />

@@ -185,6 +185,10 @@ function CssTheme<ThemeType extends object>(
    
    const bodyThemeClassPrefix = `use-theme`
 
+   //TODO Remove hookstate and other things...
+   //* Create a custom hook, try using event listeners
+   //* and find a way to exclude the origina theme array, it isn't needed
+
    //* Creating theme css string
    const cssThemeStyleString = Object.entries(themes).map(([key, val]) => {
       const themeVals = makeCssThemeVars(val, true)
@@ -225,6 +229,8 @@ function CssTheme<ThemeType extends object>(
       //TODO Give a look into this hydration isseus caused by html entities
       return <></>
    }
+
+   //TODO Create a function that returns a 
 
    //* Script that willll be injected before body for pre-hydration execution
    function getInitialTheme() {

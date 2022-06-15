@@ -1,11 +1,11 @@
+import type { Props } from '@pages/_app'
+
 import {
    Container,
    socialLinkStyle,
    sourcesLinkStyle
 } from './style'
-
 import { useMenu } from '../menu/state'
-import { useLocale } from '@hooks/locale-hook'
 
 export interface SocialLinksInterface {
    name: string
@@ -24,8 +24,8 @@ export interface SourcesLinksINterface {
    alt?: string
 }
 
-export const Footer = () => {
-   const { footer } = useLocale()
+export const Footer: React.FC<{ pageProps: Props['pageProps']['pageSource'] }> = ({ pageProps }) => {
+   const { footer } = pageProps
 
    //TODO Improve and add graphql query to external cms api (apollo probably)
    const externalSocialLinks: SocialLinksInterface[] = [

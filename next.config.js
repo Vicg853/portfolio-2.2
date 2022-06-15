@@ -55,6 +55,23 @@ const nextConfig = {
 
     return config;
   },
+  async headers() {
+    return [
+      {
+        source: '/about',
+        headers: [
+          {
+            key: 'script-src',
+            value: "'none'" + process.env.NEXT_PUBLIC_SITE_URL,
+          },
+          {
+            key: 'object-src',
+            value: 'none',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = withPlugins([
