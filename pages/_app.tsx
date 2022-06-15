@@ -1,10 +1,9 @@
 import type { AppProps } from 'next/app'
 import type { ThemeTyping } from '@custom-types/theme'
-import type { PageFullType } from '../src/locales/index'
+import type { PageFullType, RosettaPerLocaleProps } from '../src/locales/index'
 
 import Head from 'next/head'
 
-import { defaultLocale } from '../src/locales/configs'
 import CssTheme from '@components/css-theme'
 import { useLocale } from '@hooks/locale-hook'
 
@@ -54,22 +53,25 @@ export default function App({ Component, pageProps, router, ...props }: Props) {
             {getThemesStyles()}
          </style>
       </Head>
+      {console.log(props, pageProps)}
       <CssThemeProvider />
       <div className={GlobalStyles}/>
-      <GlobalSeo defaultLocaleSources={pageLocaleDefaults}
+      <GlobalSeo defaultLocaleSources={pageProps.pageDefaults}
       customLocaleSources={pageProps.pageSource?.mainProps?.seo ?? undefined}
       locale={router.locale ?? router.defaultLocale!}
       locales={router.locales!}
       defaultLocale={router.defaultLocale!}
       location={router.pathname} />
       <>
-         <NavBar />
-         <MiniMenu />
+         <NavBar pageProps={pageProps} 
+         locale={router.locale ?? router.defaultLocale!} 
+         locales={router.locales!} />
+         <MiniMenu pageProps={pageProps} />
          {/* @ts-ignore */}
          <ContentContainer>
             <Component {...pageProps as any} />
          </ContentContainer>
-         <Footer />
+         <Footer pageProps={pageProps} />
       </>
     </>
   )
