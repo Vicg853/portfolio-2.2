@@ -24,7 +24,7 @@ import {
 //TODO - Find a better way to handle this
 const noHeaderPages: RegExp = /^\/(this-site\/.*|contact)/
 
-export const NavBar: React.FC<{ pageProps: Props['pageProps'], locale: string, locales: string[] }> = 
+export const NavBar: React.FC<{ pageProps: Props['pageProps']['pageSource'], locale: string, locales: string[] }> = 
 ({ pageProps, locale, locales }) => {
    const { route } = useRouter()
    const { nav: navLocales } = pageProps

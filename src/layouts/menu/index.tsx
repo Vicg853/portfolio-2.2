@@ -1,4 +1,6 @@
 import type { AnimeAnimParams } from 'animejs'
+import type { Props } from '@pages/_app'
+
 import { useEffect, useState } from 'react'
 import anime from 'animejs'
 import Link from 'next/link'
@@ -11,17 +13,16 @@ import {
 
 //* Importing mini-nav state
 import { useMenu } from './state'
-import { useLocale } from '@hooks/locale-hook'
 
 interface LinksInterface {
    name: string
    path: string
    alt: string
 }
-const windowCheck = typeof window !== 'undefined'
 
-export const MiniMenu = () => {
-   const { menu, locale } = useLocale()
+export const MiniMenu: React.FC<{ pageProps: Props['pageProps']['pageSource'], locale: string }> = 
+({ pageProps, locale }) => {
+   const { menu } = pageProps
    
    //TODO Improve and add graphql query to external cms api (apollo probably)
    const routes: LinksInterface[] = [
