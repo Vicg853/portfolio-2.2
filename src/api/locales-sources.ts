@@ -12,6 +12,7 @@ export const getPageSource = <PageName extends keyof Pages>(locale: string | und
       ...pageSource!['page']['pages'][page],
       footer: pageSource!['footer'],
       nav: pageSource!['nav'],
-      menu: pageSource!['menu']
+      menu: pageSource!['menu'],
+      pageDefaults: pageSource!['page']['defaults']
    }
 }
