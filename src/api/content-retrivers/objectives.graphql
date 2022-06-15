@@ -1,9 +1,0 @@
-query objectives {
-   getAllObjectives {
-      id
-      objectiveProgress
-      objectiveSource
-      objectiveName
-      objectiveDescription
-   }
-}

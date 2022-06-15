@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
-import type { ObjectivesType } from '@api-utils/content-retrivers/objectives'
+import type { ObjectivesType, GetObjectivesPromise } from '@api-utils/content-retrivers/objectives'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -41,6 +41,8 @@ export interface IndexPageLocaleContent {
 	objectivesText: {
 		title: string
 		description: string
+		error: string
+		noObjectives: string
 		objectivesCaption: {
 			title: string
 			done: string
@@ -53,7 +55,7 @@ export interface IndexPageLocaleContent {
 }
 
 type PageProps =  PageFullType<IndexPageLocaleContent> & {
-	objectivesFetch: ObjectivesType[]
+	objectivesFetch: GetObjectivesPromise
 }
 
 export const getStaticProps: GetStaticProps<{
@@ -131,7 +133,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					<Section data-wrap data-jusSpBet data-stretch
 					data-widthHundred	
 					className={objectivesSectionTitleStyle}>
-						<div data-vert>
+						<div>
 							<SecTitle>{objectivesText.title.split(/\n/).map(val => <>{val}<br key={val}/></>)}</SecTitle>
 							<SectionDesc className={objectivesDescriptionStyle}>{objectivesText.description}</SectionDesc>
 						</div>
@@ -157,30 +159,40 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 							</SectionDesc>
 						</div>
 					</Section>
-					<ObjectivesGridS>
-						{objectivesFetch.map(objective => {
-							const comp = (
-								<ObjectiveCard key={objective.id} data-progress={objective.objectiveProgress}
-								data-has-source={objective.objectiveSource ? 'true' : 'false'}>
-									<sub>
-										<h4>{objective.objectiveName}</h4>
-										<span className='progress-el'></span>
-									</sub>
-									<p>
-										{objective.objectiveDescription}
-									</p>
-								</ObjectiveCard>
-							)
+					{objectivesFetch === null ? (
+						<span className='objectiveIssueMessage'>
+							{objectivesText.noObjectives}
+						</span>
+					) : objectivesFetch === 'error' ? (
+						<span className='objectiveIssueMessage'>
+							{objectivesText.error}
+						</span>
+					) : (
+						<ObjectivesGridS>
+							{objectivesFetch.map((objective: ObjectivesType) => {
+								const comp = (
+									<ObjectiveCard key={objective.id} data-progress={objective.progress}
+									data-has-source={objective.source ? 'true' : 'false'}>
+										<sub>
+											<h4>{objective.title}</h4>
+											<span className='progress-el'></span>
+										</sub>
+										<p>
+											{objective.description}
+										</p>
+									</ObjectiveCard>
+								)
 
-							if(objective.objectiveSource) return (
-								<Link href={objective.objectiveSource} passHref>
-									<a>{comp}</a>
-								</Link>
-							)
-							
-							return comp
-						})}
-					</ObjectivesGridS>
+								if(objective.source) return (
+									<Link href={objective.source} passHref>
+										<a>{comp}</a>
+									</Link>
+								)
+								
+								return comp
+							})}
+						</ObjectivesGridS>
+					)}
 				</section>
   	  		 </Container>
   	  	</>

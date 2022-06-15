@@ -52,15 +52,18 @@ export const GlobalSeo: React.FC<DefaultSeoProps> = ({
          <meta charSet='utf-8' />
          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
          <meta name="color-scheme" content="light dark" />
+         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0a0a70" />
+         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f5" />
          <meta name="robots" content={robots} />
          <link rel="manifest" href="/manifest.json" />
-         
+
          <title>V.G. | {title}</title>
          <meta name='description' content={description} />
          <meta name='keywords' content={keywords.join(',')} />
          <meta name="owner" content='Victor Rosa Gomez' />
          <meta name="author" content='Victor Rosa Gomez' />
          <link rel="canonical" href={`${base}${canonicalPath}`} />
+         <link rel='apple-touch-icon' href='/images/manifest/maskable_icon_x192.png' />
 
          {/* <!-- Locale related SEO --> */}
          <meta name="language" content={locale} />

@@ -8,6 +8,8 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
       objectivesText: {
          title: 'Sempre\nna ativa &\natualizado',
          description: 'a.k.a. vulgo objetivos para este ano',
+         error: 'Estranho, ocorreu um erro ao buscar os objetivos 🤔.',
+         noObjectives: 'Nenhum objetivo foi encontrado.',
          objectivesCaption: {
             title: 'Legenda',
             done: 'Projetos concluidos 🎉',

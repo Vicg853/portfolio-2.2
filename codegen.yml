@@ -1,8 +1,8 @@
 overwrite: true
-schema: "./graphql/schemas/main-cms.graphql"
-documents: "src/**/*.graphql"
 generates:
-  ./graphql/generated/graphql.ts:
+  ./graphql/generated/gql-cms.ts:
+    documents: "src/**/*.cms.graphql"
+    schema: ${MAIN_CMS_GQL_URL_SCHEMA}
     plugins:
       - typescript
       - typescript-operations

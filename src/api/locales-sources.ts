@@ -8,5 +8,11 @@ export const getPageSource = <PageName extends keyof Pages>(locale: string | und
    const pageSource = locale ? 
       (i18n.table(locale) ?? defaultLocaleSource) 
       : defaultLocaleSource
-   return pageSource!['page']['pages'][page]
+   return {
+      ...pageSource!['page']['pages'][page],
+      footer: pageSource!['footer'],
+      nav: pageSource!['nav'],
+      menu: pageSource!['menu'],
+      pageDefaults: pageSource!['page']['defaults']
+   }
 }

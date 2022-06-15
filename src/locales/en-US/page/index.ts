@@ -8,6 +8,8 @@ export const IndexPage: PageFullType<IndexPageLocaleContent> = {
       objectivesText: {
          title: 'Keeping myself\n up-to-date &\n running',
          description: 'a.k.a.: my goals for this year',
+         error: 'Weird, there was an error while fetching the objectives 🤔.',
+         noObjectives: 'No objectives were found.',
          objectivesCaption: {
             title: 'Caption',
             done: 'Done 🎉',
