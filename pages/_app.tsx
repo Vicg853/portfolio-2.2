@@ -37,41 +37,43 @@ export {
 
 export interface Props extends AppProps {
    pageProps: {
-      pageSource: PageFullType<any>
-      pageDefaults: RosettaPerLocaleProps<any>['page']['defaults']
-      footer: RosettaPerLocaleProps<any>['footer']
-      nav: RosettaPerLocaleProps<any>['nav']
-      menu: RosettaPerLocaleProps<any>['menu']
+      pageSource: PageFullType<any> & {
+         pageDefaults: RosettaPerLocaleProps<any>['page']['defaults']
+         footer: RosettaPerLocaleProps<any>['footer']
+         nav: RosettaPerLocaleProps<any>['nav']
+         menu: RosettaPerLocaleProps<any>['menu']
+      }
    }
 }
 
 export default function App({ Component, pageProps, router, ...props }: Props) {
-  return (
+   const { pageSource } = pageProps
+   return (
     <>
       <Head>
          <style>
             {getThemesStyles()}
          </style>
       </Head>
-      {console.log(props, pageProps)}
       <CssThemeProvider />
       <div className={GlobalStyles}/>
-      <GlobalSeo defaultLocaleSources={pageProps.pageDefaults}
+      <GlobalSeo defaultLocaleSources={pageSource.pageDefaults}
       customLocaleSources={pageProps.pageSource?.mainProps?.seo ?? undefined}
       locale={router.locale ?? router.defaultLocale!}
       locales={router.locales!}
       defaultLocale={router.defaultLocale!}
       location={router.pathname} />
       <>
-         <NavBar pageProps={pageProps} 
+         <NavBar pageProps={pageSource} 
          locale={router.locale ?? router.defaultLocale!} 
          locales={router.locales!} />
-         <MiniMenu pageProps={pageProps} />
+         <MiniMenu pageProps={pageSource}
+         locale={router.locale ?? router.defaultLocale!}  />
          {/* @ts-ignore */}
          <ContentContainer>
             <Component {...pageProps as any} />
          </ContentContainer>
-         <Footer pageProps={pageProps} />
+         <Footer pageProps={pageSource} />
       </>
     </>
   )
