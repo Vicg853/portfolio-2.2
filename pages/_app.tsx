@@ -36,19 +36,17 @@ export {
    getThemesStyles
 }
 
-interface Props extends AppProps {
+export interface Props extends AppProps {
    pageProps: {
       pageSource: PageFullType<any>
+      pageDefaults: RosettaPerLocaleProps<any>['page']['defaults']
+      footer: RosettaPerLocaleProps<any>['footer']
+      nav: RosettaPerLocaleProps<any>['nav']
+      menu: RosettaPerLocaleProps<any>['menu']
    }
 }
 
-export default function App({ Component, pageProps, router }: Props) {
-   const {
-      page: {
-         defaults: pageLocaleDefaults,
-      }
-   } = useLocale()
-
+export default function App({ Component, pageProps, router, ...props }: Props) {
   return (
     <>
       <Head>
