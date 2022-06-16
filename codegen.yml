@@ -2,7 +2,7 @@ overwrite: true
 generates:
   ./graphql/generated/gql-cms.ts:
     documents: "src/**/*.cms.graphql"
-    schema: ${MAIN_CMS_GQL_URL_SCHEMA}
+    schema: ./getCmsSchema.js
     plugins:
       - typescript
       - typescript-operations
