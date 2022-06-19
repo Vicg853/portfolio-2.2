@@ -19,8 +19,8 @@ const style = css`
    }
 `
 
-type LinkAndAnchorProps = LinkProps & DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
-type LinkAndButtonProps = LinkProps & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type LinkAndAnchorProps = LinkProps 
+type LinkAndButtonProps = LinkProps 
 
 interface InTextLinkActionProps extends LinkAndAnchorProps {
    action: () => any
