@@ -240,10 +240,10 @@ function CssTheme<ThemeType extends object>(
             .matches
       
       if (themeKey) {
-         document.documentElement.classList.add('use-theme-' + themeKey);
+         document.documentElement.className = 'use-theme-' + themeKey;
          document.documentElement.style.setProperty('--initial-theme', themeKey);
       } else if(systemColorPreference) {
-         document.documentElement.classList.add('use-theme-' + '-sysSchemeKey-');
+         document.documentElement.className = 'use-theme-' + '-sysSchemeKey-';
          document.documentElement.style.setProperty('--initial-theme', '-sysSchemeKey-');
       }
    }
