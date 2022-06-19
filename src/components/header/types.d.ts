@@ -4,6 +4,7 @@ export interface HeaderImageBgOpts {
    type: 'image'
    src: string
    srcType: 'remote' | 'local' | 'data' | 'svg'
+   blurData?: string
 }
 export type HeaderBackground = ({
    type: 'video'

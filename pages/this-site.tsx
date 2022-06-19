@@ -3,13 +3,15 @@ import type { GetServicePromise } from '@api-utils/content-retrivers/services'
 import type { OnlySvcPageLocaleContent } from './this-site/[svc]'
 import type { GetStaticProps, NextPage } from 'next'
 
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { getPlaiceholder } from 'plaiceholder'
+
 //* Importing API utils
 import { getPageSource } from '@api-utils/locales-sources'
 import { getServices } from '@api-utils/content-retrivers/services'
 
 //* Required deps and components
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { Header } from '@components/header'
 import { ServiceCard } from '@components/pages/this-webs/service-card'
 import {
@@ -52,6 +54,7 @@ export interface ThisWebSPageLocaleContent {
 type PageProps = {
    pageSource: PageFullType<ThisWebSPageLocaleContent>
    services: GetServicePromise[]
+   headerBlurUrl: string
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({
@@ -59,19 +62,23 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
 }) => {
    const pageSource = getPageSource(locale ?? locales![0], 'thisWebS')
 
+   const { base64 } = await getPlaiceholder('/images/pages/this-site/Screenshot 2022-05-19 165800.jpg')
+
    const services = await getServices(locale ?? locales![0] as any)
 
    return {
       props: {
          pageSource,
-         services
+         services,
+         headerBlurUrl: base64
       }
    }
 }
 
 const ThisWebpage: NextPage<PageProps> = ({
    pageSource,
-   services
+   services,
+   headerBlurUrl: blurData
 }) => {
    const {
       push,
@@ -120,7 +127,8 @@ const ThisWebpage: NextPage<PageProps> = ({
                type: 'image',
                srcType: 'local',
                src: '/images/pages/this-site/Screenshot 2022-05-19 165800.jpg',
-               alt: 'This website page header background'
+               alt: 'This website page header background',
+               blurData
             }} /> 
          <Container data-transition={initTransition ? 'true' : 'false'}
          className={thisWebSContainerStyles}>

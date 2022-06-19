@@ -5,6 +5,7 @@ import type { ObjectivesType, GetObjectivesPromise } from '@api-utils/content-re
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { getPlaiceholder } from 'plaiceholder'
 
 //* Importing essential components
 import { Header } from '@components/header'
@@ -56,6 +57,7 @@ export interface IndexPageLocaleContent {
 
 type PageProps =  PageFullType<IndexPageLocaleContent> & {
 	objectivesFetch: GetObjectivesPromise
+	headerBlurUrl: string
 }
 
 export const getStaticProps: GetStaticProps<{
@@ -64,6 +66,9 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ locale, locales }) => {
 	const pageSource = getPageSource(locale, 'index')
 
+	const { base64 } = await getPlaiceholder('/images/pages/index/LRM_20200528_151756 (1).jpg')
+
+
 	//* Retrieving objectives list
 	const objectivesFetch = await getObjectivesList(locale as any, 'en')
 
@@ -71,7 +76,8 @@ export const getStaticProps: GetStaticProps<{
 		props: {
 			pageSource: {
 				...pageSource,
-				objectivesFetch
+				objectivesFetch,
+				headerBlurUrl: base64
 			},
 			locale: locale ?? locales![0],
 		},
@@ -90,6 +96,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 		header
 	} = pageSource.mainProps!
 
+	const blurData = pageSource.headerBlurUrl
 	const objectivesFetch = pageSource.objectivesFetch
 
   	return (
@@ -101,6 +108,7 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
   	  		  	  srcType: 'local',
 				  alt: header!.backgroundAlt,
   	  		  	  src: '/images/pages/index/LRM_20200528_151756 (1).jpg',
+				  blurData
   	  		  	}}
 				button={{
 					text: 'Projects',
