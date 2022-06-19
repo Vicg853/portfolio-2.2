@@ -50,9 +50,7 @@ export default function App({ Component, pageProps, router, ...props }: Props) {
    return (
     <>
       <Head>
-         <style>
-            {getThemesStyles()}
-         </style>
+         <style dangerouslySetInnerHTML={{__html: getThemesStyles() }} />
       </Head>
       <CssThemeProvider />
       <div className={GlobalStyles}/>
