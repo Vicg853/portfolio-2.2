@@ -7,7 +7,8 @@ import {
 
 export default function Document() {
   return (
-    <Html>
+    <Html className='use-theme-dark'>
+      <ThemePreHydration />
       <Head>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='*' />
         <link  rel="stylesheet"
@@ -18,7 +19,6 @@ export default function Document() {
            href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap' />
       </Head>
       <body>
-         <ThemePreHydration />
          <Main />
          <NextScript />
       </body>
