@@ -1,4 +1,3 @@
-import type { HTMLAttributes, DetailedHTMLProps, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import type { LinkProps } from 'next/link'
 import type { ReactChild } from 'react'
 import Link from 'next/link'
