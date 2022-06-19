@@ -3,12 +3,14 @@ import type { GetStaticProps } from 'next'
 import type { PageFullType  } from '../src/locales'
 import type { CVPageCMSContent, ExpAndEducContent } from '@api-utils/content-retrivers/cv-page-info'
 
+import { useEffect } from 'react'
+import { getPlaiceholder } from 'plaiceholder'
+
 //* Importing api functions
 import { getPageSource } from '@api-utils/locales-sources'
 import { getCVPageContent } from '@api-utils/content-retrivers/cv-page-info'
 
 //* Importing main components and deps
-import { useEffect } from 'react'
 import { Header } from '@components/header'
 import { InTextLink } from '@components/mini-components/InTextLink'
 import { SkillsContainer } from '@components/pages/resume/skill-section'
@@ -76,11 +78,14 @@ interface PageProps {
       description: string
       to: ExpAndEducContent['to'] | null
    })[]
+   headerBlurUrl: string
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = 
    async ({ locale, locales }) => {
    const pageSource = getPageSource(locale, 'resume')
+
+   const { base64 } = await getPlaiceholder('/images/pages/resume/IMG_20220516_154424613-01.jpeg')
 
    const errDescGet = locale === 'pt' ? 'Erro ao obter descrição da página' : 
       locale === 'en' ? 'Error getting page description' : 'Error getting page description'
@@ -109,7 +114,8 @@ export const getStaticProps: GetStaticProps<PageProps> =
          pageSource,
          skills: getCVPageContentResult.skills,
          experience,
-         education
+         education,
+         headerBlurUrl: base64
       }
    }
 }
@@ -128,7 +134,8 @@ const Resume: NextPage<PageProps> = ({
    skills, 
    pageSource,
    experience,
-   education
+   education,
+   headerBlurUrl: blurData
 }) => {
    useEffect(() => {
       if(document.location.hash !== '') 
@@ -159,6 +166,7 @@ const Resume: NextPage<PageProps> = ({
                srcType: 'local',
                src: '/images/pages/resume/IMG_20220516_154424613-01.jpeg',
                alt: headerBackgroundAlt,
+               blurData
             }}
          />
          <Container className={containerStyles}>

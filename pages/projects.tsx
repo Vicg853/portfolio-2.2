@@ -3,14 +3,16 @@ import type { PageFullType } from '../src/locales'
 import type { GetProjectsPromise } from '@api-utils/content-retrivers/projects'
 
 //* Importing needed components and deps
-import { Header } from '@components/header'
 import Image from 'next/image'
 import Link from 'next/link'
 import { cx } from 'linaria'
+import { getPlaiceholder } from 'plaiceholder'
 
 //* Importing api components and deps
 import { getPageSource } from '@api-utils/locales-sources'
 import { getProjectsList } from '@api-utils/content-retrivers/projects'
+
+import { Header } from '@components/header'
 
 //* Importing global and specific styled components
 import { 
@@ -57,11 +59,14 @@ interface GetStaticPropsResult {
 	projectsList: GetProjectsPromise
 	pageSource: ProjectsPageSource
 	locale: string
+	headerBlurUrl: string
 }
 
 export const getStaticProps: GetStaticProps<GetStaticPropsResult> = async ({ locale, locales }) => {
 	const pageSource = getPageSource(locale, 'projects')
 	
+	const { base64 } = await getPlaiceholder('/images/pages/projects/background.jpg')
+
 	const projectsList = await getProjectsList(locale as any, locales![0] as any)
 
 	return {
@@ -71,12 +76,13 @@ export const getStaticProps: GetStaticProps<GetStaticPropsResult> = async ({ loc
 			},
 			projectsList,
 			locale: locale ?? locales![0],
+			headerBlurUrl: base64
 		},
 		revalidate: 604800
 	}
 }
 
-const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale, projectsList }) => {
+const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale, projectsList, headerBlurUrl: blurData }) => {
 	const {
 		mainParagraphTitle,
 		mainParagraph,
@@ -93,6 +99,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
                srcType: 'local',
                src: '/images/pages/projects/background.jpg',
                alt: pageSource.mainProps!.header!.backgroundAlt,
+					blurData
             }}
 				button={{
 					text: 'Resume',
