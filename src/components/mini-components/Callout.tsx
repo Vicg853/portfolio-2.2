@@ -97,7 +97,10 @@ const Callout: React.FC<CalloutProps> = ({
       data-quote={quote ? 'true' : 'false'}
       data-special={special ?? 'false'}>
          <span className='icon'>
-            {icon.type === 'icon' && (<Image src={icon.source} alt='Callout icon' layout='fill' objectFit='cover' />)}
+            {icon.type === 'icon' && (<Image src={icon.source}
+             loading='lazy'
+             placeholder='blur'
+             alt='Callout icon' layout='fill' objectFit='cover' />)}
             {icon.type === 'emoji' && (<>{icon.source}</>)}
          </span>
          <sub>
