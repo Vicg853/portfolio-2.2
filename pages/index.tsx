@@ -128,6 +128,8 @@ const Home: NextPage<{pageSource: PageProps, locale: string}> = ({ pageSource, l
 					</div>
 					<CaptionedImage data-topCaption>
 						<Image src='/images/pages/index/IMG-20200226-WA0034.jpg'
+							loading='lazy'
+							placeholder='blur'
 							className={meImageStyle}
 							alt={imageCaption}
 							width={268}

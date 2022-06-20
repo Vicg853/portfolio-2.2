@@ -59,21 +59,23 @@ export const Container = styled.header`
 
    #header-background {
       animation-name: HeaderIntro;
-      animation-duration: 0.8s;
+      animation-duration: 1.1s;
       animation-timing-function: cubic-bezier(0.57, -0.02, 0.04, 1.23);
       animation-iteration-count: 1;
       animation-delay: 0.1s;
       @keyframes HeaderIntro {
          0% {
-            opacity: 0.6;
             transform: scale(1.3);
          }
          100% {
-            opacity: 1;
             transform: scale(1);
          }
       }
    }
+
+   #header-background > span > img {
+      transition: filter 1s ease-in-out;
+   } 
 
    #textContent > * {
       animation-name: TitleIntro;

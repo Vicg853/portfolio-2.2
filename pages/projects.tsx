@@ -134,6 +134,7 @@ const ProjectsComponent: NextPage<GetStaticPropsResult> = ({ pageSource, locale,
 				) : projectsList.map((project, i) => (
 						<ProjectCard key={i}>
 							<Image className='project-card-image' layout='fill' objectFit='cover'
+							loading='lazy' placeholder='blur'
 							src={project.image ?? '/images/pages/projects/background.jpg'} 
 							alt={`${project.title} project background illustration!`}/>
 							<sub>
