@@ -1,6 +1,6 @@
 import type { localeEnName, localeFrName, localePtBrName } from '../../locales/configs'
 
-export type DevStatuses = 'DEV' | 'READY' | 'DRAFT'
+export type DevStatuses = 'DEV' | 'READY' | 'DRAFT' | 'DEPRECATED'
 
 export type HealthResponses = ({
    justCheckStatusCode: number
@@ -49,7 +49,8 @@ const services: Service[] = [
       healthEndpoint: {
          url: 'https://victorgomez.dev/api/health',
          method: 'GET',
-         checkSpecificJson: '{"status":"pass","message":"Everything is fine!"}'
+         checkSpecificJson: '{"status":"pass","message":"Everything is fine!"}',
+         checkInterval: 60000
       },
       details: {
          description: 'The current website you\'re visiting right now. I use it to show my work and abilities.',
@@ -108,7 +109,8 @@ const services: Service[] = [
       healthEndpoint: {
          url: 'https://main-gql.victorgomez.dev/.well-known/apollo/server-health',
          method: 'GET',
-         checkSpecificJson: '{"status":"pass"}'
+         checkSpecificJson: '{"status":"pass"}',
+         checkInterval: 60000
       },
       details: {
          description: 'The CMS server for my portfolio, etc. It is the first version and will probably go through many improvements.',
@@ -203,12 +205,7 @@ const services: Service[] = [
       id: 'mail-api',
       name: 'Mailer API',
       version: '1.0.0',
-      devStatus: 'READY',
-      healthEndpoint: {
-         url: 'https://mailer.victorgomez.dev/api/mailer/message',
-         method: 'POST',
-         justCheckStatusCode: 422,
-      },
+      devStatus: 'DEPRECATED',
       details: {
          description: 'The first version of my mailer API. that is being currently used to send messages through here (contact page). The second version (that is under dev) has more features.',
          techStack: [
@@ -236,10 +233,70 @@ const services: Service[] = [
       }
    },
    {
-      id: 'rusty-mail-api',
-      name: 'Mailer API (rust patch)',
+      id: 'mail-api-rust',
+      name: 'Mailer API',
       version: '2.0.0',
-      devStatus: 'DRAFT'
+      devStatus: 'READY',
+      healthEndpoint: {
+         url: 'https://mailer.victorgomez.dev/health',
+         method: 'GET',
+         checkSpecificJson: '{ "status": { "server": { "status_msg": "OK", "is_ok": true }, "db": { "status_msg": "OK", "is_ok": true } } }',
+         checkInterval: 90000
+      },
+      details: {
+         description: 'The second version of my mailer API. It is being used to send messages through here (contact page). Has newer features, improved security and I switched from using TypeScript/NodeJs to Rust.',
+         techStack: [
+            {
+               techName: 'Rust',
+               techLink: 'https://www.rust-lang.org/',
+            },
+            {
+               techName: 'MongoDB',
+               techLink: 'https://www.mongodb.com/'
+            },
+            { 
+               techName: 'MongoDB Rust Driver',
+               techLink: 'https://github.com/mongodb/mongo-rust-driver'
+            },
+            {
+               techName: 'Rocket.rs',
+               techLink: 'https://rocket.rs/'
+            },
+            {
+               techName: 'rocket_cors',
+               techLink: 'https://github.com/lawliet89/rocket_cors'
+            },
+            {
+               techName: 'amonia',
+               techLink: 'https://github.com/rust-ammonia/ammonia'
+            },
+            {
+               techName: 'unicode-segmentation',
+               techLink: 'https://github.com/unicode-rs/unicode-segmentation'
+            },
+            {
+               techName: 'serde',
+               techLink: 'https://serde.rs/'
+            },
+            {
+               techName: 'tokio',
+               techLink: 'https://tokio.rs/'
+            },
+            {
+               techName: 'reqwest',
+               techLink: 'https://github.com/seanmonstar/reqwest'
+            },
+            {
+               techName: 'chrono',
+               techLink: 'https://github.com/chronotope/chrono'
+            }
+         ],
+         runsOn: [
+            'Tokio (Rust Async Runtime)',
+            'Railway.app',
+            'Rust'
+         ]
+      }
    },
    {
       id: 'health-check-api',
