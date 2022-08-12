@@ -35,6 +35,7 @@ export const ThisWebS: PageFullType<ThisWebSPageLocaleContent> = {
             draft: 'Em rascunho',
             underDev: 'Em desenvolvimento',
             ready: 'Pronto para produção',
+            deprecated: 'Descontinuado',
          },
          healthStats: {
             title: 'Status operacional',

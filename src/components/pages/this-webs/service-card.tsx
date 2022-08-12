@@ -73,6 +73,7 @@ const RawServiceCard: React.FC<ServiceCardProps> = ({
                {devStatus === 'READY' && localeSources.cardDevStats.ready}
                {devStatus === 'DEV' && localeSources.cardDevStats.underDev}
                {devStatus === 'DRAFT' && localeSources.cardDevStats.draft}
+               {devStatus === 'DEPRECATED' && localeSources.cardDevStats.deprecated}
             </span>
             {doHealthCheck && (
                <>

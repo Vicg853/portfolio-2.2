@@ -152,6 +152,9 @@ export const Card = styled.div`
    span[data-devStatus="DEV"], span[data-health="MAINT"] {
       color: var(--pallete-constants-info);
    }   
+   span[data-devStatus="DEPRECATED"] {
+      color: var(--pallete-constants-err);
+   }   
    span[data-health="DOWN"] {
       color: var(--pallete-constants-err);
    }

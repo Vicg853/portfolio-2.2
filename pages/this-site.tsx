@@ -39,6 +39,7 @@ export interface ThisWebSPageLocaleContent {
          underDev: string
          ready: string
          draft: string
+         deprecated: string
       }
       version: string
       healthStats: {
