@@ -130,12 +130,17 @@ export const gmtOffsetStyle = css`
 
 export const ReqResultMessageCard = styled.div`
    position: fixed;
-   top: 10vh;
+   top: 20vh;
    transition: none;
-   width: 0px;
+   display: flex;
+   width: 100% !important;
    height: 0px;
+   justify-content: center;
+   align-items: center;
+   z-index: calc(var(--zIndex-messagePopUp) - 1);
 
    sub {
+      width: fit-content;
       display: block;
       padding: 1rem 1.4rem;
       border-radius: 0.5rem;
