@@ -182,10 +182,10 @@ const Contact: NextPage<ContactPageProps>  = ({
       const { name, email, subject, message } = formState
          
       const jsonBody = JSON.stringify({
-         senderName: name.value,
-         senderEmail: email.value,
-         msgSubject: subject.value,
-         msgBody: message.value
+         name: name.value,
+         from: email.value,
+         subject: subject.value,
+         message: message.value
       })
 
       await fetch(mailerApiEndpoint, {
