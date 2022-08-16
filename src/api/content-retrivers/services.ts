@@ -240,7 +240,7 @@ const services: Service[] = [
       healthEndpoint: {
          url: 'https://mailer.victorgomez.dev/health',
          method: 'GET',
-         checkSpecificJson: '{ "status": { "server": { "status_msg": "OK", "is_ok": true }, "db": { "status_msg": "OK", "is_ok": true } } }',
+         checkSpecificJson: '{"status":{"server":{"status_msg":"OK","is_ok":true},"db":{"status_msg":"OK","is_ok":true}}}',
          checkInterval: 90000
       },
       details: {
