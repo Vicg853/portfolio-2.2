@@ -59,7 +59,6 @@ Still not implemented...
 ---
 
 ### **Credits**
-Contributors: [@vicg853](https://github.com/Vicg853)
 
 Special thanks to techs/teams: 
 - of NodeJS's for an amazing runtime env
