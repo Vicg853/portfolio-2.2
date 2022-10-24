@@ -35,12 +35,12 @@ const ExpAndEcudCardsRaw: React.FC<Props> = ({
                   </span>
                   {" "}
                   <span className='exp-educ-card-to-date'>
-                     {captionSources.toCaption}{" "}{new Date(to).toLocaleDateString()}
+                     {captionSources.toCaption}{" "}{new Date(to).toLocaleDateString()} | (DD/MM/YY)
                   </span>
                </>
             ) : (
                <span className='exp-educ-card-since-date'>
-                  {captionSources.sinceCaption}{" "}{new Date(from).toLocaleDateString()}
+                  {captionSources.sinceCaption}{" "}{new Date(from).toLocaleDateString()} | (DD/MM/YY)
                </span>
             )}
          </sub>
