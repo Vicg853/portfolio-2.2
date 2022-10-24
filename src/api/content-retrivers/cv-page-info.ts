@@ -60,6 +60,14 @@ export const getCVPageContent: () => Promise<CVPageCMSContent> = async () => {
             'en': 'French Baccalaureate - Baccalauréat Général Scientifique, Option Internationale',
             'pt': 'Ensino Médio Francês - Baccalauréat Général Scientifique, Option Internationale'
          }
+      },
+      {
+         institution: 'Avignon Université, Avignon, France - License informatique',
+         from: new Date('2022-08-01').toISOString(),
+         descriptionLocales: {
+            'en': 'Undergraduate Computer Science Student',
+            'pt': 'Estudos superiores em Ciencia da Computação'
+         }
       }
    ]
 

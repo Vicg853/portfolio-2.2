@@ -62,8 +62,8 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ({
 }) => {
    const pageSource = getPageSource(locale, 'contact')
    const gmtOffset: ContactPageProps['gmtOffset'] = {
-      gmt: '-3',
-      local: 'São Paulo'
+      gmt: '+2',
+      local: 'Avignon - France'
    }
    const emailAddress = 'vicg853@gmail.com'
 
